@@ -1,0 +1,61 @@
+body {
+    font-family: "Inter", sans-serif;
+}
+
+.navbar-nav {
+    display: block;
+}
+
+.navbar-nav li {
+    display: inline;
+}
+
+.navbar-nav li a {
+    display: inline;
+    margin-left: 20px;
+}
+
+.navbar-nav li:first-child a{
+    margin-left: 0;
+}
+
+nav.navbar a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+nav.navbar a:hover {
+    color: #4B7D99;
+}
+
+footer {
+    background-color: #FFE57F;
+}
+
+.btn-primary,
+.btn-primary:focus {
+    background-color: #FFC400;
+    border-color: #FFC400;
+    color: #000;
+    box-shadow: 0 0 0 0;
+}
+
+.btn-primary.disabled,
+.btn-primary:hover {
+    background-color: #FFE57F;
+    border-color: #FFE57F;
+    color: #000;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #FFE57F;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(255, 196, 0,.25);
+}
+
+.bg-yellow {
+    background-color: #FFE57F !important;
+}

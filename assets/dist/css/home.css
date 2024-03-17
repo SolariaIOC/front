@@ -1,0 +1,56 @@
+section.home-slider {
+    position: relative;
+    max-height: 500px;
+    min-height: 400px;
+}
+
+section.home-slider img {
+    max-height: 500px;
+}
+
+section.home-slider div.text {
+    color: #FFFFFF;
+    position: absolute;
+    z-index: 2;
+    text-align: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+section.home-slider div.text a.btn-primary {
+    text-decoration: none;
+    color: #000000;
+    background-color: #FFC400;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+    font-weight: 400;
+    line-height: 1.5;
+    display: inline-block;
+}
+
+section.home-slider div.text a.btn-primary:hover {
+    color: #000000;
+    background-color: #FFE57F;
+}
+
+section.home-slider div.bg-black {
+    background-color: black;
+    opacity: 0.7;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+section.home-slider div.bg-image {
+    height: 100%;
+    width: 100%;
+    background-image: url('https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE');
+    background-size: cover;
+    background-position: bottom;
+    position: absolute;
+    top: 0;
+}

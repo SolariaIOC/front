@@ -1,13 +1,106 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Solaria">
+    <meta name="author" content="Solaria">
+    <link rel="icon" type="image/png" href="/assets/brand/solaria_logo.jpg">
+    <title>Solaria</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <link href="/assets/dist/css/webpage.css" rel="stylesheet">
+    <link href="/assets/dist/css/home.css" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/a541cd95d6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="assets/dist/js/webpage.js"></script>
+</head>
+<body class="text-center">
+
+    <header>
+        <!-- Brand Logo -->
+        <div class="brand-logo text-center p-3">
+            <img src="/assets/brand/solaria_logo.jpg" width="75" alt="Logo Solaria">
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="navbar navbar-expand-md navbar-yellow bg-yellow">
+            <div class="container d-flex justify-content-between">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Immobles</a>
+                    </li>
+                </ul>
+
+                <div id="user-info">
+                    <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Login</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--------------------->
+    <!-- Webpage content -->
+    <!--------------------->
+
+    <!-- Home Slider-->
+    <section class="home-slider">
+        <div class="bg-black"></div>
+        <div class="bg-image"></div>
+        <div class="container text">
+            <h1>Amb més de 20 any d'experiencia</h1>
+            <p>Fundada l'any 1989, la nostra empresa és un equip de reconeguts experts en gestió immobiliària i immobiliàries sempre disposats a ajudar-te.</p>
+            <a class="btn-primary mt-3" href="#immobles">Veure immobles</a>
+        </div>
+        <img class="w-100 w" src="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE">
+    </section>
+
+    <!-- Properties list -->
+    <section id="immobles" class="properties">
+        <h1 class="mt-5 mb-5">Els nostres inmobles</h1>
+        <div class="grid-properties">
+            <div class="property-image">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-start">
+                            <img class="w-100" src="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE">
+                            <h3 class="price mt-3 mb-3">1500€</h3>
+                            <p class="description"><strong>Pis</strong> en venta al Carrer de Mallorca, Dreta de l'Eixample</p>
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <img class="w-100" src="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE">
+                            <h3 class="price mt-3 mb-3">1500€</h3>
+                            <p class="description"><strong>Pis</strong> en venta al Carrer de Mallorca, Dreta de l'Eixample</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!------------------------->
+    <!-- End Webpage content -->
+    <!------------------------->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container mt-5 p-3">
+            <div class="copyright text-start">© Copyright 2024</div>
+        </div>
+    </footer>
+</body>
 </html>
