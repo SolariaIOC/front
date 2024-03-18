@@ -20,22 +20,26 @@
 
     <link href="/assets/dist/css/webpage.css" rel="stylesheet">
     <link href="/assets/dist/css/home.css" rel="stylesheet">
+    <link href="/assets/dist/css/main.css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/a541cd95d6.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="assets/dist/js/webpage.js"></script>
+
+
 </head>
 <body class="text-center">
 
     <header>
-        <!-- Brand Logo -->
+    </header>
+        <!-- Navigation Menu -->
+        <nav  class="navbar navbar-expand-md navbar-yellow bg-yellow sticky-top nav-scroll">
+                    <!-- Brand Logo -->
         <div class="brand-logo text-center p-3">
             <img src="/assets/brand/solaria_logo.jpg" width="75" alt="Logo Solaria">
         </div>
 
-        <!-- Navigation Menu -->
-        <nav class="navbar navbar-expand-md navbar-yellow bg-yellow">
-            <div class="container d-flex justify-content-between">
+            <div class="container d-flex justify-content-between ">
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -46,12 +50,19 @@
                     </li>
                 </ul>
 
+                <div>
+                    <b class=" " id="nombre"></b>
+                </div>
                 <div id="user-info">
                     <a href="login.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Login</span></a>
                 </div>
             </div>
         </nav>
-    </header>
+
+
+
+
+ 
 
     <!--------------------->
     <!-- Webpage content -->
@@ -92,6 +103,12 @@
         </div>
     </section>
 
+    <section>
+        <article>
+            <div id="banner"></div>
+        </article>
+    </section>
+
     <!------------------------->
     <!-- End Webpage content -->
     <!------------------------->
@@ -103,4 +120,6 @@
         </div>
     </footer>
 </body>
+
+<script src="/assets/dist/js/main.js" type="module"></script>
 </html>
