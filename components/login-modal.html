@@ -1,0 +1,123 @@
+
+ <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class=" modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+        <form id="login-form">
+          <img class="mb-4" src="/assets/brand/solaria_logo.jpg" alt="Logo Solaria" width="75">
+          <!--<h1 class="h3 mb-3 fw-normal">Login</h1>-->
+  
+          <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="loginEmail" placeholder="name@solaria.website">
+              <label for="loginEmail">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="loginPassword" placeholder="Contrasenya">
+              <label for="loginPassword">Contrasenya</label>
+          </div>
+          <button id="btnLogin" class="w-100 btn btn-lg btn-primary" type="submit" >Login</button>
+          <div class="mt-3 invalid-feedback error-message-login"></div>
+      </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">vuelve</button>
+       <!-- <button type="button" class="btn btn-primary">login</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(){
+/**/
+
+if(isUserLogged()) {
+     console.log("usuario logueado")
+     modal =  document.querySelector('.toggle')
+    }
+
+let loginEmail = $('#loginEmail').val();
+    let loginPassword = $('#loginPassword').val();
+
+    checkLoginAndPassword(loginEmail, loginPassword);
+
+    $("#loginEmail, #loginPassword").on("change paste keyup", function() {
+        checkLoginAndPassword($('#loginPassword').val(), $('#loginEmail').val());
+    });
+
+    // TODO Make petition to API
+    $( "#login-form" ).on( "submit", function( event ) {
+
+        event.preventDefault();
+
+        hideLoginError();
+        showButtonSpinner();
+
+        setTimeout(() => {
+            let loginEmail = $('#loginEmail').val();
+            let loginPassword = $('#loginPassword').val();
+
+
+            $.ajax("http://solaria.website:3333/login", {
+                data: JSON.stringify({
+                    "Email": loginEmail,
+                    "Contrasenya": loginPassword
+                }),
+                contentType: 'application/json',
+                type: 'POST',
+            }).done(function (data) {
+                setCookie('token', data.token, 365);
+                window.location.replace("index.html");
+            }).fail(function () {
+                showLoginError();
+            });
+
+            removeButtonSpinner();
+        }, 1000);
+    });
+
+
+function checkLoginAndPassword(
+    loginEmail, loginPassword,
+){
+    if(loginEmail !== '' && loginPassword !==''){
+        $('#btnLogin').removeClass('disabled');
+    } else {
+        $('#btnLogin').addClass('disabled');
+    }
+}
+
+function showButtonSpinner(){
+    $('#btnLogin').html('<i class="fas fa-spinner fa-spin"></i>');
+    $('#btnLogin').addClass('disabled');
+}
+
+function removeButtonSpinner(){
+    $('#btnLogin').html('Login');
+    $('#btnLogin').removeClass('disabled');
+}
+function showLoginError(){
+    $('.error-message-login').show();
+    $('.error-message-login').text('Usuari i/o contrasenya incorrectes');
+}
+
+function hideLoginError(){
+    $('.error-message-login').hide();
+    $('.error-message-login').text('');
+}
+
+
+
+
+/**/
+}())
+
+</script>
