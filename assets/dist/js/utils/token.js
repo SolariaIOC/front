@@ -2,10 +2,12 @@ export function decodificaJWT(token) {
 
   const arrayToken = token.split('.');
   console.log("Array Token: ");
-  console.log(arrayToken);
+  if(token.length >= 1) {
+    const tokenPayload = JSON.parse(atob(arrayToken[1]));
+    //console.log(tokenPayload)
+    return tokenPayload
+  }
 
-  const tokenPayload = JSON.parse(atob(arrayToken[1]));
-  //console.log(tokenPayload)
-  return tokenPayload
+  return null;
 
 }

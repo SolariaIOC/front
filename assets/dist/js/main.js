@@ -33,15 +33,17 @@ if(ruta.includes("index")){
 //window.location.assign()
 
 let token = getCookie("token");
-console.log(token)
 
 if(token !== undefined || token !=='') {
-     console.log('Usuario en local storage');
+
      let usuario = decodificaJWT(token);
-     localStorage.setItem('usuario', JSON.stringify(usuario));
-     const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
-     console.log('usuario en local storage')
-     console.log(usuarioLocal)
+
+     if(usuario !== null) {
+          localStorage.setItem('usuario', JSON.stringify(usuario));
+          const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
+          console.log('usuario en local storage')
+          console.log(usuarioLocal);
+     }
 }
 
 
