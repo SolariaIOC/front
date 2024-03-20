@@ -52,16 +52,14 @@ if(ruta.includes("index")){
 
 
 let token = getCookie("token");
-let usuario = decodificaJWT(token); 
 
-localStorage.setItem('usuario', JSON.stringify(usuario));
-
-
-const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
-
-console.log('usuario en local storage')
-console.log(usuarioLocal)
-
+if(token !== undefined) {
+     let usuario = decodificaJWT(token);
+     localStorage.setItem('usuario', JSON.stringify(usuario));
+     const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
+     console.log('usuario en local storage')
+     console.log(usuarioLocal)
+}
 
 
 
