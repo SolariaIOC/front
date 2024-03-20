@@ -3,6 +3,10 @@ import { renderComponent } from "./utils/components.js";
 import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
 
+if(window.location.pathname === '/'){
+     window.location.replace("index.html");
+}
+
 /* FUNCIONES GENERALES */
 
 /*Animacion de la barra de navegación*/
