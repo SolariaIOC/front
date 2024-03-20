@@ -28,10 +28,13 @@
         </div>
     </div>
 </nav>
+<div id="banner"></div>
 
 
 
 <script>
+
+
 
         const usuaio = localStorage.getItem('usuario');
         const btnContainer = document.getElementById("btn-login-container");
@@ -64,6 +67,8 @@
             btnContainer.replaceChildren(btnUsuario)
           //  btnContainer.appendChild(btnUsuario);
             btnUsuario.appendChild(iconoUsuario);
+
+           
         }
 
 

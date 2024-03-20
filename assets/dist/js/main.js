@@ -49,7 +49,7 @@ if(ruta.includes("index")){
 
 
 
-renderComponent("#banner", "/components/banner.html")
+
 
 let token = getCookie("token");
 let usuario = decodificaJWT(token); 
@@ -65,14 +65,8 @@ console.log(usuarioLocal)
 
 
 
-if (usuario){
-   let banner = document.querySelector('#banner');
-     banner.textContent = "Benvingut, " + usuario.Nom;
-}
 
-if(token){
-     renderizaFragmento("#banner","./components/banner.html");
-}
+
 
 
 console.log(usuario)
