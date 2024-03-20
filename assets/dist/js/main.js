@@ -3,8 +3,6 @@ import { renderComponent } from "./utils/components.js";
 import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
 
-
-
 /* FUNCIONES GENERALES */
 
 /*Animacion de la barra de navegación*/
@@ -34,26 +32,11 @@ if(ruta.includes("index")){
 //REDIRIGE A
 //window.location.assign()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let token = getCookie("token");
+console.log(token)
 
 if(token !== undefined) {
+     console.log('Usuario en local storage');
      let usuario = decodificaJWT(token);
      localStorage.setItem('usuario', JSON.stringify(usuario));
      const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
