@@ -38,6 +38,8 @@ if(token !== undefined || token !=='') {
 
      let usuario = decodificaJWT(token);
 
+     console.log(usuario);
+
      if(usuario !== null) {
           localStorage.setItem('usuario', JSON.stringify(usuario));
           const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
