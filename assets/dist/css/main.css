@@ -1,0 +1,18 @@
+body{
+    min-height: 100vh;
+}
+
+
+.nav-scroll {
+    background: azure;
+    transition: all 800ms ease-in-out;
+}
+
+
+.scroll-down .nav-scroll {
+    transform: translateY(-100%)
+}
+
+.scroll-up .nav-scroll {
+    transform: translateY(0)
+}
