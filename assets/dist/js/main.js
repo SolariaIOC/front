@@ -35,7 +35,7 @@ if(ruta.includes("index")){
 let token = getCookie("token");
 console.log(token)
 
-if(token !== undefined) {
+if(token !== undefined || token !=='') {
      console.log('Usuario en local storage');
      let usuario = decodificaJWT(token);
      localStorage.setItem('usuario', JSON.stringify(usuario));
