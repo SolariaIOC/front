@@ -30,34 +30,18 @@
 </nav>
 <div id="banner"></div>
 
-
-
 <script>
+    const usuario = localStorage.getItem('usuario');
+    const btnContainer = document.getElementById("btn-login-container");
+    const btnLogin = document.getElementById("btn-login");
 
+    (function () {
 
-
-        const usuaio = localStorage.getItem('usuario');
-        const btnContainer = document.getElementById("btn-login-container");
-        const btnLogin = document.getElementById("btn-login");
-
-
-        (function () {
-
-
-
-
-
-
-
-
-
-        if (usuaio) {
-
+        if (usuario) {
             let iconoUsuario = document.createElement("i")
             iconoUsuario.classList.add("fa-solid", "fa-user", "m-2", "me-0", "mt-0", "mb-0", "pr-5")
 
             let btnUsuario = document.createElement("button");
-
 
             btnUsuario.classList.add("btn", "btn-outline-primary", "m-3")
             btnUsuario.setAttribute('onclick', 'logout();')
@@ -65,22 +49,13 @@
             btnUsuario.textContent = "usuario";
 
             btnContainer.replaceChildren(btnUsuario)
-          //  btnContainer.appendChild(btnUsuario);
+            // btnContainer.appendChild(btnUsuario);
             btnUsuario.appendChild(iconoUsuario);
-
-
         }
-
-
     })();
 
-
     function logout(){
-
         localStorage.removeItem('usuario');
         btnContainer.replaceChildren(btnLogin)
-
-}
-
-
+    }
 </script>
