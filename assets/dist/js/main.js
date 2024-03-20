@@ -17,17 +17,14 @@ renderizaFragmento("#footer","./components/footer.html");
 
 let ruta =  window.location.href;
 if(ruta.includes("registre")){
-    
 
 }
 
 if(ruta.includes("index")){
-
      renderizaFragmento("#inmobles","./components/inmobles.html");
      renderizaFragmento("#promo","./components/promo.html");
      renderizaFragmento("#loginModal","./components/login-modal.html");    
 }
-
 
 //REDIRIGE A
 //window.location.assign()
@@ -54,7 +51,6 @@ if(token !== undefined || token !=='') {
 }
 
 /*
-
 function getCookies(name) {
      const cookies = document.cookie.split(';'); // Divide la cadena de cookies en un arreglo
      for (let i = 0; i < cookies.length; i++) {
@@ -74,5 +70,4 @@ function getCookies(name) {
  } else {
      console.log('No se encontró la cookie "token"');
  }
-
  */
