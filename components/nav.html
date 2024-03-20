@@ -16,17 +16,66 @@
                     <a class="nav-link" href="#">Immobles</a>
                 </li>
                 <li>
-         
+
                 </li>
             </ul>
-            <div class="d-flex flex-column" >
-                <button value="login" class="btn btn-outline-primary  m-3" data-bs-toggle="modal"  href="#staticBackdrop"> <i
-                        class="fa-solid fa-arrow-right-to-bracket me-2"></i> login </button>
+            <div id="btn-login-container" class="d-flex flex-column">
+                <button id="btn-login" value="login" class="btn btn-outline-primary  m-3" data-bs-toggle="modal"
+                    href="#staticBackdrop"> <i class="fa-solid fa-arrow-right-to-bracket me-2"></i> login </button>
 
             </div>
-          
+
         </div>
     </div>
 </nav>
 
-<!--data-bs-target="#staticBackdrop"-->
+
+
+<script>
+
+        const usuaio = localStorage.getItem('usuario');
+        const btnContainer = document.getElementById("btn-login-container");
+        const btnLogin = document.getElementById("btn-login");
+
+
+        (function () {
+
+
+     
+
+
+        
+
+
+
+        if (usuaio) {
+
+            let iconoUsuario = document.createElement("i")
+            iconoUsuario.classList.add("fa-solid", "fa-user", "m-2", "me-0", "mt-0", "mb-0", "pr-5")
+
+            let btnUsuario = document.createElement("button");
+
+
+            btnUsuario.classList.add("btn", "btn-outline-primary", "m-3")
+            btnUsuario.setAttribute('onclick', 'logout();')
+            btnUsuario.id = "btn-usuario";
+            btnUsuario.textContent = "usuario";
+
+            btnContainer.replaceChildren(btnUsuario)
+          //  btnContainer.appendChild(btnUsuario);
+            btnUsuario.appendChild(iconoUsuario);
+        }
+
+
+    })();
+
+
+    function logout(){
+
+        localStorage.removeItem('usuario');
+        btnContainer.replaceChildren(btnLogin)
+
+}
+
+
+</script>
