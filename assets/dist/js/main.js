@@ -42,32 +42,16 @@ if(token !== undefined || token !=='') {
 
      if(usuario !== null) {
           localStorage.setItem('usuario', JSON.stringify(usuario));
+
           const usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
+
           console.log('usuario en local storage')
           console.log(usuarioLocal);
+
+          console.log(usuario)
+          console.log( decodificaJWT(token) )
      }
 }
-
-
-
-
-
-
-
-console.log(usuario)
-
-
-
-
-console.log( decodificaJWT(token) )
-
-
-
-
-
-
-
-
 
 /*
 
