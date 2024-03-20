@@ -26,7 +26,7 @@ $(function() {
             let loginPassword = $('#loginPassword').val();
 
 
-            $.ajax("http://solaria.website:3333/login", {
+            $.ajax("https://solaria.website:3333/login", {
                 data: JSON.stringify({
                     "Email": loginEmail,
                     "Contrasenya": loginPassword
