@@ -43,11 +43,9 @@
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const rutaBase = "http://solaria.website/";
-
+    const rutaBase = "http://solaria.website:3333/";
 
     const formData = new FormData(this);
-
 
     const data = {};
     formData.forEach((value, key) => {
