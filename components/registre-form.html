@@ -44,7 +44,8 @@
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const rutaBase = "http://solaria.website:3333/";
+    const rutaBase = "http://solaria.website/";
+    const rutaApi = "http://solaria.website:3333/";
 
     const formData = new FormData(this);
 
@@ -54,7 +55,7 @@
     });
 
 
-    fetch(rutaBase + "app/registre", {
+    fetch(rutaApi + "app/registre", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
