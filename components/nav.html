@@ -10,6 +10,7 @@
         <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto  ">
                 <li class="nav-item">
+                    <!--CAMBIAR DIRECCION-->
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
@@ -36,22 +37,23 @@
 
 
 
-        const usuaio = localStorage.getItem('usuario');
-        const btnContainer = document.getElementById("btn-login-container");
-        const btnLogin = document.getElementById("btn-login");
+    const payloadRec = localStorage.getItem('usuario');
+    const btnContainer = document.getElementById("btn-login-container");
+    const btnLogin = document.getElementById("btn-login");
 
 
-        (function () {
+    let payloadParse = JSON.parse(payloadRec);
+
+    let usuarioLocal = payloadParse.usuario;
+
+    (function () {
+
+        console.log('usuarioLocal')
+        console.log(usuarioLocal)
 
 
-     
 
-
-        
-
-
-
-        if (usuaio) {
+        if (usuarioLocal) {
 
             let iconoUsuario = document.createElement("i")
             iconoUsuario.classList.add("fa-solid", "fa-user", "m-2", "me-0", "mt-0", "mb-0", "pr-5")
@@ -62,25 +64,25 @@
             btnUsuario.classList.add("btn", "btn-outline-primary", "m-3")
             btnUsuario.setAttribute('onclick', 'logout();')
             btnUsuario.id = "btn-usuario";
-            btnUsuario.textContent = "usuario";
+            btnUsuario.textContent = usuarioLocal.Nom;
 
             btnContainer.replaceChildren(btnUsuario)
-          //  btnContainer.appendChild(btnUsuario);
+            //  btnContainer.appendChild(btnUsuario);
             btnUsuario.appendChild(iconoUsuario);
 
-           
+
         }
 
 
     })();
 
 
-    function logout(){
+    function logout() {
 
         localStorage.removeItem('usuario');
         btnContainer.replaceChildren(btnLogin)
 
-}
+    }
 
 
 </script>

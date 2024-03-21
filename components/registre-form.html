@@ -1,0 +1,89 @@
+<div class="container justify-content-center mt-auto mb-auto">
+
+  <h2 class="mb-4 mt-3">Registre</h2>
+  <form id="registroForm" >
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+          title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+      </div>
+      <div class="col-md-8">
+        <label for="cognoms" class="form-label">Cognoms</label>
+        <input type="text" class="form-control" id="cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+          title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+      </div>
+    </div>
+
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Correu electrònic</label>
+        <input type="email" class="form-control" id="email" name="Email" required>
+      </div>
+      <div class="mb-3">
+        <label for="contrasenya" class="form-label">Contrasenya</label>
+        <input type="password" class="form-control" id="contrasenya" name="Contrasenya" pattern=".{6,}"
+          title="La contrasenya ha de tenir com a mínim 6 caràcters" required>
+      </div>
+  <div class="justify-content-end">
+        <button type="submit" class="btn btn-primary ">Registrar-se</button>
+  </div>
+   
+    </form>
+</div>
+
+<script>
+  const formularioRegistro = document.getElementById("registroForm");
+
+  let errorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
+  let confMssg = "Registre amb èxit!";
+
+  console.log("dentro de registro");
+  formularioRegistro.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+
+    const rutaBase = "https://solaria.website/";
+
+    // Recopilar los datos del formulario
+    const formData = new FormData(this);
+
+    // Convertir los datos a un objeto
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    // Realizar la solicitud fetch al endpoint de registro
+    /* */
+    fetch(rutaBase + "app/registre", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "S'ha produït un error en registrar. Si us plau, torneu-ho a provar."
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("registro correcto:", data);
+
+        alert("");
+
+        // TODO CAMBIAR RUTA A DONDE SE DIRIGE DESPUES DE REGISTRARSE
+        window.location.assign("/")
+
+      })
+      .catch((error) => {
+        console.error("Error en el registro:", error.message);
+
+      });
+  });
+
+</script>
