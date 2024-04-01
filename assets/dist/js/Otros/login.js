@@ -34,7 +34,13 @@ $(function() {
                 contentType: 'application/json',
                 type: 'POST',
             }).done(function (data) {
-                setCookie('token', data.token, 365);
+                
+                console.log(data)
+                localStorage.setItem('token', data.token )
+                console.log('token desde login')
+                console.log(localStorage.getItem('token'))
+                // Evitar cookies
+               // setCookie('token', data.token, 365);
                 window.location.replace("index.html");
             }).fail(function () {
                 showLoginError();
