@@ -4,7 +4,9 @@ import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
 import { registro } from "./registre.js";
 
-
+if(window.location.pathname === '/'){
+     window.location.replace("index.html");
+}
 const mainContent = document.querySelector('main-content');
 
 /* FUNCIONES GENERALES */
@@ -22,7 +24,6 @@ renderizaFragmento("#footer","./components/footer.html");
 const ruta = window.location.href;
 
 if(ruta.includes("index")){
-
      renderizaFragmento("#inmobles","./components/inmobles.html");
      renderizaFragmento("#promo","./components/promo.html");
      renderizaFragmento("#login-modal","./components/login-modal.html");    
@@ -35,6 +36,15 @@ if(ruta.includes("registre")){
 
    
 }
+
+if(ruta.includes("registre")){ 
+    renderizaFragmento("#login-modal","./components/login-modal.html");  
+  
+    renderizaFragmento("#registre-form","./components/registre-form.html");
+
+   
+}
+
 
 
 //REDIRIGE A
