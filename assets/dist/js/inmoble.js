@@ -10,7 +10,7 @@ import { checkToken } from "./utils/token.js";
 //const rutaAPI = "http://solaria.website:3333/";
 
 /* TEST */
-const rutaAPI = "http://127.0.0.1:3333/";
+const rutaAPI = "http://solaria.website:3333/";
 
 const token = localStorage.getItem("token");
 const ruta = window.location.href;
