@@ -12,7 +12,7 @@ import {
 
 import{fillTablaInmobles, getAllInmobles, getMyInmobles,getInmoblesPerCodiPostal ,getInmoblePerPoblacio , addInmoble ,removeInmoble } from "./inmoble.js"
 
-const rutaAPI = "http://"+window.location.hostname+":3333";
+const rutaAPI = "https://"+window.location.hostname+":3333";
 //let token =  localStorage.getItem('token');
 
 

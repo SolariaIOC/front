@@ -35,8 +35,8 @@ window.onload = () => {
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const rutaBase = "http://"+window.location.hostname+"/";
-    const rutaApi = "http://"+window.location.hostname+":3333/";
+    const rutaBase = "https://"+window.location.hostname+"/";
+    const rutaApi = "https://"+window.location.hostname+":3333/";
 
     const formData = new FormData(this);
 

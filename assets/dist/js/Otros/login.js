@@ -26,7 +26,7 @@ $(function() {
             let loginPassword = $('#loginPassword').val();
 
 
-            $.ajax("http://"+window.location.hostname+":3333/login", {
+            $.ajax("https://"+window.location.hostname+":3333/login", {
                 data: JSON.stringify({
                     "Email": loginEmail,
                     "Contrasenya": loginPassword
