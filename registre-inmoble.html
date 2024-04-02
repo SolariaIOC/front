@@ -35,7 +35,7 @@
 
 <body>
 
-  <header>
+  <header >
     <div id="barra-navegacion"></div>
   </header>
   <section>
@@ -43,39 +43,56 @@
     <div id="message-modal"></div>
   </section>
 
+<!--INICIO -->
+<!-- Carrer, Numero, Pis, Codi_Postal, Poblacio, Descripcio, Preu, Imatge -->
 
- <!-- <div id="registre-form" class="container mt-5 p-5"></div>-->
 
-<!-- FORM -->
-<div class="container justify-content-center mt-auto mb-auto">
+<div class="container justify-content-center mt-5 mb-auto ">
 
-  <h2 class="mb-4 mt-3">Registre</h2>
-  <form id="registre-formulari-dades">
+  <h2 class="mb-4 mt-4">Registre Inmoble</h2>
+  <form id="registre-formulari-inmoble">
 
     <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
-          title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
-      </div>
       <div class="col-md-8">
-        <label for="cognoms" class="form-label">Cognoms</label>
-        <input type="text" class="form-control" id="cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
-          title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters."
+        <label for="Carrer" class="form-label">Carrer</label>
+        <input type="text" class="form-control" id="Carrer" name="Carrer" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+          title="Carrer invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+      </div>
+      <div class="col-md-4">
+        <label for="Numero" class="form-label">Numero</label>
+        <input type="text" class="form-control" id="Numero" name="Numero" 
           required>
       </div>
     </div>
 
+    <div class="row mb-3">
+      <div class="col-md-3">
+      <label for="Pis" class="form-label">Pis</label>
+      <input type="text" class="form-control" id="Pis" name="Pis" required>
+    </div>
+    <div class="col-md-3">
+      <label for="Codi_Postal" class="form-label">Codi postal</label>
+      <input type="text" class="form-control" id="Codi_Postal" name="Codi_Postal" required>
+    
+    </div>
+    <div class="col-md-6">
+      <label for="Poblacio" class="form-label">Poblacio</label>
+      <input type="text" class="form-control" id="Poblacio" name="Poblacio" required>
+   
+    </div>
+  </div>
 
     <div class="mb-3">
-      <label for="email" class="form-label">Correu electrònic</label>
-      <input type="email" class="form-control" id="email" name="Email" required>
+      <label for="Descripcio" class="form-label">Descripcio</label>
+      <input type="text" class="form-control" id="Descripcio" name="Descripcio" required>
     </div>
     <div class="mb-3">
-      <label for="contrasenya" class="form-label">Contrasenya</label>
-      <input type="password" class="form-control" id="contrasenya" name="Contrasenya" pattern=".{6,}"
-        title="La contrasenya ha de tenir com a mínim 6 caràcters" required>
-      <input type="hidden" name="TipusUsuari" value="user">
+      <label for="Imatge" class="form-label">Imatge</label>
+      <input type="text" class="form-control" id="Imatge" name="Imatge" required>
+    </div>
+    <div class="col-md-3  mb-3">
+      <label for="Preu" class="form-label">Preu</label>
+      <input type="text" class="form-control" id="Preu" name="Preu" required>
     </div>
     <div class="justify-content-end">
       <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="registra">Registrar-se</button>
@@ -87,18 +104,14 @@
 
 
 
-<!--FIN DE FORM -->
 
 
 
-
-
+<!--FIN -->
   <footer>
     <div id="footer"></div>
   </footer>
-
-
 </body>
 <script src="assets/dist/js/main.js" type="module"></script>
-<script src="assets/dist/js/registre.js" type="module"></script>
+<script src="assets/dist/js/inmoble.js" type="module"></script>
 </html>

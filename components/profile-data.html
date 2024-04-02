@@ -1,0 +1,35 @@
+<div class="container justify-content-center mt-auto mb-auto">
+
+    <form id="registroForm">
+  
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+            title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." disabled>
+        </div>
+        <div class="col-md-8">
+          <label for="cognoms" class="form-label">Cognoms</label>
+          <input type="text" class="form-control" id="cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+            title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters."
+            disabled>
+        </div>
+      </div>
+  
+  
+      <div class="mb-3">
+        <label for="email" class="form-label">Correu electrònic</label>
+        <input type="email" class="form-control" id="email" name="Email" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="contrasenya" class="form-label">Contrasenya</label>
+        <input type="password" class="form-control" id="contrasenya" name="Contrasenya" pattern=".{6,}"
+          title="La contrasenya ha de tenir com a mínim 6 caràcters" disabled>
+        <input type="hidden" name="TipusUsuari" value="user">
+      </div>
+      <div class="justify-content-end mt-3 p-5">
+        <button type="submit" class="btn btn-primary ">Modificar</button>
+      </div>
+  
+    </form>
+  </div>

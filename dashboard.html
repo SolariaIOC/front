@@ -6,7 +6,7 @@
         <meta name="description" content="Solaria">
         <meta name="author" content="Solaria">
         <link rel="icon" type="image/svg" href="assets/brand/icono.svg">
-        <title>Solaria</title>
+        <title>Solaria - Dashboard</title>
 
         <!-- Bootstrap core CSS -->
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,25 +44,23 @@
 
     <header>
         <div id="barra-navegacion"></div>
-
-        <div id="promo"></div>
     </header>
 
     <!--MAIN CONTENT-->
-    <div id="main-content">
-        <section>
-            <div id="inmobles" class="container-fluid"></div>
-        </section>
-        <section>
-            <div id="login-modal-container"></div>
-            <div id="message-modal-container"></div>
-        </section>
+    <div id="main-content" class="p-5 mt-5">
+
+        <h2>Dashboard</h2>
+    
+        <section id="datos-usuari" class="p-3 mt-3"></section>
+        <section id="llista-usuaris" class="p-3 mt-1"></section>
+        <section id="llista-inmobles" class="p-3 mt-1"></section>
+        <section id="table-content-llista-usuaris" class="p-3 mt-1" style="overflow-x:auto;"> </section>
+        <section id="table-content-llista-inmobles" class="p-3 mt-1" style="overflow-x:auto;"> </section>
+
     </div>
     <footer id="footer">
     </footer>
 </body>
 
- <script src="assets/dist/js/main.js" type="module"></script> 
- <script src="assets/dist/js/inmoble.js" type="module"></script> 
- 
+    <script src="assets/dist/js/main.js" type="module"></script>
 </html>

@@ -26,7 +26,7 @@ $(function() {
             let loginPassword = $('#loginPassword').val();
 
 
-            $.ajax("http://solaria.website:3333/login", {
+            $.ajax("https://"+window.location.hostname+":3333/login", {
                 data: JSON.stringify({
                     "Email": loginEmail,
                     "Contrasenya": loginPassword
@@ -34,7 +34,13 @@ $(function() {
                 contentType: 'application/json',
                 type: 'POST',
             }).done(function (data) {
-                setCookie('token', data.token, 365);
+                
+                console.log(data)
+                localStorage.setItem('token', data.token )
+                console.log('token desde login')
+                console.log(localStorage.getItem('token'))
+                // Evitar cookies
+               // setCookie('token', data.token, 365);
                 window.location.replace("index.html");
             }).fail(function () {
                 showLoginError();

@@ -1,18 +1,46 @@
-body{
-    min-height: 100vh;
+body {
+  min-height: 100vh;
+}
+
+/* COLORES */
+:root{
+    --color-principal: blue;
+    --color-secundario:red;
+    --accent:yellow;
+
+    --color-neutral:whitesmoke;
+
 }
 
 
+
+/* NAVEGADOR */
 .nav-scroll {
-    background: azure;
-    transition: all 800ms ease-in-out;
+  background: var(--color-neutral);
+  transition: all 800ms ease-in-out;
 }
-
 
 .scroll-down .nav-scroll {
-    transform: translateY(-100%)
+  transform: translateY(-100%);
 }
 
 .scroll-up .nav-scroll {
-    transform: translateY(0)
+  transform: translateY(0);
 }
+
+.btn-user-profile {
+  background-color: rgba(248, 249, 250,0); /* Green */
+  border: none;
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn-user-profile:hover{
+     
+    border: none;
+    cursor: pointer;
+}
+

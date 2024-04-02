@@ -1,8 +1,8 @@
 
 /**
  * 
- * @param {*} destinoInyeccion 
- * @param {*} rutaHtml 
+ * @param {*} destinoInyeccion  Donde queremos insertar el snippet 
+ * @param {*} rutaHtml El snippet en si que es un codigo html en un archivo pasar la ruta del snippet ej "/aviso"
  */
 export function renderizaFragmento(destinoInyeccion, rutaHtml) {
     const inyectarHTML = document.querySelector(destinoInyeccion);

@@ -8,3 +8,17 @@ export function decodificaJWT(token) {
   return null;
 
 }
+
+export function checkToken(token){
+
+ let tokenDescodificado =  decodificaJWT(token)
+if (tokenDescodificado.exp < Date.now() / 1000) {
+  console.log('El token ha caducado');
+  localStorage.removeItem('token')
+  console.log('redireccion a index.')
+  //location.assign('index.html')
+  return false;
+}
+return true;
+
+}
