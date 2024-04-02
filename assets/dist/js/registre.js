@@ -35,8 +35,8 @@ window.onload = () => {
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const rutaBase = "http://solaria.website/";
-    const rutaApi = "http://solaria.website:3333/";
+    const rutaBase = "http://"+window.location.hostname+"/";
+    const rutaApi = "http://"+window.location.hostname+":3333/";
 
     const formData = new FormData(this);
 

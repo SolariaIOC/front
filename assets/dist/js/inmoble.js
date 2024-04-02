@@ -4,13 +4,10 @@ import { checkToken } from "./utils/token.js";
 
 // Http only - Con cookies no utilizar el local Storage.
 
-
-
-
 //const rutaAPI = "http://solaria.website:3333/";
 
 /* TEST */
-const rutaAPI = "http://solaria.website:3333/";
+const rutaAPI = "http://"+window.location.hostname+":3333/";
 
 const token = localStorage.getItem("token");
 const ruta = window.location.href;

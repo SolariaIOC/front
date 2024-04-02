@@ -3,7 +3,6 @@ import { renderizaFragmento } from "./utils/modularizacionHtml.js";
 import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
 import {
-  loginUser,
   registerUser,
   getUsers,
   getLocalUser,
@@ -13,13 +12,13 @@ import {
 
 import{fillTablaInmobles, getAllInmobles, getMyInmobles,getInmoblesPerCodiPostal ,getInmoblePerPoblacio , addInmoble ,removeInmoble } from "./inmoble.js"
 
-const rutaAPI = "http://solaria.website:3333";
+const rutaAPI = "http://"+window.location.hostname+":3333";
 //let token =  localStorage.getItem('token');
 
 
 
 console.log("location");
-if (window.location.hostname == "127.0.0.1") {
+if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {
   console.log("Dev");
 } else {
   console.log("Production");
