@@ -1,7 +1,7 @@
 import { renderizaFragmento } from "./utils/modularizacionHtml.js";
-
 import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
+import { getApiURL } from "./utils.js";
 import {
   registerUser,
   getUsers,
@@ -10,23 +10,20 @@ import {
   fillTablaUsuarios
 } from "./utils/users.js";
 
-import{fillTablaInmobles, getAllInmobles, getMyInmobles,getInmoblesPerCodiPostal ,getInmoblePerPoblacio , addInmoble ,removeInmoble } from "./inmoble.js"
-
-const rutaAPI = "https://"+window.location.hostname+":3333";
-//let token =  localStorage.getItem('token');
-
-
-
-console.log("location");
-if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {
-  console.log("Dev");
-} else {
-  console.log("Production");
-}
+import{
+  fillTablaInmobles,
+  getAllInmobles,
+  getMyInmobles,
+  getInmoblesPerCodiPostal,
+  getInmoblePerPoblacio ,
+  addInmoble,
+  removeInmoble
+} from "./inmoble.js"
 
 if (window.location.pathname === "/") {
   window.location.replace("index.html");
 }
+
 const mainContent = document.querySelector("main-content");
 
 /* FUNCIONES GENERALES */

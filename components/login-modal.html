@@ -38,12 +38,21 @@
 
 <script>
 
-
+// TODO: Duplicated in utils.js
+function getApiURL(){
+    if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {
+        console.log('DEV');
+        return "http://"+window.location.hostname+":3333";
+    } else {
+        console.log('LIVE');
+        return "https://"+window.location.hostname+":3333";
+    }
+}
 
 async function getMyInmobles() {
-  meuInmobles = [];
+    let meuInmobles = [];
 
-  await fetch(rutaAPI + "immobles/r", {
+    await fetch(getApiURL() + "/immobles/r", {
     credentials:'include',
     headers: {
       "Content-Type": "application/json",
@@ -64,29 +73,25 @@ async function getMyInmobles() {
 }
 
 
+const loginForm = document.getElementById('login-form');
 
+loginForm.addEventListener('submit', (evento) => {
+    evento.preventDefault();
 
-    const rutaAPI = "https://"+window.location.hostname+":3333/";
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    let dataUsuari = { Email: email, Contrasenya: password };
 
-    const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', (evento) => {
+    console.log("Datos login: " + email + " " + password);
 
-        evento.preventDefault();
-
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-        let datausuari = { Email: email, Contrasenya: password };
-
-        console.log("Datos login: " + email + " " + password);
-
-        fetch(rutaAPI + "login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: 'include',
-            body: JSON.stringify(datausuari),
-        }).then((resp) => {
+    fetch(getApiURL() + "/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: 'include',
+        body: JSON.stringify(dataUsuari),
+    }).then((resp) => {
       if (!resp.ok) {
         throw new Error("S'ha produït un error al servidor.");
       }
@@ -94,27 +99,24 @@ async function getMyInmobles() {
       console.log(resp.headers)
       console.log(resp.value)
       return resp;
-    })
-    .then((data) => {
-      console.log("Data Login:");
-      console.log("data");
-      console.log(data);
+    }).then((data) => {
+        console.log("Data Login:");
+        console.log("data");
+        console.log(data);
         console.log("data.headers");
-      console.log(data.headers);
-      console.log("data.headers.getSetCookie()");
-      console.log(data.headers.getSetCookie());
+        console.log(data.headers);
+        console.log("data.headers.getSetCookie()");
+        console.log(data.headers.getSetCookie());
 
-      console.log('cookie')
-      console.log(document.cookie)
-      getMyInmobles()
-     
+        console.log('cookie')
+        console.log(document.cookie)
+        getMyInmobles()
+
       return data;
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.error("Error en el login:", error.message);
     });
-
-    })
+})
 
   
 
