@@ -1,5 +1,5 @@
-
-  import { renderizaFragmento } from "./utils/modularizacionHtml.js";
+import { renderizaFragmento } from "./utils/modularizacionHtml.js";
+import { getApiURL } from "./utils.js";
 
 
 
@@ -35,9 +35,6 @@ window.onload = () => {
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const rutaBase = "https://"+window.location.hostname+"/";
-    const rutaApi = "https://"+window.location.hostname+":3333/";
-
     const formData = new FormData(this);
 
     const data = {};
@@ -46,7 +43,7 @@ window.onload = () => {
     });
 
 
-    fetch(rutaApi + "app/registre", {
+    fetch(getApiURL() + "/app/registre", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

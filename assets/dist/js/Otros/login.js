@@ -1,3 +1,5 @@
+import { getApiURL } from "../utils.js";
+
 $(function() {
 
     if(isUserLogged()) {
@@ -26,7 +28,7 @@ $(function() {
             let loginPassword = $('#loginPassword').val();
 
 
-            $.ajax("https://"+window.location.hostname+":3333/login", {
+            $.ajax(getApiURL()+"/login", {
                 data: JSON.stringify({
                     "Email": loginEmail,
                     "Contrasenya": loginPassword
