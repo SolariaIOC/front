@@ -5,24 +5,21 @@ let immobles = [];
 
 window.navigation.addEventListener("navigate", async () => {
     await loadImmoblesTable();
-})
+    console.log(immobleToEdit);
+});
 
 await loadImmoblesTable();
 
 document.addEventListener("DOMContentLoaded", function(arg) {
-    let editElements = document.getElementsByClassName("edit-immoble");
-    for(let i = 0; i < editElements.length; i++) {
-        editElements[i].onclick = function () {
-            for (let j = 0; j < immobles.length; i++) {
-                if(immobles[j].id_immoble === parseInt(editElements[i].getAttribute('data-id'))){
-                    immobleToEdit = immobles[i];
-                    console.log(immobleToEdit);
-                    break;
-                }
-            }
 
-        }
-    }
+    console.log('1');
+
+    $(document).on("click", '.edit-immoble', function(event) {
+
+        console.log('2');
+
+
+    });
 
     let removeElements = document.getElementsByClassName("remove-immoble");
     for(let i = 0; i < removeElements.length; i++) {
@@ -78,16 +75,14 @@ async function loadImmoblesTable() {
         $('#immobles-information').append('<td>' + immobles[i].Codi_Postal + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Poblacio + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Preu + '</td>');
-        $('#immobles-information').append('<td><a class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'">Eliminar</a></td>');
-        $('#immobles-information').append('<td><a class="edit-immoble dashboard-link" href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'">Editar</a></td>');
+        $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'">Eliminar</span></td>');
+        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link" href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'">Editar</span></td>');
         $('#immobles-information').append('</tr>');
     }
 }
 
-async function loadImmobleEditForm(){
-
-}
-
-async function createImmoble(){
+function loadImmobleEditForm(){
+    console.log('loadImmobleEditForm');
+    $('#Carrer').value(immobleToEdit.id_immoble);
 
 }
