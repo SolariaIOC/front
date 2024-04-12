@@ -1,12 +1,9 @@
-import { getAllInmobles, removeInmoble } from "../../../js/inmoble.js";
+import { addInmoble, getAllInmobles, removeInmoble } from "../../../js/inmoble.js";
 
-// IF URL IS LLISTAT
-
-let url = window.location.hash.split('?')[0].split('#')[1];
 let immobleToEdit = undefined;
 let immobles = [];
 
-window.navigation.addEventListener("navigate", async (event) => {
+window.navigation.addEventListener("navigate", async () => {
     await loadImmoblesTable();
 })
 
@@ -32,6 +29,28 @@ document.addEventListener("DOMContentLoaded", function(arg) {
         removeElements[i].onclick = function () {
             removeImmobleFromTable(removeElements[i].getAttribute('data-id'));
         }
+    }
+});
+
+$(document).on("submit", '#crear-formulari-inmoble', async function(event) {
+
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    console.log(formData);
+
+    const inmoble = {};
+    formData.forEach((value, key) => {
+        inmoble[key] = value;
+    });
+
+    console.log(inmoble);
+    let hasBeenCreated = await addInmoble(inmoble);
+
+    if(hasBeenCreated) {
+        alert('Immoble creat correctament!');
+    } else {
+        alert('No s\'ha pogut crear correctament el immoble');
     }
 });
 
@@ -66,5 +85,9 @@ async function loadImmoblesTable() {
 }
 
 async function loadImmobleEditForm(){
+
+}
+
+async function createImmoble(){
 
 }

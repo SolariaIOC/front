@@ -117,30 +117,29 @@ export async function getInmoblePerPoblacio(poblacio) {
 
 /**
  *
- * @param {*} token
  * @param {*} inmoble
  */
 
-export async function addInmoble(token, inmoble) {
-  await fetch(getApiURL() + "/immobles/afegir", {
+export async function addInmoble(inmoble) {
+    await fetch(getApiURL() + "/immobles/a/afegirUsuariImmoble", {
     method: "POST",
+    credentials:'include',
     headers: {
-      Authorization: "Bearer " + token,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(inmoble),
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log("inmoble");
-      console.log(JSON.stringify(data));
-
-      console.log("Registro correcte de l'inmoble:", data);
-      alert("Imoble registrat correctament!");
-      return JSON.stringify(data);
+      if(data.hasOwnProperty('error')){
+        console.log(JSON.stringify(data));
+        return false;
+      }
+      return true;
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
+      return false;
     });
 }
 

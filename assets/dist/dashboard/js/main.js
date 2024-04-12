@@ -1,10 +1,11 @@
 import { renderizaFragmento } from "../../js/utils/modularizacionHtml.js";
-import { isUserLogged } from "./security/security.js";
 
 // Check if user is logged
+/*
 if(!isUserLogged()){
-    window.location.replace("dashboard_login.html");
+    window.location.replace("login.html");
 }
+ */
 
 // Renders
 renderizaFragmento("#sidebar", "../../components/dashboard/dashboard_layout/menu.html");
@@ -14,10 +15,12 @@ renderizaFragmento("#footer", "../../components/dashboard/dashboard_layout/foote
 // Gets the url and render the content of this url
 renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(window.location.hash));
 document.addEventListener("DOMContentLoaded", function(arg) {
-
     $(document).on("click", '.dashboard-link', function(event) {
         renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
+
+    // TODO: Get current user
+    $('#username').html('Dani Roman');
 });
 
 function getHtmlFromUrl(url){

@@ -3,4 +3,54 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Crear Immoble</h1>
     </div>
+
+    <form id="crear-formulari-inmoble" method="POST">
+
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <label for="Carrer" class="form-label">Carrer</label>
+                <input type="text" class="form-control" id="Carrer" name="Carrer" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+                       title="Carrer invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+            </div>
+            <div class="col-md-4">
+                <label for="Numero" class="form-label">Numero</label>
+                <input type="text" class="form-control" id="Numero" name="Numero"
+                       required>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="Pis" class="form-label">Pis</label>
+                <input type="text" class="form-control" id="Pis" name="Pis" required>
+            </div>
+            <div class="col-md-3">
+                <label for="Codi_Postal" class="form-label">Codi postal</label>
+                <input type="text" class="form-control" id="Codi_Postal" name="Codi_Postal" required>
+
+            </div>
+            <div class="col-md-6">
+                <label for="Poblacio" class="form-label">Poblacio</label>
+                <input type="text" class="form-control" id="Poblacio" name="Poblacio" required>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Descripcio" class="form-label">Descripcio</label>
+            <input type="text" class="form-control" id="Descripcio" name="Descripcio" required>
+        </div>
+        <div class="mb-3">
+            <label for="Imatge" class="form-label">Imatge</label>
+            <input type="text" class="form-control" id="Imatge" name="Imatge" required>
+        </div>
+        <div class="mb-3">
+            <label for="Preu" class="form-label">Preu</label>
+            <input type="text" class="form-control" id="Preu" name="Preu" required>
+        </div>
+        <div class="justify-content-end">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="Crear">Crear</button>
+        </div>
+
+    </form>
 </div>
