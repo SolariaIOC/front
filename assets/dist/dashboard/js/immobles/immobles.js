@@ -5,7 +5,7 @@ let immobles = [];
 
 window.navigation.addEventListener("navigate", async () => {
     await loadImmoblesTable();
-    if(immobleToEdit !== undefined){
+    if(immobleToEdit !== undefined && window.location.hash.split('?')[0].split('#')[1] === 'editar-immoble'){
         loadImmobleEditForm();
     }
 });
@@ -28,7 +28,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click", '.remove-immoble', function() {
-        removeImmobleFromTable(removeElements[i].getAttribute('data-id'));
+        removeImmobleFromTable($(this).attr('data-id'));
     });
 });
 
