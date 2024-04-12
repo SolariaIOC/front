@@ -2,12 +2,8 @@ import { getApiURL } from "./utils.js";
 
 // Tipo de usuario A - R 
 
-// Http only - Con cookies no utilizar el local Storage.
 
-const token = localStorage.getItem("token");
-const ruta = window.location.href;
-
-//((()=>{console.log('dentro de peticiones inmoble')})())
+const rutaAPI = getApiURL();
 
 //FORMULARIO INMOBLE
 
@@ -17,15 +13,16 @@ let meuInmobles = new Array();
 //Habría que acotar la cantidad de resultados si la BBDD crece puede colapsar la app
 
 /**
- * Petición de todos los inmuebles disponibles
+ * @description Petición de todos los inmuebles disponibles
  * @returns
  */
 export async function getAllInmobles() {
   inmobles = [];
-  await fetch(getApiURL() + "/immobles", {
+  await fetch(rutaAPI + "/immobles", {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: 'include'
   })
     .then((resp) => resp.json())
     .then((data) => {
@@ -38,7 +35,7 @@ export async function getAllInmobles() {
 
 
 /**
- *Petición de toda la lista de inmuebles de un usuario
+ *@description Petición de toda la lista de inmuebles de un usuario
  *
  *
  * @returns
@@ -46,7 +43,7 @@ export async function getAllInmobles() {
 export async function getMyInmobles() {
   meuInmobles = [];
 
-  await fetch(rutaAPI + "immobles/r", {
+  await fetch(rutaAPI + "/immobles/r", {
     credentials:'include',
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +64,7 @@ export async function getMyInmobles() {
 }
 
 /**
- *filtre d'inmobles per códi postal
+ *@description filtre d'inmobles per códi postal
  *
  * @param {*} codiPostal
  * @returns {[{}]} retorna un array d'inmobles
@@ -79,6 +76,7 @@ export async function getInmoblesPerCodiPostal(codiPostal) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: 'include'
   })
     .then((resp) => resp.json())
     .then((json) => {
@@ -91,7 +89,7 @@ export async function getInmoblesPerCodiPostal(codiPostal) {
 }
 
 /**
- *Filtre d'inmobles per població
+ *@description Filtre d'inmobles per població
  *
  * @param {*} poblacio
  */
@@ -102,6 +100,7 @@ export async function getInmoblePerPoblacio(poblacio) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: 'include',
   })
     .then((resp) => resp.json())
     .then((json) => {
@@ -117,17 +116,20 @@ export async function getInmoblePerPoblacio(poblacio) {
 
 /**
  *
- * @param {*} token
+ * @param {*} tipoUsuari
  * @param {*} inmoble
  */
 
-export async function addInmoble(token, inmoble) {
-  await fetch(rutaAPI + "immobles/afegir", {
+export async function addInmoble(tipoUsuari, inmoble) {
+
+  //todo verificar tipo de usuario
+
+  await fetch(rutaAPI + "/immobles/r/afegir", {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + token,
       "Content-Type": "application/json",
     },
+    credentials: 'include',
     body: JSON.stringify(inmoble),
   })
     .then((resp) => resp.json())
@@ -146,10 +148,10 @@ export async function addInmoble(token, inmoble) {
 
 /**
  *
- * @param {*} token
+ * @param {*} 
  * @param {*} inmoble
  */
-export async function removeInmoble(token, inmoble) {
+export async function removeInmoble( inmoble) {
   await fetch(rutaAPI + "inmobles", {
     headers: {
       Authorization: "Bearer " + token,
@@ -164,7 +166,7 @@ export async function removeInmoble(token, inmoble) {
 
 
 
-if (token && ruta.includes("register-inmobles")) {
+if ( window.location.href.includes("register-inmobles")) {
   const formulariInmoble = document.getElementById(
     "registre-formulari-inmoble"
   );
@@ -248,11 +250,12 @@ export function fillTablaInmobles(inmobles) {
     tdImatge.setAttribute("Imatge", "Imatge-" + inmoble.Imatge);
     tdImatge.textContent = inmoble.Imatge;
 
-    let tdDeleteUsuari = document.createElement("td");
+    let tdDeleteInmoble = document.createElement("td");
     let tdButton = document.createElement("button");
     let iconDelete = document.createElement("i");
-    (iconDelete.classList = "fa"), "fa-close";
+    iconDelete.classList = "fa", "fa-close";
     iconDelete.setAttribute("aria-hidden", true);
+    iconDelete.setAttribute("onClick", removeInmoble(inmoble));
 
     // AÑADIR ON CLICK CON COMPROBACIONES
    
@@ -271,8 +274,8 @@ export function fillTablaInmobles(inmobles) {
 
     
     tdButton.append(iconDelete);
-    tdDeleteUsuari.append(tdButton);
-    tr.appendChild(tdDeleteUsuari);
+    tdDeleteInmoble.append(tdButton);
+    tr.appendChild(tdDeleteInmoble);
 
     contenidoTabla.appendChild(tr);
   });

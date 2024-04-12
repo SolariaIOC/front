@@ -35,12 +35,14 @@
 
 
 
-    <script src="assets/dist/js/webpage.js"></script>
+   <!--  <script src="assets/dist/js/webpage.js"></script>-->
+    <script src="assets/dist/js/main.js" type="module"></script>
+
 
 
 </head>
 
-<body class="text-center">
+<body class=" align-content-between justify-content-between  vh-100">
 
     <header>
         <div id="barra-navegacion"></div>
@@ -53,17 +55,20 @@
         <section>
             <div id="inmobles" class="container-fluid"></div>
         </section>
-        <section>
+        <section class="text-center">
             <div id="login-modal-container"></div>
             <div id="message-modal-container"></div>
         </section>
     </div>
-    <footer id="footer">
-    </footer>
+
+    <footer class="container-fluid position-relative bottom-0 text-center">
+        <div id="footer"></div>
+      </footer>
 </body>
 
  <script src="assets/dist/js/utils.js" type="module"></script>
- <script src="assets/dist/js/main.js" type="module"></script>
+ <script src="assets/dist/js/observer.js" type="module"></script>
  <script src="assets/dist/js/inmoble.js" type="module"></script>
- 
+ <script src="assets/dist/js/login.js" type="module"></script>
+
 </html>

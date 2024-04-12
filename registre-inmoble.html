@@ -30,29 +30,35 @@
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/dist/js/bootstrap.bundle.min.js.map"></script>
 
-  <script src="assets/dist/js/webpage.js"></script>
+  <!--MAIN JS-->
+    <!--  <script src="assets/dist/js/webpage.js"></script>-->
+
+<script src="assets/dist/js/main.js" type="module"></script>
+
 </head>
 
-<body>
+<body class=" row align-content-between justify-content-between  vh-100">
+
 
   <header >
     <div id="barra-navegacion"></div>
   </header>
-  <section>
-    <div id="login-modal"></div>
-    <div id="message-modal"></div>
-  </section>
+  <section class="text-center" >
+    <div id="login-modal-container"></div>
+    <div id="message-modal-container"></div>
+</section>
+
 
 <!--INICIO -->
 <!-- Carrer, Numero, Pis, Codi_Postal, Poblacio, Descripcio, Preu, Imatge -->
 
 
-<div class="container justify-content-center mt-5 mb-auto ">
+<div class="container row align-content-center  p-5 text-center">
 
   <h2 class="mb-4 mt-4">Registre Inmoble</h2>
   <form id="registre-formulari-inmoble">
 
-    <div class="row mb-3">
+    <div class="row mb-3 mt-3">
       <div class="col-md-8">
         <label for="Carrer" class="form-label">Carrer</label>
         <input type="text" class="form-control" id="Carrer" name="Carrer" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
@@ -95,7 +101,7 @@
       <input type="text" class="form-control" id="Preu" name="Preu" required>
     </div>
     <div class="justify-content-end">
-      <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="registra">Registrar-se</button>
+      <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="registra">Registrar Inmoble</button>
     </div>
 
   </form>
@@ -112,6 +118,8 @@
     <div id="footer"></div>
   </footer>
 </body>
-<script src="assets/dist/js/main.js" type="module"></script>
 <script src="assets/dist/js/inmoble.js" type="module"></script>
+<script src="assets/dist/js/utils.js" type="module"></script>
+<script src="assets/dist/js/observer.js" type="module"></script>
+<script src="assets/dist/js/login.js" type="module"></script>
 </html>
