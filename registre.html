@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Solaria, fundada l'any 1989, la nostra empresa és un equip de reconeguts experts en gestió immobiliària i immobiliàries sempre disposats a ajudar-te." />
+  <meta name="description"
+    content="Solaria, fundada l'any 1989, la nostra empresa és un equip de reconeguts experts en gestió immobiliària i immobiliàries sempre disposats a ajudar-te." />
   <meta name="author" content="Solaria" />
   <link rel="icon" type="image/svg" href="/assets/brand/icono.svg" />
   <title>Solaria - Registre</title>
@@ -30,75 +31,88 @@
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/dist/js/bootstrap.bundle.min.js.map"></script>
 
-  <script src="assets/dist/js/webpage.js"></script>
+
+
+  <!--MAIN JS-->
+  <!--  <script src="assets/dist/js/webpage.js"></script>-->
+  <script src="assets/dist/js/main.js" type="module"></script>
+
 </head>
 
-<body>
+<body class=" row align-content-between justify-content-between  vh-100">
 
   <header>
     <div id="barra-navegacion"></div>
   </header>
-  <section>
-    <div id="login-modal"></div>
-    <div id="message-modal"></div>
+  <section class="text-center">
+    <div id="login-modal-container"></div>
+    <div id="message-modal-container"></div>
   </section>
 
 
- <!-- <div id="registre-form" class="container mt-5 p-5"></div>-->
+  <!-- <div id="registre-form" class="container mt-5 p-5"></div>-->
 
-<!-- FORM -->
-<div class="container justify-content-center mt-auto mb-auto">
+  <!-- FORM -->
+  <div class="container row align-content-center  p-5 text-center">
 
-  <h2 class="mb-4 mt-3">Registre</h2>
-  <form id="registre-formulari-dades">
+    <h2>Registre</h2>
+    <form id="registre-formulari-dades">
+      <div class="mb-5 mt-5">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+              title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters."
+              required>
+          </div>
+          <div class="col-md-8">
+            <label for="cognoms" class="form-label">Cognoms</label>
+            <input type="text" class="form-control" id="cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
+              title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters."
+              required>
+          </div>
+        </div>
 
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
-          title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correu electrònic</label>
+          <input type="email" class="form-control" id="email" name="Email" required>
+        </div>
+        <div class="mb-3">
+          <label for="contrasenya" class="form-label">Contrasenya</label>
+          <input type="password" class="form-control" id="contrasenya" name="Contrasenya" pattern=".{6,}"
+            title="La contrasenya ha de tenir com a mínim 6 caràcters" required>
+          <!--TODO CONTROLAR TIPO DE USUARIO-->
+          <input type="hidden" name="TipusUsuari" value="R">
+        </div>
       </div>
-      <div class="col-md-8">
-        <label for="cognoms" class="form-label">Cognoms</label>
-        <input type="text" class="form-control" id="cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
-          title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters."
-          required>
+      <div class="col text-center ">
+        <button type="submit" class="btn btn-primary disabled me-5" value="registra"
+          id="btnRegistre">Registrar-se</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.assign('index.html')">torna</button>
       </div>
-    </div>
 
-
-    <div class="mb-3">
-      <label for="email" class="form-label">Correu electrònic</label>
-      <input type="email" class="form-control" id="email" name="Email" required>
-    </div>
-    <div class="mb-3">
-      <label for="contrasenya" class="form-label">Contrasenya</label>
-      <input type="password" class="form-control" id="contrasenya" name="Contrasenya" pattern=".{6,}"
-        title="La contrasenya ha de tenir com a mínim 6 caràcters" required>
-      <input type="hidden" name="TipusUsuari" value="user">
-    </div>
-    <div class="justify-content-end">
-      <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="registra">Registrar-se</button>
-    </div>
-
-  </form>
-</div>
+    </form>
+  </div>
 
 
 
 
-<!--FIN DE FORM -->
+  <!--FIN DE FORM -->
 
 
 
 
 
-  <footer>
+  <footer class="container-fluid align-self-end text-center">
     <div id="footer"></div>
   </footer>
 
 
 </body>
-<script src="assets/dist/js/main.js" type="module"></script>
-<script src="assets/dist/js/registre.js" type="module"></script>
+<script src="assets/dist/js/utils.js" type="module"></script>
+<script src="assets/dist/js/observer.js" type="module"></script>
+<script src="assets/dist/js/inmoble.js" type="module"></script>
+<script src="assets/dist/js/login.js" type="module"></script>
+
 </html>

@@ -28,6 +28,33 @@ export function loginUser(rutaApi, email, pass) {
     });
 }
 
+
+
+
+/**
+ * Retorna un usuario o un null
+ * 
+ * @returns {json} 
+ * @returns {null} 
+ */
+export function isUserLoged(){
+
+   let usuario =  localStorage.getItem('usuario');
+
+   if(usuario != undefined){
+    return JSON.parse(usuario); } else {
+      return null;
+    }
+}
+
+/**
+ * Logout - Elimina usuario del local Storage
+ * 
+ * @Void
+ */
+
+
+
 /**
  *
  * @param {String} rutaAPI

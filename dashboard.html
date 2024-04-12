@@ -1,28 +1,30 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Solaria">
-        <meta name="author" content="Solaria">
-        <link rel="icon" type="image/svg" href="assets/brand/icono.svg">
-        <title>Solaria - Dashboard</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Solaria">
+    <meta name="author" content="Solaria">
+    <link rel="icon" type="image/svg" href="assets/brand/icono.svg">
+    <title>Solaria - Dashboard</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="assets/dist/css/webpage.css" rel="stylesheet">
-        <link href="assets/dist/css/home.css" rel="stylesheet">
-        <link href="assets/dist/css/main.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <script src="https://kit.fontawesome.com/a541cd95d6.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/dist/css/webpage.css" rel="stylesheet">
+    <link href="assets/dist/css/home.css" rel="stylesheet">
+    <link href="assets/dist/css/main.css" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/a541cd95d6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <!--POPPER -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -34,33 +36,60 @@
     <script src="assets/dist/js/bootstrap.bundle.min.js.map"></script>
 
 
-
-    <script src="assets/dist/js/webpage.js"></script>
+    <!--MAIN JS-->
+    <!--  <script src="assets/dist/js/webpage.js"></script>-->
+    <script src="assets/dist/js/main.js" type="module"></script>
 
 
 </head>
 
-<body class="text-center">
+<body class=" row align-content-between justify-content-between  vh-100">
 
     <header>
         <div id="barra-navegacion"></div>
     </header>
+    <section class="text-center">
+        <div id="login-modal-container"></div>
+        <div id="message-modal-container"></div>
+    </section>
 
     <!--MAIN CONTENT-->
-    <div id="main-content" class="p-5 mt-5">
 
-        <h2>Dashboard</h2>
-    
-        <section id="datos-usuari" class="p-3 mt-3"></section>
-        <section id="llista-usuaris" class="p-3 mt-1"></section>
-        <section id="llista-inmobles" class="p-3 mt-1"></section>
-        <section id="table-content-llista-usuaris" class="p-3 mt-1" style="overflow-x:auto;"> </section>
-        <section id="table-content-llista-inmobles" class="p-3 mt-1" style="overflow-x:auto;"> </section>
+    <div class="container row align-content-center text-center p-5 mt-5">
+
+        <h2 >Dashboard</h2>
+        <div class="mb-5 mt-3">
+      
+            <div class="row mb-3">
+          
+                    <section id="datos-usuari" class="p-3 mt-3"></section>
+               
+            </div>
+        </div>
+
+
+        <div class="container">
+            <section id="table-content-llista-usuaris" class="p-3 mt-1" style="overflow-x:auto;"> </section>
+
+        </div>
+        <div class="col text-center ">
+            <section id="table-content-llista-inmobles" class="p-3 mt-1" style="overflow-x:auto;"> </section>
+            <button type="button" class="btn btn-primary me-5" onclick="window.location.assign('registre-inmoble.html')"
+                id="btnRegistreInmoble">nou inmoble</button>
+
+        </div>
+
 
     </div>
-    <footer id="footer">
+
+    <footer class="container-fluid position-relative bottom-0 text-center">
+        <div id="footer"></div>
     </footer>
 </body>
 
-    <script src="assets/dist/js/main.js" type="module"></script>
+<script src="assets/dist/js/utils.js" type="module"></script>
+<script src="assets/dist/js/observer.js" type="module"></script>
+<script src="assets/dist/js/inmoble.js" type="module"></script>
+<script src="assets/dist/js/login.js" type="module"></script>
+
 </html>

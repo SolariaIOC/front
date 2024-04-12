@@ -1,16 +1,33 @@
 
 <!--role="document"-->
 
-<div class="modal fade" tabindex="-1" role="dialog" id="message-modal">
-  <div class="modal-dialog modal-dialog-centered" >
+<div class="modal fade" tabindex="-1" role="dialog" id="message-modal" >
+  <div class=" modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-bottom-0 justify-content-end">
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" >
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >
         </button>
       </div>
       <div class="modal-body pb-5">
-        <b id="misatje-en-modal">Mensaje del modal.</b>
+        <b id="misatje-en-modal">Registro correcto.</b>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+      function checkLog(){
+    let usuario = localStorage.getItem("usuario");
+
+    if(JSON.parse(usuario) != undefined){
+        console.log("El usuario "+ JSON.parse(usuario).nombre+" está logueado");
+        return true;
+    }else {
+        console.log("el usuario no está logueado")
+        return false;
+    }
+}
+
+
+
+</script>
