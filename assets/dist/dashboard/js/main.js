@@ -14,7 +14,7 @@ renderizaFragmento("#footer", "../../components/dashboard/dashboard_layout/foote
 
 // Gets the url and render the content of this url
 renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(window.location.hash));
-document.addEventListener("DOMContentLoaded", function(arg) {
+$(document).ready(function() {
     $(document).on("click", '.dashboard-link', function(event) {
         renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });

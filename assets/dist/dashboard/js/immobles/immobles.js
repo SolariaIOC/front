@@ -1,32 +1,35 @@
-import { addInmoble, getAllInmobles, removeInmoble } from "../../../js/inmoble.js";
+import {addInmoble, getAllInmobles, removeInmoble, updateInmoble} from "../../../js/inmoble.js";
 
 let immobleToEdit = undefined;
 let immobles = [];
 
 window.navigation.addEventListener("navigate", async () => {
     await loadImmoblesTable();
-    console.log(immobleToEdit);
+    if(immobleToEdit !== undefined){
+        loadImmobleEditForm();
+    }
 });
 
 await loadImmoblesTable();
+if(immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[1] === 'editar-immoble'){
+    window.location.replace('dashboard.html');
+}
 
-document.addEventListener("DOMContentLoaded", function(arg) {
-
-    console.log('1');
-
-    $(document).on("click", '.edit-immoble', function(event) {
-
-        console.log('2');
-
-
+$(document).ready(function() {
+    $(document).on("click", '.edit-immoble', function() {
+        for (let j = 0; j < immobles.length; i++) {
+            if(immobles[j].id_immoble === parseInt($(this).attr('data-id'))){
+                immobleToEdit = immobles[j];
+                window.location.hash = 'editar-immoble';
+                loadImmobleEditForm();
+                break;
+            }
+        }
     });
 
-    let removeElements = document.getElementsByClassName("remove-immoble");
-    for(let i = 0; i < removeElements.length; i++) {
-        removeElements[i].onclick = function () {
-            removeImmobleFromTable(removeElements[i].getAttribute('data-id'));
-        }
-    }
+    $(document).on("click", '.remove-immoble', function() {
+        removeImmobleFromTable(removeElements[i].getAttribute('data-id'));
+    });
 });
 
 $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
@@ -46,8 +49,32 @@ $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
 
     if(hasBeenCreated) {
         alert('Immoble creat correctament!');
+        window.location.hash = 'immobles';
     } else {
         alert('No s\'ha pogut crear correctament el immoble');
+    }
+});
+
+$(document).on("submit", '#editar-formulari-inmoble', async function(event) {
+
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    console.log(formData);
+
+    const inmoble = {};
+    formData.forEach((value, key) => {
+        inmoble[key] = value;
+    });
+
+    console.log(inmoble);
+    let hasBeenSavedd = await updateInmoble(inmoble);
+
+    if(hasBeenSavedd) {
+        alert('Immoble guardat correctament!');
+        window.location.hash = 'immobles';
+    } else {
+        alert('No s\'ha pogut guardar correctament el immoble');
     }
 });
 
@@ -76,13 +103,18 @@ async function loadImmoblesTable() {
         $('#immobles-information').append('<td>' + immobles[i].Poblacio + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Preu + '</td>');
         $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'">Eliminar</span></td>');
-        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link" href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'">Editar</span></td>');
+        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link"  href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'">Editar</span></td>');
         $('#immobles-information').append('</tr>');
     }
 }
 
 function loadImmobleEditForm(){
-    console.log('loadImmobleEditForm');
-    $('#Carrer').value(immobleToEdit.id_immoble);
-
+    $('#Carrer').val(immobleToEdit.Carrer);
+    $('#Numero').val(immobleToEdit.Numero);
+    $('#Pis').val(immobleToEdit.Pis);
+    $('#Codi_Postal').val(immobleToEdit.Codi_Postal);
+    $('#Poblacio').val(immobleToEdit.Poblacio);
+    $('#Preu').val(immobleToEdit.Preu);
+    $('#Descripcio').val(immobleToEdit.Descripcio);
+    $('#Imatge').val(immobleToEdit.Imatge);
 }

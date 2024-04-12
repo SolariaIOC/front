@@ -159,6 +159,10 @@ export async function removeInmoble(id_immoble) {
     .then((json) => !json.hasOwnProperty('error'));
 }
 
+export function updateInmoble(inmoble){
+  return false;
+}
+
 
 
 
