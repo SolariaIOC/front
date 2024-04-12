@@ -1,4 +1,10 @@
 import { renderizaFragmento } from "../../js/utils/modularizacionHtml.js";
+import { isUserLogged } from "./security/security.js";
+
+// Check if user is logged
+if(!isUserLogged()){
+    window.location.replace("dashboard_login.html");
+}
 
 // Renders
 renderizaFragmento("#sidebar", "../../components/dashboard/dashboard_layout/menu.html");
@@ -7,19 +13,16 @@ renderizaFragmento("#footer", "../../components/dashboard/dashboard_layout/foote
 
 // Gets the url and render the content of this url
 renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(window.location.hash));
+document.addEventListener("DOMContentLoaded", function(arg) {
 
-window.onload = function() {
-    let elements = document.getElementsByClassName("dashboard-link");
-    for(let i = 0; i < elements.length; i++) {
-        elements[i].onclick = function () {
-            // Renders the content from the link
-            renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(elements[i].href));
-        }
-    }
-};
+    $(document).on("click", '.dashboard-link', function(event) {
+        renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
+    });
+});
 
 function getHtmlFromUrl(url){
     let urlPath = url.split('?')[0].split('#')[1];
+    console.log('urlPath: '+urlPath);
     switch (urlPath) {
         case 'usuaris':
             return 'usuaris/llistat_usuaris.html';

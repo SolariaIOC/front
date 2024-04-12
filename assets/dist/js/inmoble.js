@@ -46,7 +46,7 @@ export async function getAllInmobles() {
 export async function getMyInmobles() {
   meuInmobles = [];
 
-  await fetch(rutaAPI + "immobles/r", {
+  await fetch(getApiURL() + "/immobles/r", {
     credentials:'include',
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export async function getMyInmobles() {
 export async function getInmoblesPerCodiPostal(codiPostal) {
   inmobles = [];
 
-  await fetch(rutaAPI + "immobles/codi_postal/" + codiPostal, {
+  await fetch(getApiURL() + "/immobles/codi_postal/" + codiPostal, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -98,7 +98,7 @@ export async function getInmoblesPerCodiPostal(codiPostal) {
 export async function getInmoblePerPoblacio(poblacio) {
   inmobles = [];
 
-  await fetch(rutaAPI + "immobles/poblacio/" + poblacio, {
+  await fetch(getApiURL() + "/immobles/poblacio/" + poblacio, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -122,7 +122,7 @@ export async function getInmoblePerPoblacio(poblacio) {
  */
 
 export async function addInmoble(token, inmoble) {
-  await fetch(rutaAPI + "immobles/afegir", {
+  await fetch(getApiURL() + "/immobles/afegir", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
@@ -146,19 +146,18 @@ export async function addInmoble(token, inmoble) {
 
 /**
  *
- * @param {*} token
- * @param {*} inmoble
+ * @param {*} id_immoble
  */
-export async function removeInmoble(token, inmoble) {
-  await fetch(rutaAPI + "inmobles", {
+export async function removeInmoble(id_immoble) {
+  return await fetch(getApiURL() + "/immobles/r/eliminar/"+id_immoble, {
+    method: "DELETE",
+    credentials:'include',
     headers: {
-      Authorization: "Bearer " + token,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(inmoble),
   })
     .then((resp) => resp.json())
-    .then((json) => console.log(JSON.stringify(json)));
+    .then((json) => !json.hasOwnProperty('error'));
 }
 
 
@@ -277,8 +276,5 @@ export function fillTablaInmobles(inmobles) {
     contenidoTabla.appendChild(tr);
   });
 }
-
-
-
 
 //.../r/afegir
