@@ -102,8 +102,8 @@ async function loadImmoblesTable() {
         $('#immobles-information').append('<td>' + immobles[i].Codi_Postal + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Poblacio + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Preu + '</td>');
-        $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'">Eliminar</span></td>');
-        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link"  href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'">Editar</span></td>');
+        $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'"><i class="fa-solid fa-trash"></i></span></td>');
+        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link"  href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'"><i class="fa-solid fa-pencil"></i></span></td>');
         $('#immobles-information').append('</tr>');
     }
 }

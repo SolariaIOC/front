@@ -11286,3 +11286,11 @@ body.sidebar-toggled footer.sticky-footer {
   text-decoration: underline;
   color: #FFC400;
 }
+
+.remove-immoble:hover {
+  color: #dc3545;
+}
+
+.edit-immoble:hover {
+  color: #28a745;
+}
