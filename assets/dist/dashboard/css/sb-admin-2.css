@@ -11285,6 +11285,8 @@ body.sidebar-toggled footer.sticky-footer {
   cursor: pointer;
   text-decoration: underline;
   color: #FFC400;
+  text-align: center;
+  display: block;
 }
 
 .remove-immoble:hover {

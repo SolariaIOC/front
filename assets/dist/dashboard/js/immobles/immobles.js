@@ -94,7 +94,15 @@ async function loadImmoblesTable() {
     $('#immobles-information').empty();
 
     for (let i = 0; i < immobles.length; i++) {
-        $('#immobles-information').append('<tr>');
+
+        let classOddEven;
+        if( i % 2 === 0){
+            classOddEven = 'odd';
+        } else {
+            classOddEven = 'even';
+        }
+
+        $('#immobles-information').append('<tr class="'+classOddEven+'">');
         $('#immobles-information').append('<td>' + immobles[i].id_immoble + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Carrer + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Numero + '</td>');
