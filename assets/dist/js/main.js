@@ -27,7 +27,6 @@ if (window.location.pathname === "/") {
 }
 
 
-const mainContent = document.querySelector("main-content");
 
 /* FUNCIONES GENERALES */
 
@@ -65,7 +64,7 @@ if (ruta.includes("registre-inmoble")) {
 
 }
 
-
+/*
 
 if (ruta.includes("dashboard")) {
   await renderizaFragmento("#datos-usuari", "./components/datos-usuari.html");
@@ -97,6 +96,6 @@ console.log(usuari)
   }
 
 }
-
+*/
 
 

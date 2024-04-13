@@ -18,8 +18,6 @@ $(document).ready(function() {
     $(document).on("click", '.dashboard-link', function(event) {
         renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
-
-    $('#username').html(userInformation.nombre+" "+userInformation.apellidos);
 });
 
 function getHtmlFromUrl(url){

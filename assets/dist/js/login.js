@@ -140,6 +140,28 @@ export function modoLogueado() {
   }
 }
 
+/* AÑDIR NOMBRE EN EL DASHBOARD */
+export function modoLogueadoDashboard(){
+
+    console.log("MODO LOGUEADO ACTIVO")
+    const nomDashboard = document.getElementById('username');
+    const logoutDashboard = document.getElementById('logoutDashborad');
+
+
+    let usuario = getUsuario();
+
+    nomDashboard.textContent =usuario.nombre ;
+   
+    logoutDashboard.addEventListener('click', ()=>{
+        console.log("CLICK LOGOUT")
+        logout();
+        
+    })
+    
+}
+
+
+
 
 /**
  * @description Devuelve un boton para hacer logout
@@ -245,20 +267,29 @@ function getUsuario() {
  */
 
 export function logout(){
-  const benvinguda = document.getElementById("perfil-usuari");
-  const nomContainer = document.getElementById("nom-usuari-container");
-  const btnContainer = document.getElementById("btn-login-container");
 
-  const btnLogin = crearBotonLogin();
+    if(window.location.pathname != "/dashboard.html"){
 
-  //quitar banner
-  nomContainer.removeChild(benvinguda);
+        
+        const benvinguda = document.getElementById("perfil-usuari");
+        const nomContainer = document.getElementById("nom-usuari-container");
+        const btnContainer = document.getElementById("btn-login-container");
+
+
+        const btnLogin = crearBotonLogin();
+        btnContainer.replaceChildren(btnLogin);
+        //quitar banner
+        nomContainer.removeChild(benvinguda);
+    }
+
+
+
+
   // Elimina usuario
   localStorage.removeItem("usuario");
-
-  btnContainer.replaceChildren(btnLogin);
-
   peticionLogout(url);
+
+  window.location.assign("/index.html")
 
 }
 
