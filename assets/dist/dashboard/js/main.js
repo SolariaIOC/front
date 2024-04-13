@@ -20,7 +20,7 @@ $(document).ready(function() {
     });
 
     // TODO: Get current user
-    $('#username').html('Dani Roman');
+    // $('#username').html('Dani Roman');
 });
 
 function getHtmlFromUrl(url){
