@@ -1,11 +1,11 @@
 import { renderizaFragmento } from "../../js/utils/modularizacionHtml.js";
+import { isUserLoged } from "../../js/users.js";
 
-// Check if user is logged
-/*
-if(!isUserLogged()){
-    window.location.replace("login.html");
+let userInformation = isUserLoged();
+
+if(userInformation === undefined || userInformation === null){
+    window.location.replace("index.html");
 }
- */
 
 // Renders
 renderizaFragmento("#sidebar", "../../components/dashboard/dashboard_layout/menu.html");
@@ -19,8 +19,7 @@ $(document).ready(function() {
         renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
 
-    // TODO: Get current user
-    $('#username').html('Dani Roman');
+    $('#username').html(userInformation.nombre+" "+userInformation.apellidos);
 });
 
 function getHtmlFromUrl(url){
