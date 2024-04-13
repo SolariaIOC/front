@@ -15,7 +15,11 @@ let url = (() => {
 
 /* PETICION BACK */
 
-async function peticionLogin(url, dataUsuari) {
+export async function peticionLogin(dataUsuari) {
+
+  //Deslogueamos por si esta ya logueado
+
+
   fetch(url + "/login", {
     method: "POST",
     headers: {
@@ -34,7 +38,9 @@ async function peticionLogin(url, dataUsuari) {
       /* GUARDA USUARIO EN LOCAL */
       localStorage.setItem("usuario", JSON.stringify(data.datosUsuario));
 
-      window.location.assign("dashboard.html");
+      modoLogueado();
+
+      window.location.assign("/dashboard.html");
 
       return data;
     })
@@ -78,7 +84,7 @@ export function userLogin() {
     let dataUsuari = { Email: email, Contrasenya: password };
 
     if (!checkLog()) {
-      peticionLogin(url, dataUsuari);
+      peticionLogin(dataUsuari);
     }
   });
 
