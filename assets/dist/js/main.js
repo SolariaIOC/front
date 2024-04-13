@@ -2,13 +2,15 @@ import { renderizaFragmento } from "./utils/modularizacionHtml.js";
 import { decodificaJWT } from "./utils/token.js";
 import { hideNav } from "./utils/hideNav.js";
 import { getApiURL } from "./utils.js";
+import { logout } from "./login.js";
 import {
   registerUser,
+  isUserLoged,
   getUsers,
   getLocalUser,
   getUser,
   fillTablaUsuarios
-} from "./utils/users.js";
+} from "./users.js";
 
 import{
   fillTablaInmobles,
@@ -24,6 +26,7 @@ if (window.location.pathname === "/") {
   window.location.replace("index.html");
 }
 
+
 const mainContent = document.querySelector("main-content");
 
 /* FUNCIONES GENERALES */
@@ -33,50 +36,67 @@ hideNav();
 
 /* RENDERIZACIÓN DE ELEMENTOS COMPARTIDOS */
 
-renderizaFragmento("#barra-navegacion", "./components/nav.html");
-renderizaFragmento("#footer", "./components/footer.html");
+await renderizaFragmento("#barra-navegacion", "./components/nav.html");
+await renderizaFragmento("#footer", "./components/footer.html");
 
 /* RENDERIZACIÓN ESPECIFICA */
 
 const ruta = window.location.href;
 
 if (ruta.includes("index")) {
-  renderizaFragmento("#inmobles", "./components/inmobles.html");
-  renderizaFragmento("#promo", "./components/promo.html");
-  renderizaFragmento("#login-modal-container", "./components/login-modal.html");
-  renderizaFragmento("#message-modal-container","./components/message-modal.html");
+  await renderizaFragmento("#inmobles", "./components/inmobles.html");
+  await renderizaFragmento("#promo", "./components/promo.html");
+  await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
+  await renderizaFragmento("#message-modal-container","./components/message-modal.html");
+
+
 }
 
 if (ruta.includes("registre")) {
-  renderizaFragmento("#login-modal", "./components/login-modal.html");
+
+  await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
+  await renderizaFragmento("#message-modal-container","./components/message-modal.html");
  // renderizaFragmento("#registre-form", "./components/registre-form.html");
 }
 
 if (ruta.includes("registre-inmoble")) {
-
+  await  renderizaFragmento("#login-modal-container", "./components/login-modal.html");
+  await renderizaFragmento("#message-modal-container","./components/message-modal.html");
 
 }
 
 
 
 if (ruta.includes("dashboard")) {
-  renderizaFragmento("#datos-usuari", "./components/profile-data.html");
-  renderizaFragmento("#table-content-llista-usuaris", "./components/llista-usuaris.html");
-  renderizaFragmento("#table-content-llista-inmobles", "./components/llista-inmobles.html");
+  await renderizaFragmento("#datos-usuari", "./components/datos-usuari.html");
+  await renderizaFragmento("#table-content-llista-usuaris", "./components/llista-usuaris.html");
+  await renderizaFragmento("#table-content-llista-inmobles", "./components/llista-inmobles.html");
 
-  let usuaris = await getUsers(rutaAPI);
+  await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
+  await renderizaFragmento("#message-modal-container","./components/message-modal.html");
 
-  let inmobles = await getMyInmobles(token);
+  console.log("Hay usuario logueado?")
 
-  console.log('mis inmobles')
-  console.log(inmobles)
-  //console.log("usuarios recogidos:");
-  //console.log(usuaris);
+let usuari = isUserLoged();
+console.log(usuari)
+  if(usuari != null){
+    if(usuari.tipoDeUsuari == "A"){
 
-  fillTablaUsuarios(usuaris);
-  fillTablaInmobles(inmobles);
+      fillTablaUsuarios(usuaris);
+      let usuaris = await getUsers(rutaAPI);
+    }
+
+    let inmobles = await getMyInmobles(usuari);
+  
+    console.log('mis inmobles')
+    console.log(inmobles)
+  
+  
+  
+    fillTablaInmobles(inmobles);
+  }
+
 }
-
 
 
 
