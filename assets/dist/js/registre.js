@@ -1,9 +1,9 @@
-import { renderizaFragmento } from "./utils/modularizacionHtml.js";
 import { getApiURL } from "./utils.js";
+import {peticionLogin} from "./login.js"
 
-
+const url = getApiURL();
   
-
+document.onload = () => {console.log("cargado Registre.js")}
   const formularioRegistro = document.getElementById("registre-formulari-dades");
 
   const btnRegistre = document.getElementById("btnRegistre");
@@ -12,7 +12,6 @@ import { getApiURL } from "./utils.js";
 
 formularioRegistro.addEventListener('change', ()=>{
 
-      
 
       let nom =  document.getElementById("nom").value;
       let cognoms = document.getElementById("cognoms").value;
@@ -25,7 +24,6 @@ formularioRegistro.addEventListener('change', ()=>{
         btnRegistre.classList.add("disabled");
       }
 
-
 })
 
 
@@ -36,7 +34,7 @@ formularioRegistro.addEventListener('change', ()=>{
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const formData = new FormData(this);
+    const formData = new FormData(formularioRegistro);
 
     console.log(formData)
 
@@ -45,14 +43,15 @@ formularioRegistro.addEventListener('change', ()=>{
       data[key] = value;
     });
 
+    const usuariologin = {"Email":data.Email, "Contrasenya":data.Contrasenya}
 
-    fetch(getApiURL() + "/app/registre", {
+    fetch(url + "/app/registre", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-      credentials: true
+      credentials: "include"
     })
       .then((response) => {
         if (!response.ok) {
@@ -65,15 +64,9 @@ formularioRegistro.addEventListener('change', ()=>{
       .then((data) => {
         console.log("Registro correcto:", data);
 
-        alert("T'has registrat correctament!");
+          peticionLogin(url, usuariologin)
 
-        // TODO CAMBIAR RUTA A DONDE SE DIRIGE DESPUES DE REGISTRARSE
-        //Comprobar que apunta a al modal
-        renderizaFragmento("#message-modal-container", "components/message-modal.html");
-        messageModal.value= "REGISTRO"
-
-
-
+          window.location.assign("/dashboard.html");
       })
       .catch((error) => {
         console.error("Error en el registro:", error.message);

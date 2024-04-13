@@ -15,7 +15,7 @@ let url = (() => {
 
 /* PETICION BACK */
 
-async function peticionLogin(url, dataUsuari) {
+export async function peticionLogin(url, dataUsuari) {
   fetch(url + "/login", {
     method: "POST",
     headers: {
