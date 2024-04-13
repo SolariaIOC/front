@@ -39,6 +39,7 @@ async function peticionLogin(url, dataUsuari) {
       return data;
     })
     .catch((error) => {
+      showLoginError()
       console.error("Error en el login:", error.message);
     });
 }
@@ -82,6 +83,7 @@ export function userLogin() {
   });
 
   loginForm.addEventListener("change", () => {
+    hideLoginError()
     let email = document.getElementById("loginEmail").value;
     let password = document.getElementById("loginPassword").value;
     checkLoginAndPassword(email, password);
