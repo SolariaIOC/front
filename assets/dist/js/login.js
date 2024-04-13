@@ -260,6 +260,8 @@ export function logout(){
 
   peticionLogout(url);
 
+  window.location.assign("index.html")
+
 }
 
 /********###################################***********/
