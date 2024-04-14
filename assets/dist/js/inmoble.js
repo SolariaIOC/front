@@ -117,7 +117,7 @@ export async function getInmoblePerPoblacio(poblacio) {
 
 export async function addInmoble(inmoble) {
 
-  let error = true;
+
 
    await fetch(url + "/immobles/r/afegir", {
     method: "POST",
@@ -129,6 +129,8 @@ export async function addInmoble(inmoble) {
   })
     .then((response) =>
     {
+
+      let error = true;
 
       if(response.ok === true){
         let data = response.json();
