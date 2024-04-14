@@ -103,7 +103,6 @@ async function loadImmoblesTable() {
         }
 
         $('#immobles-information').append('<tr class="'+classOddEven+'">');
-        $('#immobles-information').append('<td>' + immobles[i].id_immoble + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Carrer + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Numero + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Pis + '</td>');
