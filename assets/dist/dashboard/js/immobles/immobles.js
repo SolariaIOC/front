@@ -17,7 +17,7 @@ if(immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[
 
 $(document).ready(function() {
     $(document).on("click", '.edit-immoble', function() {
-        for (let j = 0; j < immobles.length; i++) {
+        for (let j = 0; j < immobles.length; j++) {
             if(immobles[j].id_immoble === parseInt($(this).attr('data-id'))){
                 immobleToEdit = immobles[j];
                 window.location.hash = 'editar-immoble';
@@ -59,7 +59,7 @@ $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
         inmoble[key] = value;
     });
 
-    updateInmoble(inmoble);
+    await updateInmoble(inmoble);
 });
 
 async function removeImmobleFromTable(id){

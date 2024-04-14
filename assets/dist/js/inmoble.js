@@ -116,9 +116,6 @@ export async function getInmoblePerPoblacio(poblacio) {
  */
 
 export async function addInmoble(inmoble) {
-
-
-
    await fetch(url + "/immobles/r/afegir", {
     method: "POST",
     credentials: "include",
@@ -153,7 +150,6 @@ export async function addInmoble(inmoble) {
       console.error("Error en el registro de inmueble:", error.message);
       return false;
     });
-
 }
 
 /**
@@ -172,8 +168,41 @@ export async function removeInmoble(id_immoble) {
     .then((json) => !json.hasOwnProperty("error"));
 }
 
-export function updateInmoble(inmoble) {
-  return false;
+export async function updateInmoble(inmoble) {
+  await fetch(url + "/immobles/r/afegir", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inmoble),
+  })
+      .then((response) =>
+      {
+
+        let error = true;
+
+        if(response.ok === true){
+          let data = response.json();
+          if(!data.hasOwnProperty("error")){
+            error = false;
+            alert('Immoble creat correctament!');
+            window.location.hash = 'immobles';
+            window.location.reload();
+          }
+        }
+
+        if(error){
+          alert('No s\'ha pogut crear correctament el immoble');
+          console.log('Response: ');
+          console.log(response);
+        }
+
+      })
+      .catch((error) => {
+        console.error("Error en el registro de inmueble:", error.message);
+        return false;
+      });
 }
 
 if (window.location.href.includes("register-inmobles")) {
