@@ -165,7 +165,7 @@ window.location.assign("/dashboard.html")
  * @param {*} id_immoble
  */
 export async function removeInmoble(id_immoble) {
-  return await fetch(rutaAPI + "/immobles/r/eliminar/" + id_immoble, {
+  return await fetch(url + "/immobles/r/eliminar/" + id_immoble, {
     method: "DELETE",
     credentials: "include",
     headers: {
