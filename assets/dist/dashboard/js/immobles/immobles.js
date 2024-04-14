@@ -59,15 +59,7 @@ $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
         inmoble[key] = value;
     });
 
-    console.log(inmoble);
-    let hasBeenSavedd = await updateInmoble(inmoble);
-
-    if(hasBeenSavedd) {
-        alert('Immoble guardat correctament!');
-        window.location.hash = 'immobles';
-    } else {
-        alert('No s\'ha pogut guardar correctament el immoble');
-    }
+    updateInmoble(inmoble);
 });
 
 async function removeImmobleFromTable(id){
