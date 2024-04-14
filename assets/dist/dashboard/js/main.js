@@ -3,21 +3,29 @@ import { isUserLoged } from "../../js/users.js";
 
 let userInformation = isUserLoged();
 
+console.log('userInformation');
+console.log(userInformation);
+
 if(userInformation === undefined || userInformation === null){
     window.location.replace("index.html");
 }
 
 // Renders
-renderizaFragmento("#sidebar", "../../components/dashboard/dashboard_layout/menu.html");
-renderizaFragmento("#top-bar", "../../components/dashboard/dashboard_layout/top_bar.html");
-renderizaFragmento("#footer", "../../components/dashboard/dashboard_layout/footer.html");
+await renderizaFragmento("#sidebar", "../../components/dashboard/dashboard_layout/menu.html");
+await renderizaFragmento("#top-bar", "../../components/dashboard/dashboard_layout/top_bar.html");
+await renderizaFragmento("#footer", "../../components/dashboard/dashboard_layout/footer.html");
 
 // Gets the url and render the content of this url
-renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(window.location.hash));
+await renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl(window.location.hash));
+
+
 $(document).ready(function() {
     $(document).on("click", '.dashboard-link', function(event) {
         renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
+
+    $('#username').html(userInformation.nombre);
+    console.log('hi: '+userInformation.nombre);
 });
 
 function getHtmlFromUrl(url){
