@@ -169,7 +169,7 @@ export async function removeInmoble(id_immoble) {
 }
 
 export async function updateInmoble(inmoble) {
-  await fetch(url + "/immobles/r/afegir", {
+  await fetch(url + "/immobles/r/modificar", { // TODO: Get correct url
     method: "POST",
     credentials: "include",
     headers: {
@@ -186,21 +186,21 @@ export async function updateInmoble(inmoble) {
           let data = response.json();
           if(!data.hasOwnProperty("error")){
             error = false;
-            alert('Immoble creat correctament!');
+            alert('Immoble actualitzat correctament!');
             window.location.hash = 'immobles';
             window.location.reload();
           }
         }
 
         if(error){
-          alert('No s\'ha pogut crear correctament el immoble');
+          alert('No s\'ha pogut actualitzar correctament el immoble');
           console.log('Response: ');
           console.log(response);
         }
 
       })
       .catch((error) => {
-        console.error("Error en el registro de inmueble:", error.message);
+        console.error("Error en la modificación de inmueble:", error.message);
         return false;
       });
 }
