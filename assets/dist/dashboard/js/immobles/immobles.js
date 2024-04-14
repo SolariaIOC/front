@@ -17,8 +17,8 @@ function handleURLChange() {
 handleURLChange();
 
 window.addEventListener('hashchange', handleURLChange);
-
 loadImmoblesTable();
+
 
 
 
