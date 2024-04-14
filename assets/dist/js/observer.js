@@ -38,8 +38,8 @@ const mutationObserver = new MutationObserver((mutations) => {
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();
         break;
-        case "formularioInmobleContainer": addInmoble();
-        break;
+        //case "formularioInmobleContainer": addInmoble();
+        //break;
         
     }
 
