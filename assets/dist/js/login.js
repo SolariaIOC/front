@@ -15,7 +15,8 @@ let url = (() => {
 
 /* PETICION BACK */
 
-export async function peticionLogin(url, dataUsuari) {
+
+export async function peticionLogin(dataUsuari) {
   fetch(url + "/login", {
     method: "POST",
     headers: {
@@ -34,18 +35,23 @@ export async function peticionLogin(url, dataUsuari) {
       /* GUARDA USUARIO EN LOCAL */
       localStorage.setItem("usuario", JSON.stringify(data.datosUsuario));
 
-      window.location.assign("dashboard.html");
+      modoLogueado();
+
+      window.location.assign("/dashboard.html");
 
       return data;
     })
     .catch((error) => {
+      showLoginError()
       console.error("Error en el login:", error.message);
     });
 }
 
 
 function peticionLogout(url){
-    fetch(url + "/logout", {
+   
+  
+  fetch(url + "/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,11 +83,12 @@ export function userLogin() {
     let dataUsuari = { Email: email, Contrasenya: password };
 
     if (!checkLog()) {
-      peticionLogin(url, dataUsuari);
+      peticionLogin(dataUsuari);
     }
   });
 
   loginForm.addEventListener("change", () => {
+    hideLoginError()
     let email = document.getElementById("loginEmail").value;
     let password = document.getElementById("loginPassword").value;
     checkLoginAndPassword(email, password);
@@ -139,6 +146,29 @@ export function modoLogueado() {
     })
   }
 }
+
+/* AÑDIR NOMBRE EN EL DASHBOARD */
+export function modoLogueadoDashboard(){
+
+    console.log("MODO LOGUEADO ACTIVO")
+    const nomDashboard = document.getElementById('username');
+    const logoutDashboard = document.getElementById('logoutDashborad');
+
+
+    let usuario = getUsuario();
+
+    nomDashboard.textContent =usuario.nombre ;
+   
+    logoutDashboard.addEventListener('click', ()=>{
+        console.log("CLICK LOGOUT")
+       logout(url);
+     
+        
+    })
+    
+}
+
+
 
 
 /**
@@ -245,22 +275,32 @@ function getUsuario() {
  */
 
 export function logout(){
-  const benvinguda = document.getElementById("perfil-usuari");
-  const nomContainer = document.getElementById("nom-usuari-container");
-  const btnContainer = document.getElementById("btn-login-container");
 
-  const btnLogin = crearBotonLogin();
+    if(window.location.pathname != "/dashboard.html"){
 
-  //quitar banner
-  nomContainer.removeChild(benvinguda);
+        
+        const benvinguda = document.getElementById("perfil-usuari");
+        const nomContainer = document.getElementById("nom-usuari-container");
+        const btnContainer = document.getElementById("btn-login-container");
+
+
+        const btnLogin = crearBotonLogin();
+        btnContainer.replaceChildren(btnLogin);
+        //quitar banner
+        nomContainer.removeChild(benvinguda);
+        localStorage.removeItem("usuario");
+        peticionLogout(url);
+
+    }
+
+
+
+
   // Elimina usuario
   localStorage.removeItem("usuario");
-
-  btnContainer.replaceChildren(btnLogin);
-
   peticionLogout(url);
+  window.location.assign("/index.html")
 
-  window.location.assign("index.html")
 
 }
 

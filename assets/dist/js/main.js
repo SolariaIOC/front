@@ -27,7 +27,6 @@ if (window.location.pathname === "/") {
 }
 
 
-const mainContent = document.querySelector("main-content");
 
 /* FUNCIONES GENERALES */
 
@@ -44,6 +43,8 @@ await renderizaFragmento("#footer", "./components/footer.html");
 const ruta = window.location.href;
 
 if (ruta.includes("index")) {
+  // TODO PETICION MIDDLE WARE PARA SABER SI HAY USUARIO LOGUEADO
+  // TODO AL CERRAR QUITAR USUARIO DEL LOCAL
   await renderizaFragmento("#inmobles", "./components/inmobles.html");
   await renderizaFragmento("#promo", "./components/promo.html");
   await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
@@ -65,7 +66,7 @@ if (ruta.includes("registre-inmoble")) {
 
 }
 
-
+/*
 
 if (ruta.includes("dashboard")) {
   await renderizaFragmento("#datos-usuari", "./components/datos-usuari.html");
@@ -97,6 +98,6 @@ console.log(usuari)
   }
 
 }
-
+*/
 
 

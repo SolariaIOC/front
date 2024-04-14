@@ -1,5 +1,7 @@
 import { getApiURL } from "./utils.js";
-import {peticionLogin} from "./login.js"
+
+import {peticionLogin } from "./login.js"
+
 
 const url = getApiURL();
   
@@ -45,6 +47,7 @@ formularioRegistro.addEventListener('change', ()=>{
 
     const usuariologin = {"Email":data.Email, "Contrasenya":data.Contrasenya}
 
+
     fetch(url + "/app/registre", {
       method: "POST",
       headers: {
@@ -63,10 +66,10 @@ formularioRegistro.addEventListener('change', ()=>{
       })
       .then((data) => {
         console.log("Registro correcto:", data);
+          peticionLogin(usuariologin);
 
-          peticionLogin(url, usuariologin)
+       
 
-          window.location.assign("/dashboard.html");
       })
       .catch((error) => {
         console.error("Error en el registro:", error.message);
@@ -74,4 +77,3 @@ formularioRegistro.addEventListener('change', ()=>{
       });
   });
 
-// Event listener
