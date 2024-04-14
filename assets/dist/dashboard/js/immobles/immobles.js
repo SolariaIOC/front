@@ -17,7 +17,7 @@ if(immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[
 
 $(document).ready(function() {
     $(document).on("click", '.edit-immoble', function() {
-        for (let j = 0; j < immobles.length; i++) {
+        for (let j = 0; j < immobles.length; j++) {
             if(immobles[j].id_immoble === parseInt($(this).attr('data-id'))){
                 immobleToEdit = immobles[j];
                 window.location.hash = 'editar-immoble';
@@ -44,15 +44,7 @@ $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
         inmoble[key] = value;
     });
 
-    console.log(inmoble);
-    let hasBeenCreated = await addInmoble(inmoble);
-
-    if(hasBeenCreated) {
-        alert('Immoble creat correctament!');
-        window.location.hash = 'immobles';
-    } else {
-        alert('No s\'ha pogut crear correctament el immoble');
-    }
+    await addInmoble(inmoble);
 });
 
 $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
@@ -67,15 +59,7 @@ $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
         inmoble[key] = value;
     });
 
-    console.log(inmoble);
-    let hasBeenSavedd = await updateInmoble(inmoble);
-
-    if(hasBeenSavedd) {
-        alert('Immoble guardat correctament!');
-        window.location.hash = 'immobles';
-    } else {
-        alert('No s\'ha pogut guardar correctament el immoble');
-    }
+    await updateInmoble(inmoble);
 });
 
 async function removeImmobleFromTable(id){
@@ -103,7 +87,6 @@ async function loadImmoblesTable() {
         }
 
         $('#immobles-information').append('<tr class="'+classOddEven+'">');
-        $('#immobles-information').append('<td>' + immobles[i].id_immoble + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Carrer + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Numero + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Pis + '</td>');

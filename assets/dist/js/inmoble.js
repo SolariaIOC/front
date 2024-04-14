@@ -115,31 +115,14 @@ export async function getInmoblePerPoblacio(poblacio) {
  * @param {*} inmoble
  */
 
-export async function addInmoble() {
-  const inmobleFrom = document.getElementById("crear-formulari-inmoble");
-
-  inmobleFrom.addEventListener("submit", (evento) => {
-    evento.preventDefault();
-
-    const formData = new FormData(inmobleFrom);
-
-    console.log(formData);
-
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-
-
-  // TODO: Verificar tipo de usuario
-
-   fetch(url + "/immobles/r/afegir", {
+export async function addInmoble(inmoble) {
+   await fetch(url + "/immobles/r/afegir", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(inmoble),
   })
     .then((resp) => resp.json())
     .then((data) => {
@@ -149,15 +132,13 @@ export async function addInmoble() {
        
       }
       console.log("immoble registrat correctament.")
-      window.location.assign("/dashboard.html")
+window.location.assign("/dashboard.html")
      
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
-    
+      return false;
     });
-
-  });
 }
 
 /**
@@ -176,8 +157,41 @@ export async function removeInmoble(id_immoble) {
     .then((json) => !json.hasOwnProperty("error"));
 }
 
-export function updateInmoble(inmoble) {
-  return false;
+export async function updateInmoble(inmoble) {
+  await fetch(url + "/immobles/r/modificar", { // TODO: Get correct url
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inmoble),
+  })
+      .then((response) =>
+      {
+
+        let error = true;
+
+        if(response.ok === true){
+          let data = response.json();
+          if(!data.hasOwnProperty("error")){
+            error = false;
+            alert('Immoble actualitzat correctament!');
+            window.location.hash = 'immobles';
+            window.location.reload();
+          }
+        }
+
+        if(error){
+          alert('No s\'ha pogut actualitzar correctament el immoble');
+          console.log('Response: ');
+          console.log(response);
+        }
+
+      })
+      .catch((error) => {
+        console.error("Error en la modificación de inmueble:", error.message);
+        return false;
+      });
 }
 
 if (window.location.href.includes("register-inmobles")) {
