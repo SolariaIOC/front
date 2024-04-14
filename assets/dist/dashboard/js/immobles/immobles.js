@@ -1,4 +1,4 @@
-import {addInmoble, getAllInmobles, removeInmoble, updateInmoble} from "../../../js/inmoble.js";
+import { addInmoble, getAllInmobles, removeInmoble, updateInmoble } from "../../../js/inmoble.js";
 
 let immobleToEdit = undefined;
 let immobles = [];
@@ -33,10 +33,10 @@ if(immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[
     window.location.replace('dashboard.html');
 }
 */
-$(document).ready(function() {
-    $(document).on("click", '.edit-immoble', function() {
+$(document).ready(function () {
+    $(document).on("click", '.edit-immoble', function () {
         for (let j = 0; j < immobles.length; i++) {
-            if(immobles[j].id_immoble === parseInt($(this).attr('data-id'))){
+            if (immobles[j].id_immoble === parseInt($(this).attr('data-id'))) {
                 immobleToEdit = immobles[j];
                 window.location.hash = 'editar-immoble';
                 loadImmobleEditForm();
@@ -45,12 +45,16 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on("click", '.remove-immoble', function() {
+    $(document).on("click", '.remove-immoble', function () {
         removeImmobleFromTable($(this).attr('data-id'));
+    });
+
+    $(document).on("click", '.dashboard-link[href="#immobles"]', function (event) {
+        loadImmoblesTable();
     });
 });
 
-$(document).on("submit", '#crear-formulari-inmoble', async function(event) {
+$(document).on("submit", '#crear-formulari-inmoble', async function (event) {
 
     event.preventDefault();
 
@@ -65,7 +69,7 @@ $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
     console.log(inmoble);
     let hasBeenCreated = await addInmoble(inmoble);
 
-    if(hasBeenCreated) {
+    if (hasBeenCreated) {
         alert('Immoble creat correctament!');
         window.location.hash = 'immobles';
     } else {
@@ -73,7 +77,7 @@ $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
     }
 });
 
-$(document).on("submit", '#editar-formulari-inmoble', async function(event) {
+$(document).on("submit", '#editar-formulari-inmoble', async function (event) {
 
     event.preventDefault();
 
@@ -88,7 +92,7 @@ $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
     console.log(inmoble);
     let hasBeenSavedd = await updateInmoble(inmoble);
 
-    if(hasBeenSavedd) {
+    if (hasBeenSavedd) {
         alert('Immoble guardat correctament!');
         window.location.hash = 'immobles';
     } else {
@@ -96,9 +100,9 @@ $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
     }
 });
 
-async function removeImmobleFromTable(id){
+async function removeImmobleFromTable(id) {
     let hasBeenDeleted = await removeInmoble(id);
-    if(hasBeenDeleted) {
+    if (hasBeenDeleted) {
         alert('Immoble eliminat!!');
         await loadImmoblesTable();
     } else {
@@ -114,27 +118,26 @@ async function loadImmoblesTable() {
     for (let i = 0; i < immobles.length; i++) {
 
         let classOddEven;
-        if( i % 2 === 0){
+        if (i % 2 === 0) {
             classOddEven = 'odd';
         } else {
             classOddEven = 'even';
         }
 
-        $('#immobles-information').append('<tr class="'+classOddEven+'">');
-        $('#immobles-information').append('<td>' + immobles[i].id_immoble + '</td>');
+        $('#immobles-information').append('<tr class="' + classOddEven + '">');
         $('#immobles-information').append('<td>' + immobles[i].Carrer + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Numero + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Pis + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Codi_Postal + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Poblacio + '</td>');
         $('#immobles-information').append('<td>' + immobles[i].Preu + '</td>');
-        $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="'+immobles[i].id_immoble+'"><i class="fa-solid fa-trash"></i></span></td>');
-        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link"  href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="'+immobles[i].id_immoble+'"><i class="fa-solid fa-pencil"></i></span></td>');
+        $('#immobles-information').append('<td><span class="remove-immoble" href="#" data-id="' + immobles[i].id_immoble + '"><i class="fa-solid fa-trash"></i></span></td>');
+        $('#immobles-information').append('<td><span class="edit-immoble dashboard-link"  href="#editar-immoble?id=' + immobles[i].id_immoble + '" data-id="' + immobles[i].id_immoble + '"><i class="fa-solid fa-pencil"></i></span></td>');
         $('#immobles-information').append('</tr>');
     }
 }
 
-function loadImmobleEditForm(){
+function loadImmobleEditForm() {
     $('#Carrer').val(immobleToEdit.Carrer);
     $('#Numero').val(immobleToEdit.Numero);
     $('#Pis').val(immobleToEdit.Pis);
