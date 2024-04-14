@@ -21,21 +21,19 @@ const barraDashboardDer = document.getElementById('sidebar');
 console.log("Mutation Observer")
 const mutationObserver = new MutationObserver((mutations) => {
     
-    console.log(mutations)
-    console.log(mutations[0].target.firstChild.id)
-   //.childNodes[7].childNodes[3].childNodes[1].childNodes[1].id
+   // console.log(mutations)
+   // console.log(mutations[0].target.firstChild.id)
+
     
     let mutacionId = mutations[0].target.firstChild.id;
 
   
     switch(mutacionId){
-        case "staticBackdrop": console.log('MODAL: staticBackdrop cargado ...');
-        userLogin();
+        case "staticBackdrop": userLogin();
         break;
-        case "navbar": console.log('NAVBAR cargado ...');
-        modoLogueado();
+        case "navbar":modoLogueado();
         break;
-        case "message-modal": console.log('MODAL MESSAGE cargado ...');
+        case "message-modal":;
         break;
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();

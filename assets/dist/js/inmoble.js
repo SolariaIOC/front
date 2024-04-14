@@ -149,7 +149,7 @@ export async function addInmoble() {
        
       }
       console.log("immoble registrat correctament.")
-window.location.assign("/dashboard.html")
+      window.location.assign("/dashboard.html")
      
     })
     .catch((error) => {
