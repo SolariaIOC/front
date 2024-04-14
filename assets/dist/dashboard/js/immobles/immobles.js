@@ -20,6 +20,9 @@ window.addEventListener('hashchange', handleURLChange);
 
 loadImmoblesTable();
 
+
+
+
 /*
 window.navigation.addEventListener("navigate", async () => {
     await loadImmoblesTable();
@@ -34,6 +37,7 @@ if(immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[
 }
 */
 $(document).ready(function () {
+
     $(document).on("click", '.edit-immoble', function () {
         for (let j = 0; j < immobles.length; i++) {
             if (immobles[j].id_immoble === parseInt($(this).attr('data-id'))) {
