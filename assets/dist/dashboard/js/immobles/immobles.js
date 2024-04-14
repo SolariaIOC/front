@@ -1,4 +1,4 @@
-import { addInmoble, getAllInmobles, removeInmoble, updateInmoble } from "../../../js/inmoble.js";
+import { addInmoble, getAllInmobles, getMyInmobles, removeInmoble, updateInmoble } from "../../../js/inmoble.js";
 
 let immobleToEdit = undefined;
 let immobles = [];
@@ -112,7 +112,7 @@ async function removeImmobleFromTable(id) {
 
 async function loadImmoblesTable() {
 
-    immobles = await getAllInmobles();
+    immobles = await getMyInmobles();
     $('#immobles-information').empty();
 
     for (let i = 0; i < immobles.length; i++) {
