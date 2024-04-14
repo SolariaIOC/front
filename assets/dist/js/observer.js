@@ -1,7 +1,9 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
 import { addInmoble } from "./inmoble.js";
-(()=>{console.log("OBSERVADOR INICIADO")})()
+(()=>{console.log("OBSERVADOR INICIADO")
 
+
+//window.addEventListener("beforeunload", () => localStorage.removeItem('usuario'));
 
 let dashboard =  "/dashboard.html" ;
 let ruta = window.location.pathname ;
@@ -64,5 +66,5 @@ if(ruta == dashboard){
 
 }
 
-
+})()
 

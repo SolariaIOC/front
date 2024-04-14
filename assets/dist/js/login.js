@@ -52,7 +52,9 @@ export async function peticionLogin(dataUsuari) {
 
 
 function peticionLogout(url){
-    fetch(url + "/logout", {
+   
+  
+  fetch(url + "/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -162,7 +164,8 @@ export function modoLogueadoDashboard(){
    
     logoutDashboard.addEventListener('click', ()=>{
         console.log("CLICK LOGOUT")
-        logout();
+       logout(url);
+     
         
     })
     
@@ -288,6 +291,9 @@ export function logout(){
         btnContainer.replaceChildren(btnLogin);
         //quitar banner
         nomContainer.removeChild(benvinguda);
+        localStorage.removeItem("usuario");
+        peticionLogout(url);
+
     }
 
 
