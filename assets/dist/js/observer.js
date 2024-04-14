@@ -1,4 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
+import { addInmoble } from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")})()
 
 
@@ -38,6 +39,8 @@ const mutationObserver = new MutationObserver((mutations) => {
         break;
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();
+        break;
+        case "formularioInmobleContainer": addInmoble();
         break;
         
     }

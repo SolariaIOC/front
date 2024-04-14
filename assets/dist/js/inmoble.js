@@ -1,9 +1,8 @@
 import { getApiURL } from "./utils.js";
 
-// Tipo de usuario A - R 
+// Tipo de usuario A - R
 
-
-const rutaAPI = getApiURL();
+const url = getApiURL();
 
 //FORMULARIO INMOBLE
 
@@ -18,11 +17,11 @@ let meuInmobles = new Array();
  */
 export async function getAllInmobles() {
   inmobles = [];
-  await fetch(rutaAPI + "/immobles", {
+  await fetch(url + "/immobles", {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include'
+    credentials: "include",
   })
     .then((resp) => resp.json())
     .then((data) => {
@@ -33,7 +32,6 @@ export async function getAllInmobles() {
   return inmobles;
 }
 
-
 /**
  *@description Petición de toda la lista de inmuebles de un usuario
  *
@@ -43,8 +41,8 @@ export async function getAllInmobles() {
 export async function getMyInmobles() {
   meuInmobles = [];
 
-  await fetch(rutaAPI + "/immobles/r", {
-    credentials:'include',
+  await fetch(url + "/immobles/r", {
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -72,11 +70,11 @@ export async function getMyInmobles() {
 export async function getInmoblesPerCodiPostal(codiPostal) {
   inmobles = [];
 
-  await fetch(getApiURL() + "/immobles/codi_postal/" + codiPostal, {
+  await fetch(url+ "/immobles/codi_postal/" + codiPostal, {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include'
+    credentials: "include",
   })
     .then((resp) => resp.json())
     .then((json) => {
@@ -96,11 +94,11 @@ export async function getInmoblesPerCodiPostal(codiPostal) {
 export async function getInmoblePerPoblacio(poblacio) {
   inmobles = [];
 
-  await fetch(rutaAPI + "/immobles/poblacio/" + poblacio, {
+  await fetch(url + "/immobles/poblacio/" + poblacio, {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include',
+    credentials: "include",
   })
     .then((resp) => resp.json())
     .then((json) => {
@@ -112,37 +110,54 @@ export async function getInmoblePerPoblacio(poblacio) {
   return inmobles;
 }
 
-
-
 /**
  *
  * @param {*} inmoble
  */
 
-export async function addInmoble(inmoble) {
+export async function addInmoble() {
+  const inmobleFrom = document.getElementById("crear-formulari-inmoble");
+
+  inmobleFrom.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const formData = new FormData(inmobleFrom);
+
+    console.log(formData);
+
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
 
   // TODO: Verificar tipo de usuario
 
-  await fetch(rutaAPI + "/immobles/r/afegir", {
+   fetch(url + "/immobles/r/afegir", {
     method: "POST",
-    credentials:'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(inmoble),
+    body: JSON.stringify(data),
   })
     .then((resp) => resp.json())
     .then((data) => {
-      if(data.hasOwnProperty('error')){
+      if (data.hasOwnProperty("error")) {
+        console.log("ERROR")
         console.log(JSON.stringify(data));
-        return false;
+       
       }
-      return true;
+      console.log("immoble registrat correctament.")
+window.location.assign("/dashboard.html")
+     
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
-      return false;
+    
     });
+
+  });
 }
 
 /**
@@ -150,25 +165,22 @@ export async function addInmoble(inmoble) {
  * @param {*} id_immoble
  */
 export async function removeInmoble(id_immoble) {
-  return await fetch(rutaAPI + "/immobles/r/eliminar/"+id_immoble, {
+  return await fetch(rutaAPI + "/immobles/r/eliminar/" + id_immoble, {
     method: "DELETE",
-    credentials:'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((resp) => resp.json())
-    .then((json) => !json.hasOwnProperty('error'));
+    .then((json) => !json.hasOwnProperty("error"));
 }
 
-export function updateInmoble(inmoble){
+export function updateInmoble(inmoble) {
   return false;
 }
 
-
-
-
-if ( window.location.href.includes("register-inmobles")) {
+if (window.location.href.includes("register-inmobles")) {
   const formulariInmoble = document.getElementById(
     "registre-formulari-inmoble"
   );
@@ -255,12 +267,11 @@ export function fillTablaInmobles(inmobles) {
     let tdDeleteInmoble = document.createElement("td");
     let tdButton = document.createElement("button");
     let iconDelete = document.createElement("i");
-    iconDelete.classList = "fa", "fa-close";
+    (iconDelete.classList = "fa"), "fa-close";
     iconDelete.setAttribute("aria-hidden", true);
     iconDelete.setAttribute("onClick", removeInmoble(inmoble));
 
     // AÑADIR ON CLICK CON COMPROBACIONES
-   
 
     //  const { Carrer, Numero, Pis, Codi_Postal, Poblacio, Descripcio, Preu, Imatge } = req.body;
 
@@ -274,7 +285,6 @@ export function fillTablaInmobles(inmobles) {
     tr.appendChild(tdPreu);
     tr.appendChild(tdImatge);
 
-    
     tdButton.append(iconDelete);
     tdDeleteInmoble.append(tdButton);
     tr.appendChild(tdDeleteInmoble);
