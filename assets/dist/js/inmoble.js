@@ -115,49 +115,43 @@ export async function getInmoblePerPoblacio(poblacio) {
  * @param {*} inmoble
  */
 
-export async function addInmoble() {
-  const inmobleFrom = document.getElementById("crear-formulari-inmoble");
+export async function addInmoble(inmoble) {
 
-  inmobleFrom.addEventListener("submit", (evento) => {
-    evento.preventDefault();
+  let error = true;
 
-    const formData = new FormData(inmobleFrom);
-
-    console.log(formData);
-
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-
-
-  // TODO: Verificar tipo de usuario
-
-   fetch(url + "/immobles/r/afegir", {
+   await fetch(url + "/immobles/r/afegir", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(inmoble),
   })
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (data.hasOwnProperty("error")) {
-        console.log("ERROR")
-        console.log(JSON.stringify(data));
-       
+    .then((response) =>
+    {
+
+      if(response.ok === true){
+        let data = response.json();
+        if(!data.hasOwnProperty("error")){
+          error = false;
+          alert('Immoble creat correctament!');
+          window.location.hash = 'immobles';
+          window.location.reload();
+        }
       }
-      console.log("immoble registrat correctament.")
-window.location.assign("/dashboard.html")
-     
+
+      if(error){
+        alert('No s\'ha pogut crear correctament el immoble');
+        console.log('Response: ');
+        console.log(response);
+      }
+
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
-    
+      return false;
     });
 
-  });
 }
 
 /**

@@ -44,15 +44,7 @@ $(document).on("submit", '#crear-formulari-inmoble', async function(event) {
         inmoble[key] = value;
     });
 
-    console.log(inmoble);
-    let hasBeenCreated = await addInmoble(inmoble);
-
-    if(hasBeenCreated) {
-        alert('Immoble creat correctament!');
-        window.location.hash = 'immobles';
-    } else {
-        alert('No s\'ha pogut crear correctament el immoble');
-    }
+    await addInmoble(inmoble);
 });
 
 $(document).on("submit", '#editar-formulari-inmoble', async function(event) {
