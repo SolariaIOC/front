@@ -15,11 +15,8 @@ let url = (() => {
 
 /* PETICION BACK */
 
+
 export async function peticionLogin(dataUsuari) {
-
-  //Deslogueamos por si esta ya logueado
-
-
   fetch(url + "/login", {
     method: "POST",
     headers: {
@@ -302,8 +299,8 @@ export function logout(){
   // Elimina usuario
   localStorage.removeItem("usuario");
   peticionLogout(url);
-
   window.location.assign("/index.html")
+
 
 }
 

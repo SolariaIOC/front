@@ -1,5 +1,7 @@
 import { getApiURL } from "./utils.js";
+
 import {peticionLogin } from "./login.js"
+
 
 const url = getApiURL();
   
@@ -24,7 +26,6 @@ formularioRegistro.addEventListener('change', ()=>{
         btnRegistre.classList.add("disabled");
       }
 
-
 })
 
 
@@ -35,7 +36,7 @@ formularioRegistro.addEventListener('change', ()=>{
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    const formData = new FormData(this);
+    const formData = new FormData(formularioRegistro);
 
     console.log(formData)
 
@@ -46,7 +47,6 @@ formularioRegistro.addEventListener('change', ()=>{
 
     const usuariologin = {"Email":data.Email, "Contrasenya":data.Contrasenya}
 
- 
 
     fetch(url + "/app/registre", {
       method: "POST",
@@ -66,10 +66,10 @@ formularioRegistro.addEventListener('change', ()=>{
       })
       .then((data) => {
         console.log("Registro correcto:", data);
-
           peticionLogin(usuariologin);
 
        
+
       })
       .catch((error) => {
         console.error("Error en el registro:", error.message);
