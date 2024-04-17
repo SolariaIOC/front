@@ -19,7 +19,8 @@ import{
   getInmoblesPerCodiPostal,
   getInmoblePerPoblacio ,
   addInmoble,
-  removeInmoble
+  removeInmoble,
+  pintarInmuebles
 } from "./inmoble.js"
 
 if (window.location.pathname === "/") {
@@ -49,6 +50,7 @@ if (ruta.includes("index")) {
   await renderizaFragmento("#promo", "./components/promo.html");
   await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
   await renderizaFragmento("#message-modal-container","./components/message-modal.html");
+
 
 
 }

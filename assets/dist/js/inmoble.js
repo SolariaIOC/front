@@ -70,7 +70,7 @@ export async function getMyInmobles() {
 export async function getInmoblesPerCodiPostal(codiPostal) {
   inmobles = [];
 
-  await fetch(url+ "/immobles/codi_postal/" + codiPostal, {
+  await fetch(url + "/immobles/codi_postal/" + codiPostal, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -116,7 +116,7 @@ export async function getInmoblePerPoblacio(poblacio) {
  */
 
 export async function addInmoble(inmoble) {
-   await fetch(url + "/immobles/r/afegir", {
+  await fetch(url + "/immobles/r/afegir", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -127,13 +127,11 @@ export async function addInmoble(inmoble) {
     .then((resp) => resp.json())
     .then((data) => {
       if (data.hasOwnProperty("error")) {
-        console.log("ERROR")
+        console.log("ERROR");
         console.log(JSON.stringify(data));
-       
       }
-      console.log("immoble registrat correctament.")
-window.location.assign("/dashboard.html")
-     
+      console.log("immoble registrat correctament.");
+      window.location.assign("/dashboard.html");
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
@@ -158,7 +156,8 @@ export async function removeInmoble(id_immoble) {
 }
 
 export async function updateInmoble(inmoble) {
-  await fetch(url + "/immobles/r/modificar", { // TODO: Get correct url
+  await fetch(url + "/immobles/r/modificar", {
+    // TODO: Get correct url
     method: "POST",
     credentials: "include",
     headers: {
@@ -166,32 +165,29 @@ export async function updateInmoble(inmoble) {
     },
     body: JSON.stringify(inmoble),
   })
-      .then((response) =>
-      {
+    .then((response) => {
+      let error = true;
 
-        let error = true;
-
-        if(response.ok === true){
-          let data = response.json();
-          if(!data.hasOwnProperty("error")){
-            error = false;
-            alert('Immoble actualitzat correctament!');
-            window.location.hash = 'immobles';
-            window.location.reload();
-          }
+      if (response.ok === true) {
+        let data = response.json();
+        if (!data.hasOwnProperty("error")) {
+          error = false;
+          alert("Immoble actualitzat correctament!");
+          window.location.hash = "immobles";
+          window.location.reload();
         }
+      }
 
-        if(error){
-          alert('No s\'ha pogut actualitzar correctament el immoble');
-          console.log('Response: ');
-          console.log(response);
-        }
-
-      })
-      .catch((error) => {
-        console.error("Error en la modificación de inmueble:", error.message);
-        return false;
-      });
+      if (error) {
+        alert("No s'ha pogut actualitzar correctament el immoble");
+        console.log("Response: ");
+        console.log(response);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la modificación de inmueble:", error.message);
+      return false;
+    });
 }
 
 if (window.location.href.includes("register-inmobles")) {
@@ -308,3 +304,115 @@ export function fillTablaInmobles(inmobles) {
 }
 
 //.../r/afegir
+
+//TODO PEDIR TODOS LOS INMUEBLES
+//TODO PINTAR TODOS LOS INMUEBLES
+//TODO CARGA LAZY
+//TODO GESTION DE LIKES
+//Likes counter?
+
+//BusquedaInmuebles
+
+export async function pintarInmuebles(pagina) {
+  //cantidad de inmuebles por row
+  const INMUEBLES = 3;
+  let inmueblesContainer = document.getElementById("inmuebles-container");
+
+  pagina = 0;
+  //TODO agregar la pagina cuando se actualize el endpoint
+  let inmuebles = await getAllInmobles();
+  let countInmuebles = 0;
+  let inmueblesMaquetados = new Array();
+
+  inmuebles.forEach((inmueble) => {
+    inmueblesMaquetados.push(crearMaquetacionInmueble(inmueble));
+  });
+
+  console.log(inmueblesMaquetados.length)
+  console.log('countInmuebles ' + countInmuebles)
+  while (inmueblesMaquetados.length > countInmuebles) {
+    console.log('countInmuebles while' + countInmuebles)
+    let count = 0;
+    let divCardGroupINMOBLES = document.createElement("div");
+    divCardGroupINMOBLES.classList.add(
+      "d-flex",
+      "flex-sm-wrap",
+      "flex-md-nowrap",
+      "flex-wrap",
+      "gap-3",
+      "my-2",
+      "container",
+      "justify-content-center",
+      
+
+    );
+
+    while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
+      
+      console.log('count ' + count);
+      divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
+      count++;
+      countInmuebles++;
+    }
+    inmueblesContainer.appendChild(divCardGroupINMOBLES)
+  }
+
+  //cada 3 pisos mostrados crea un grupo
+}
+
+function crearMaquetacionInmueble(inmueble) {
+  // console.log(inmueble);
+  //crea elementos de la tarjeta
+
+  let card = document.createDocumentFragment();
+
+  let divCard = document.createElement("div");
+  let imgCardImgTop = document.createElement("img");
+  let divCardBody = document.createElement("div");
+  let h5CardTitle = document.createElement("h5");
+  let pCardText = document.createElement("p");
+  let divCardfooter = document.createElement("div");
+  let smallTextMuted = document.createElement("small");
+  let smallLiked = document.createElement("small");
+  let spanLiked = document.createElement("small");
+  let divCardgroup = document.createElement("div");
+  divCardgroup.classList.add("card-group");
+
+  h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
+  pCardText.textContent = inmueble.Descripcio;
+  imgCardImgTop.src = inmueble.Imatge
+    ? inmueble.image
+    : "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
+
+  divCard.classList.add("card");
+  imgCardImgTop.classList.add("card-img-top");
+  imgCardImgTop.setAttribute("alt", inmueble.Descripcio);
+
+  divCardBody.classList.add("card-body");
+  h5CardTitle.classList.add("card-title", "text-start", "title-inmoble");
+  pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
+  divCardfooter.classList.add("card-footer");
+  smallLiked.classList.add("liked");
+  spanLiked.classList.add("fa", "fa-heart");
+  spanLiked.setAttribute("aria-hidden", true);
+
+  /*BODY*/
+  divCardBody.appendChild(h5CardTitle);
+  divCardBody.appendChild(pCardText);
+
+  /* FOOTER */
+  divCardfooter.appendChild(smallTextMuted);
+  // CORAZON
+  smallLiked.appendChild(spanLiked);
+  divCardfooter.appendChild(smallLiked);
+
+  /* DIV CARD */
+  divCard.appendChild(imgCardImgTop);
+  divCard.appendChild(divCardBody);
+  divCard.appendChild(divCardfooter);
+
+  divCardgroup.appendChild(divCard);
+  card.appendChild(divCardgroup);
+  console.log(card);
+  return card;
+}
