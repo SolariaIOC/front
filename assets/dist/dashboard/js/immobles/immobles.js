@@ -151,3 +151,104 @@ function loadImmobleEditForm() {
     $('#Descripcio').val(immobleToEdit.Descripcio);
     $('#Imatge').val(immobleToEdit.Imatge);
 }
+
+
+
+
+
+/* CREAR INMOBLES HTML */
+
+/*
+  <div class="card-group">
+    <div class="card">
+      <img src="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-start title-inmoble">Card title</h5>
+        <p class="card-text text-start decripcion-inmoble">This is a wider card with supporting text below as a natural lead-in to
+          additional content. This content is a little bit longer.</p> </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="liked"><span><i class="fa fa-heart" aria-hidden="true"></i></span></small>
+    
+      </div>
+    </div>
+  </div>
+*/
+
+//TODO PEDIR TODOS LOS INMUEBLES
+//TODO PINTAR TODOS LOS INMUEBLES
+//TODO CARGA LAZY
+//TODO GESTION DE LIKES
+//Likes counter?
+
+//BusquedaInmuebles
+
+function mostrarInmueble(inmueble){
+
+    let cardContainer = document.createElement('card-conatiner')
+    
+    let divCardgroup = document.createElement('div');
+        let divCard = document.createElement('div');
+            let imgCardImgTop = document.createElement('img');
+        let divCardBody = document.createElement('div');
+            let h5CardTitle = document.createElement('h5');
+            let pCardText = document.createElement('p');
+        let divCardfooter = document.createElement('div');
+            let smallTextMuted = document.createElement('small');
+            let smallLiked = document.createElement('small');
+            let spanLiked = document.createElement('small');
+
+
+h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
+pCardText.textContent = inmueble.Descripcio;
+imgCardImgTop.src = inmueble.Imatge ? inmueble.image : "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
+
+
+divCardgroup.classList = "card-group";
+divCard.classList ="card"
+imgCardImgTop.classList ="card-img-top";
+imgCardImgTop.setAttribute("alt", inmueble.Descripcio);
+
+divCardBody.classList = "card-body";
+h5CardTitle.classList = "card-title text-start title-inmoble"
+pCardText.classList = "card-text text-start decripcion-inmoble"
+divCardfooter.classList = "card-footer"
+smallLiked.classList = "liked";
+spanLiked.classList = "fa fa-heart";
+spanLiked.setAttribute( "aria-hidden", true);
+
+
+
+
+divCard.appendChild(imgCardImgTop)
+
+            /*BODY*/
+divCardBody.appendChild(h5CardTitle);
+divCardBody.appendChild(pCardText);
+
+            /* FOOTER */
+ divCardfooter.appendChild(smallTextMuted);
+ // CORAZON
+ smallLiked.appendChild(spanLiked);
+ divCardfooter.appendChild(smallLiked);
+
+ 
+
+
+
+
+
+
+
+
+
+    divCardgroup.appendChild(divCard)
+
+    cardContainer.appendChild(divCardgroup)
+
+
+
+    
+
+}
