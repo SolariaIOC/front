@@ -380,9 +380,8 @@ function crearMaquetacionInmueble(inmueble) {
 
   h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
   pCardText.textContent = inmueble.Descripcio;
-  imgCardImgTop.src = inmueble.Imatge
-    ? inmueble.image
-    : "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
+  imgCardImgTop.src = /* inmueble.Imatge
+    ? inmueble.image : */ "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
 
   divCard.classList.add("card");
   imgCardImgTop.classList.add("card-img-top");
