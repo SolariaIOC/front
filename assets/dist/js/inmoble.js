@@ -422,22 +422,23 @@ function crearMaquetacionInmueble(inmueble) {
 export function likeInmueble(){
  document.addEventListener('click', (elemento)=> {
 
-  console.log("like inmueble")
-
   let clases  = elemento.target.classList;
-  console.log(clases);
-  clases.contains("fa-heart-o") ? likeCorazon(clases): dislikeCorazon(clases);
 
+if( clases.contains("fa-heart-o") ) {likeCorazon(clases);}
+else if(clases.contains("fa-heart")) {dislikeCorazon(clases);}
 
  })
 }
 
 function dislikeCorazon(clases){
+  console.log("dislike")
   clases.remove("fa-heart")
   clases.add("fa-heart-o")
   clases.toggle("liked")
 }
+
  function likeCorazon(clases){
+  console.log("like")
   clases.remove("fa-heart-o")
   clases.add("fa-heart")
   clases.toggle("liked")
