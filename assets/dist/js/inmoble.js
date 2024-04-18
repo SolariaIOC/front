@@ -361,7 +361,7 @@ export async function pintarInmuebles(pagina) {
 }
 
 function crearMaquetacionInmueble(inmueble) {
-  // console.log(inmueble);
+ 
   //crea elementos de la tarjeta
 
   let card = document.createDocumentFragment();
@@ -392,7 +392,7 @@ function crearMaquetacionInmueble(inmueble) {
   pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
   divCardfooter.classList.add("card-footer");
   smallLiked.classList.add("liked");
-  spanLiked.classList.add("fa", "fa-heart");
+  spanLiked.classList.add("fa", "fa-heart-o");
   spanLiked.setAttribute("aria-hidden", true);
 
   /*BODY*/
@@ -415,3 +415,30 @@ function crearMaquetacionInmueble(inmueble) {
   console.log(card);
   return card;
 }
+
+
+// LIKE INMOBLE
+
+export function likeInmueble(){
+ document.addEventListener('click', (elemento)=> {
+
+  console.log("like inmueble")
+
+  let clases  = elemento.target.classList;
+  console.log(clases);
+  clases.contains("fa-heart-o") ? likeCorazon(clases): dislikeCorazon(clases);
+
+
+ })
+}
+
+function dislikeCorazon(clases){
+  clases.remove("fa-heart")
+  clases.add("fa-heart-o")
+  clases.toggle("liked")
+}
+ function likeCorazon(clases){
+  clases.remove("fa-heart-o")
+  clases.add("fa-heart")
+  clases.toggle("liked")
+ }

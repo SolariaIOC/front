@@ -1,5 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
-import { addInmoble , pintarInmuebles} from "./inmoble.js";
+import { addInmoble , pintarInmuebles, likeInmueble} from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")
 
 
@@ -19,7 +19,8 @@ const barraDashboardDer = document.getElementById('sidebar');
 
 /* PAGINA DE INMUEBLES */
 
-const inmueblesContainer = document.getElementById('inmobles')
+const inmueblesContainer = document.getElementById('inmobles');
+
 
 
 
@@ -45,7 +46,7 @@ const mutationObserver = new MutationObserver((mutations) => {
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();
         break;
-        case "inmuebles-container": pintarInmuebles();
+        case "inmuebles-container": pintarInmuebles();likeInmueble();
         break;
         
     }
