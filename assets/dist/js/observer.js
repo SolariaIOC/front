@@ -1,5 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
-import { addInmoble , pintarInmuebles, likeInmueble} from "./inmoble.js";
+import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles} from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")
 
 
@@ -17,36 +17,41 @@ const contenidoDashboard = document.getElementById('page-content')
 const barraTop = document.getElementById('top-bar')
 const barraDashboardDer = document.getElementById('sidebar');
 
-/* PAGINA DE INMUEBLES */
+/* PAGINA DE INMUEBLES  INDEX*/
 
 const inmueblesContainer = document.getElementById('inmobles');
+const busquedaContainer = document.getElementById('busqueda-container');
 
 
+/* BUSCA EL CAMBIO EN EL CONTENEDOR Y COMPRUEBA SI SE HA PINTADO EL HIJO SI ES ASÍ EJECUTA LAS FUNCIONES */
 
-
-
-
-console.log("Mutation Observer")
 const mutationObserver = new MutationObserver((mutations) => {
     
-   // console.log(mutations)
-   // console.log(mutations[0].target.firstChild.id)
 
     
     let mutacionId = mutations[0].target.firstChild.id;
+    //console.log(mutations[0])
 
+   // console.log(mutacionId)
   
     switch(mutacionId){
+        /*MODAL */
         case "staticBackdrop": userLogin();
         break;
+        /*BARRA DE NAVEGACIÓN */
         case "navbar":modoLogueado();
         break;
+
         case "message-modal":;
         break;
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();
         break;
-        case "inmuebles-container": pintarInmuebles();likeInmueble();
+        /*INMUEBLES */
+        case "inmuebles-container": pintarInmuebles(); likeInmueble(); 
+        break;
+        /*BUSQUEDA */
+        case "busqueda":formularioBusquedaInmuebles();
         break;
         
     }
@@ -72,6 +77,9 @@ if(ruta == dashboard){
 
     /* INMUEBLES */
     mutationObserver.observe(inmueblesContainer, {childList:true})
+    
+    /*BUSQUEDA*/
+    mutationObserver.observe(busquedaContainer, {childList:true})
 
 }
 

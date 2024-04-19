@@ -12,11 +12,14 @@ let meuInmobles = new Array();
 //Habría que acotar la cantidad de resultados si la BBDD crece puede colapsar la app
 
 /**
+ * Hace una petición de todos los inmuebles de la BBDD
+ * @param {number} pag  Número de página
  * @description Petición de todos los inmuebles disponibles
- * @returns
+ * @returns {array} inmobles
  */
-export async function getAllInmobles() {
+export async function getAllInmobles(pag = 1) {
   inmobles = [];
+  if(pag==undefined){console.log("No se ha pasado una página")}
   await fetch(url + "/immobles", {
     headers: {
       "Content-Type": "application/json",
@@ -63,51 +66,64 @@ export async function getMyInmobles() {
 
 /**
  *@description filtre d'inmobles per códi postal
- *
  * @param {*} codiPostal
- * @returns {[{}]} retorna un array d'inmobles
+ * @param {number} pag  Número de página
+ * @returns {Array} retorna un array d'inmobles
  */
-export async function getInmoblesPerCodiPostal(codiPostal) {
-  inmobles = [];
+export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
 
-  await fetch(url + "/immobles/codi_postal/" + codiPostal, {
+
+  await fetch(`${url}/immobles/codi_postal/${codiPostal}`, {
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
   })
-    .then((resp) => resp.json())
-    .then((json) => {
-      json.forEach((element) => {
-        inmobles.push(element);
-      });
-    });
-
-  return inmobles;
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Error en la solicitud');
+    }
+    return response.json();
+  })
+  .then((json) => {
+    return json;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    return []; // Si hay un error, devuelve un array vacío
+  });
 }
 
 /**
- *@description Filtre d'inmobles per població
- *
+ * @description Filtre d'inmobles per població
  * @param {*} poblacio
+ * @param {number} pag  Número de página
+ * @returns {Array} retorna un array d'inmobles
  */
-export async function getInmoblePerPoblacio(poblacio) {
-  inmobles = [];
+export async function getInmoblePerPoblacio(poblacio, pag = 1) {
 
-  await fetch(url + "/immobles/poblacio/" + poblacio, {
+
+  await fetch(`${url}/immobles/poblacio/${poblacio}`, {
     headers: {
       "Content-Type": "application/json",
+    
     },
-    credentials: "include",
+ 
+    credentials: "include"
   })
-    .then((resp) => resp.json())
-    .then((json) => {
-      json.forEach((element) => {
-        inmobles.push(element);
-      });
-    });
-
-  return inmobles;
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Error en la solicitud');
+    }
+    return response.json();
+  })
+  .then((json) => {
+    return json;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+    return []; // Si hay un error, devuelve un array vacío
+  });
 }
 
 /**
@@ -303,24 +319,63 @@ export function fillTablaInmobles(inmobles) {
   });
 }
 
-//.../r/afegir
 
-//TODO PEDIR TODOS LOS INMUEBLES
-//TODO PINTAR TODOS LOS INMUEBLES
-//TODO CARGA LAZY
-//TODO GESTION DE LIKES
-//Likes counter?
 
-//BusquedaInmuebles
 
-export async function pintarInmuebles(pagina) {
+
+
+
+export async function formularioBusquedaInmuebles(){
+
+  //console.log("DENTRO DE FORMULARIO BUSQUEDA");
+
+   let  inmuebles = new Array();
+  const formularioBusquedaInmuebleElemento = document.getElementById('formulario-busqueda-inmuebles');
+
+
+
+formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
+
+  evento.preventDefault();
+  let valorBusqueda = formularioBusquedaInmuebleElemento[0].value
+  let tipoBusqueda =  formularioBusquedaInmuebleElemento[2].value
+
+if(tipoBusqueda == 'codiPostal'){
+  inmuebles = await getInmoblesPerCodiPostal(valorBusqueda);
+  console.log(inmuebles);
+
+} 
+else if(  tipoBusqueda == 'poblacio' || valorBusqueda != undefined){
+
+  inmuebles =  await getInmoblePerPoblacio(valorBusqueda);
+  console.log(inmuebles);
+}
+
+pintarInmuebles(inmuebles);
+console.log(inmuebles)
+
+})
+
+}
+
+
+
+
+export async function pintarInmuebles(inmueblesPar, pagina) {
+
+  let inmuebles;
   //cantidad de inmuebles por row
   const INMUEBLES = 3;
   let inmueblesContainer = document.getElementById("inmuebles-container");
 
+
   pagina = 0;
-  //TODO agregar la pagina cuando se actualize el endpoint
-  let inmuebles = await getAllInmobles();
+if(inmueblesPar == undefined){
+   inmuebles = await getAllInmobles();
+}else {
+  inmuebles = inmueblesPar;
+}
+
   let countInmuebles = 0;
   let inmueblesMaquetados = new Array();
 
@@ -328,10 +383,10 @@ export async function pintarInmuebles(pagina) {
     inmueblesMaquetados.push(crearMaquetacionInmueble(inmueble));
   });
 
-  console.log(inmueblesMaquetados.length)
-  console.log('countInmuebles ' + countInmuebles)
+  //console.log(inmueblesMaquetados.length)
+  //console.log('countInmuebles ' + countInmuebles)
   while (inmueblesMaquetados.length > countInmuebles) {
-    console.log('countInmuebles while' + countInmuebles)
+    //console.log('countInmuebles while' + countInmuebles)
     let count = 0;
     let divCardGroupINMOBLES = document.createElement("div");
     divCardGroupINMOBLES.classList.add(
@@ -349,7 +404,7 @@ export async function pintarInmuebles(pagina) {
 
     while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
       
-      console.log('count ' + count);
+
       divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
       count++;
       countInmuebles++;
@@ -412,7 +467,7 @@ function crearMaquetacionInmueble(inmueble) {
 
   divCardgroup.appendChild(divCard);
   card.appendChild(divCardgroup);
-  console.log(card);
+ // console.log(card);
   return card;
 }
 

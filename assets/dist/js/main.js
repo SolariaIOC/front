@@ -37,7 +37,7 @@ hideNav();
 /* RENDERIZACIÓN DE ELEMENTOS COMPARTIDOS */
 
 await renderizaFragmento("#barra-navegacion", "./components/nav.html");
-await renderizaFragmento("#footer", "./components/footer.html");
+
 
 /* RENDERIZACIÓN ESPECIFICA */
 
@@ -46,9 +46,11 @@ const ruta = window.location.href;
 if (ruta.includes("index")) {
   // TODO PETICION MIDDLE WARE PARA SABER SI HAY USUARIO LOGUEADO
   // TODO AL CERRAR QUITAR USUARIO DEL LOCAL
-  await renderizaFragmento("#inmobles", "./components/inmobles.html");
-  await renderizaFragmento("#promo", "./components/promo.html");
   await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
+  await renderizaFragmento("#busqueda-container", "./components/busqueda.html");
+  await renderizaFragmento("#inmobles", "./components/inmobles.html");
+
+
   await renderizaFragmento("#message-modal-container","./components/message-modal.html");
 
 
@@ -68,38 +70,4 @@ if (ruta.includes("registre-inmoble")) {
 
 }
 
-/*
-
-if (ruta.includes("dashboard")) {
-  await renderizaFragmento("#datos-usuari", "./components/datos-usuari.html");
-  await renderizaFragmento("#table-content-llista-usuaris", "./components/llista-usuaris.html");
-  await renderizaFragmento("#table-content-llista-inmobles", "./components/llista-inmobles.html");
-
-  await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
-  await renderizaFragmento("#message-modal-container","./components/message-modal.html");
-
-  console.log("Hay usuario logueado?")
-
-let usuari = isUserLoged();
-console.log(usuari)
-  if(usuari != null){
-    if(usuari.tipoDeUsuari == "A"){
-
-      fillTablaUsuarios(usuaris);
-      let usuaris = await getUsers(rutaAPI);
-    }
-
-    let inmobles = await getMyInmobles(usuari);
-  
-    console.log('mis inmobles')
-    console.log(inmobles)
-  
-  
-  
-    fillTablaInmobles(inmobles);
-  }
-
-}
-*/
-
-
+await renderizaFragmento("#footer", "./components/footer.html");
