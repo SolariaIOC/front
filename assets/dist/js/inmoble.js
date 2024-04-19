@@ -359,7 +359,8 @@ export async function formularioBusquedaInmuebles(){
 
 
 formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
-
+  console.log('evento')
+  evento.originalTarget[0].value = "";
   evento.preventDefault();
   let valorBusqueda = formularioBusquedaInmuebleElemento[0].value
   let tipoBusqueda =  formularioBusquedaInmuebleElemento[2].value
