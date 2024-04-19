@@ -1,5 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
-import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles} from "./inmoble.js";
+import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles, verTodosInmuebles} from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")
 
 
@@ -51,7 +51,7 @@ const mutationObserver = new MutationObserver((mutations) => {
         case "inmuebles-container": pintarInmuebles(); likeInmueble(); 
         break;
         /*BUSQUEDA */
-        case "busqueda":formularioBusquedaInmuebles();
+        case "busqueda":formularioBusquedaInmuebles();verTodosInmuebles();
         break;
         
     }

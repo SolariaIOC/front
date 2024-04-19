@@ -336,7 +336,16 @@ export function fillTablaInmobles(inmobles) {
 
 
 
+export async function verTodosInmuebles(){
+  let inmuebles;
+  const verTodosInmuebles = document.getElementById('ver-todos-inmuebles')
+  verTodosInmuebles.addEventListener('click' , async ()=>{
+    inmuebles = await getAllInmobles();
+    busquedaOk();
+    pintarInmuebles(inmuebles);
 
+  })
+}
 
 
 export async function formularioBusquedaInmuebles(){
@@ -345,6 +354,7 @@ export async function formularioBusquedaInmuebles(){
    let mensaje;
    let  inmuebles = new Array();
   const formularioBusquedaInmuebleElemento = document.getElementById('formulario-busqueda-inmuebles');
+
 
 
 
