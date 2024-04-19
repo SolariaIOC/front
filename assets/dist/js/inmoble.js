@@ -72,7 +72,7 @@ export async function getMyInmobles() {
  */
 export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
 
-
+let inmuebles;
   await fetch(`${url}/immobles/codi_postal/${codiPostal}`, {
     headers: {
       "Content-Type": "application/json",
@@ -81,17 +81,22 @@ export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
   })
   .then((response) => {
     if (!response.ok) {
+      busquedaFail("No s'han trobat immobles amb aquest codi postal.");
       throw new Error('Error en la solicitud');
     }
     return response.json();
   })
   .then((json) => {
-    return json;
+    busquedaOk();
+    return inmuebles = json;
   })
   .catch((error) => {
     console.error('Error:', error);
-    return []; // Si hay un error, devuelve un array vacío
+   
+    return inmuebles = []; 
   });
+
+  return inmuebles;
 }
 
 /**
@@ -102,7 +107,7 @@ export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
  */
 export async function getInmoblePerPoblacio(poblacio, pag = 1) {
 
-
+let inmuebles;
   await fetch(`${url}/immobles/poblacio/${poblacio}`, {
     headers: {
       "Content-Type": "application/json",
@@ -113,17 +118,26 @@ export async function getInmoblePerPoblacio(poblacio, pag = 1) {
   })
   .then((response) => {
     if (!response.ok) {
+      busquedaFail("No s'han trobat immobles en aquesta població.");
       throw new Error('Error en la solicitud');
+    
     }
     return response.json();
   })
   .then((json) => {
-    return json;
+ 
+   
+    inmuebles = json;
+    busquedaOk();
+    return inmuebles;
   })
   .catch((error) => {
     console.error('Error:', error);
-    return []; // Si hay un error, devuelve un array vacío
+ 
+    inmuebles = []; 
   });
+
+  return inmuebles;
 }
 
 /**
@@ -328,7 +342,7 @@ export function fillTablaInmobles(inmobles) {
 export async function formularioBusquedaInmuebles(){
 
   //console.log("DENTRO DE FORMULARIO BUSQUEDA");
-
+   let mensaje;
    let  inmuebles = new Array();
   const formularioBusquedaInmuebleElemento = document.getElementById('formulario-busqueda-inmuebles');
 
@@ -340,19 +354,37 @@ formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
   let valorBusqueda = formularioBusquedaInmuebleElemento[0].value
   let tipoBusqueda =  formularioBusquedaInmuebleElemento[2].value
 
-if(tipoBusqueda == 'codiPostal'){
-  inmuebles = await getInmoblesPerCodiPostal(valorBusqueda);
-  console.log(inmuebles);
 
-} 
-else if(  tipoBusqueda == 'poblacio' || valorBusqueda != undefined){
+  if(valorBusqueda == ""){
+     mensaje = "Ha de seleccionar un tipus de cerca una."
+    mensajeBusquedaError(mensaje);
+  }
+  if(valorBusqueda == "" && tipoBusqueda == 'codiPostal'){
+    mensaje = "Ha d'introdui un codi postal";
+    mensajeBusquedaError(mensaje);
+  }
 
-  inmuebles =  await getInmoblePerPoblacio(valorBusqueda);
-  console.log(inmuebles);
-}
+  if(valorBusqueda == "" && tipoBusqueda == 'poblacio'){
+    mensaje = "Ha d'introdui un poblacio";
+    mensajeBusquedaError(mensaje);
+  }
+
+
+  if(valorBusqueda){
+  switch(tipoBusqueda){
+
+    case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda);
+    valorBusqueda="";
+    break;
+    case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda);
+      valorBusqueda = "";
+    break;
+    default :inmuebles = await getAllInmobles();
+    break;
+  }
 
 pintarInmuebles(inmuebles);
-console.log(inmuebles)
+  }
 
 })
 
@@ -368,6 +400,11 @@ export async function pintarInmuebles(inmueblesPar, pagina) {
   const INMUEBLES = 3;
   let inmueblesContainer = document.getElementById("inmuebles-container");
 
+  if(inmueblesContainer.children){
+    while (inmueblesContainer.firstChild) {
+      inmueblesContainer.firstChild.remove()
+  }
+  }
 
   pagina = 0;
 if(inmueblesPar == undefined){
@@ -498,3 +535,20 @@ function dislikeCorazon(clases){
   clases.add("fa-heart")
   clases.toggle("liked")
  }
+
+ function busquedaFail(mensaje){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.remove('visually-hidden');
+  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
+
+ }
+ function busquedaOk(){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.add('visually-hidden');
+ }
+ function mensajeBusquedaError(mensaje){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.remove('visually-hidden');
+  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
+ }
+
