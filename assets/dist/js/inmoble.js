@@ -359,9 +359,11 @@ export async function formularioBusquedaInmuebles(){
 
 
 formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
-  console.log('evento')
-  evento.originalTarget[0].value = "";
+
+  //Limpia el input
+ 
   evento.preventDefault();
+
   let valorBusqueda = formularioBusquedaInmuebleElemento[0].value
   let tipoBusqueda =  formularioBusquedaInmuebleElemento[2].value
 
@@ -396,14 +398,20 @@ formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
 
 pintarInmuebles(inmuebles);
   }
-
+  evento.originalTarget[0].value = "";
 })
+
 
 }
 
 
 
-
+/**
+ * Crea y introduce el html de los inmuebles listados por la bbdd
+ * 
+ * @param {*} inmueblesPar 
+ * @param {*} pagina 
+ */
 export async function pintarInmuebles(inmueblesPar, pagina) {
 
   let inmuebles;
@@ -547,12 +555,18 @@ function dislikeCorazon(clases){
   clases.toggle("liked")
  }
 
+ /**
+  * Añade un mensaje de fallo a la busqueda
+  * 
+  * @param {*} mensaje 
+  */
  function busquedaFail(mensaje){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
   busquedaMensaje.classList.remove('visually-hidden');
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
 
  }
+ 
  function busquedaOk(){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
   busquedaMensaje.classList.add('visually-hidden');
