@@ -1,4 +1,5 @@
 import { getApiURL } from "./utils.js";
+import {checkLog} from "./login.js";
 
 // Tipo de usuario A - R
 
@@ -502,7 +503,7 @@ function crearMaquetacionInmueble(inmueble) {
   h5CardTitle.classList.add("card-title", "text-start", "title-inmoble");
   pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
   divCardfooter.classList.add("card-footer");
-  smallLiked.classList.add("liked");
+  spanLiked.classList.add("liked");
   spanLiked.classList.add("fa", "fa-heart-o");
   spanLiked.setAttribute("aria-hidden", true);
 
@@ -528,32 +529,7 @@ function crearMaquetacionInmueble(inmueble) {
 }
 
 
-// LIKE INMOBLE
 
-export function likeInmueble(){
- document.addEventListener('click', (elemento)=> {
-
-  let clases  = elemento.target.classList;
-
-if( clases.contains("fa-heart-o") ) {likeCorazon(clases);}
-else if(clases.contains("fa-heart")) {dislikeCorazon(clases);}
-
- })
-}
-
-function dislikeCorazon(clases){
-  console.log("dislike")
-  clases.remove("fa-heart")
-  clases.add("fa-heart-o")
-  clases.toggle("liked")
-}
-
- function likeCorazon(clases){
-  console.log("like")
-  clases.remove("fa-heart-o")
-  clases.add("fa-heart")
-  clases.toggle("liked")
- }
 
  /**
   * Añade un mensaje de fallo a la busqueda
@@ -577,3 +553,48 @@ function dislikeCorazon(clases){
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
  }
 
+
+
+//CONTROL DE USUARIO
+export function controlLogin(){
+  checkLog() 
+}
+
+
+ // LIKE INMOBLE
+
+export function likeInmueble(){
+  document.addEventListener('click', (elemento)=> {
+    let clases  = elemento.target.classList;
+
+    console.log(clases.contains('liked'))
+    if(clases.contains("liked")){
+      if(checkLog()){
+        clases.contains('fa-heart-o') ? likeCorazon(clases) : dislikeCorazon(clases);
+      }else {
+      console.log('no esta logueado al modal...')
+modalShow()
+    }
+    
+    } 
+   
+    })
+ }
+
+ function modalShow(){
+ let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+ modal.show(); }
+ 
+ function dislikeCorazon(clases){
+   console.log("dislike")
+   clases.remove("fa-heart")
+   clases.add("fa-heart-o")
+
+ }
+ 
+  function likeCorazon(clases){
+   console.log("like")
+   clases.remove("fa-heart-o")
+   clases.add("fa-heart")
+  
+  }
