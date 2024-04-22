@@ -1,3 +1,4 @@
+
 import {
   addInmoble,
   getAllInmobles,
@@ -127,7 +128,6 @@ async function loadImmoblesTable() {
       classOddEven = "odd";
     } else {
       classOddEven = "even";
-    }
 
     $("#immobles-information").append('<tr class="' + classOddEven + '">');
     $("#immobles-information").append("<td>" + immobles[i].Carrer + "</td>");
