@@ -1,5 +1,5 @@
 import { getApiURL } from "./utils.js";
-import {checkLog} from "./login.js";
+import { checkLog } from "./login.js";
 
 // Tipo de usuario A - R
 
@@ -33,11 +33,31 @@ export async function getAllInmobles(pag = 1) {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      data.forEach((element) => {
+      data.results.forEach((element) => {
         inmobles.push(element);
       });
     });
   return inmobles;
+}
+
+export async function getAllInmoblesInformation(pag = 1) {
+
+  if(pag === undefined){
+    console.log("No se ha pasado una página");
+  }
+
+  return await fetch(url + "/immobles/?page="+pag, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log('DATA...');
+        console.log(data);
+        return data;
+      });
 }
 
 /**
@@ -45,6 +65,7 @@ export async function getAllInmobles(pag = 1) {
  * @returns
  */
 export async function getMyInmobles() {
+  
   meuInmobles = [];
 
   await fetch(url + "/immobles/r", {
@@ -195,6 +216,31 @@ export async function addInmoble(inmoble) {
     });
 }
 
+export async function addInmobleAdmin(inmoble) {
+  await fetch(url + "/immobles/a/afegirUsuariImmoble", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inmoble),
+  })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.hasOwnProperty("error")) {
+          console.log("ERROR");
+          console.log(JSON.stringify(data));
+          alert("No s'ha pogut crear correctament el immoble");
+        }
+        alert("Immoble registrat correctament.");
+        window.location.assign("/dashboard.html");
+      })
+      .catch((error) => {
+        console.error("Error en el registro de inmueble:", error.message);
+        alert("No s'ha pogut crear correctament el immoble");
+      });
+}
+
 /**
  *
  * @param {*} id_immoble
@@ -209,6 +255,23 @@ export async function removeInmoble(id_immoble) {
   })
     .then((resp) => resp.json())
     .then((json) => !json.hasOwnProperty("error"));
+}
+
+/**
+ *
+ * @param {int} id_immoble
+ * @param {int} id_usuari
+ */
+export async function removeImmobleAdmin(id_immoble, id_usuari) {
+  return await fetch(url + "/immobles/a/eliminarImmoble/"+id_immoble+"/"+id_usuari, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
 }
 
 export async function removeInmobleFav(id_immoble) {
@@ -256,6 +319,40 @@ export async function updateInmoble(inmoble, id_immoble) {
       console.error("Error en la modificación de inmueble:", error.message);
       return false;
     });
+}
+
+export async function updateInmobleAdmin(inmoble, id_immoble) {
+  await fetch(url + "/immobles/a/actualitzar/"+id_immoble, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inmoble),
+  })
+      .then((response) => {
+        let error = true;
+
+        if (response.ok === true) {
+          let data = response.json();
+          if (!data.hasOwnProperty("error")) {
+            error = false;
+            alert("Immoble actualitzat correctament!");
+            window.location.hash = "immobles";
+            window.location.reload();
+          }
+        }
+
+        if (error) {
+          alert("No s'ha pogut actualitzar correctament el immoble");
+          console.log("Response: ");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error en la modificación de inmueble:", error.message);
+        return false;
+      });
 }
 
 if (window.location.href.includes("register-inmobles")) {
@@ -381,7 +478,6 @@ export async function verTodosInmuebles(){
     inmuebles = await getAllInmobles();
     busquedaOk();
     pintarInmuebles(inmuebles);
-
   })
 }
 
@@ -608,30 +704,28 @@ export function likeInmueble(){
     if(clases.contains("liked")){
       if(checkLog()){
         clases.contains('fa-heart-o') ? likeCorazon(clases) : dislikeCorazon(clases);
-      }else {
-      console.log('no esta logueado al modal...')
-modalShow()
+      } else {
+        console.log('no esta logueado al modal...');
+        modalShow();
+      }
     }
-    
-    } 
-   
-    })
- }
+  })
+}
 
- function modalShow(){
+function modalShow(){
  let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
- modal.show(); }
+ modal.show();
+}
  
- function dislikeCorazon(clases){
-   console.log("dislike")
-   clases.remove("fa-heart")
-   clases.add("fa-heart-o")
+function dislikeCorazon(clases){
+   console.log("dislike");
+   clases.remove("fa-heart");
+   clases.add("fa-heart-o");
 
- }
+}
  
-  function likeCorazon(clases){
-   console.log("like")
-   clases.remove("fa-heart-o")
-   clases.add("fa-heart")
-  
-  }
+function likeCorazon(clases){
+   console.log("like");
+   clases.remove("fa-heart-o");
+   clases.add("fa-heart");
+}
