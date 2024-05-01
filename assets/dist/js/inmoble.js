@@ -20,7 +20,11 @@ let meuInmobles = new Array();
  */
 export async function getAllInmobles(pag = 1) {
   inmobles = [];
-  if(pag==undefined){console.log("No se ha pasado una página")}
+
+  if(pag === undefined){
+    console.log("No se ha pasado una página");
+  }
+
   await fetch(url + "/immobles", {
     headers: {
       "Content-Type": "application/json",
@@ -37,9 +41,7 @@ export async function getAllInmobles(pag = 1) {
 }
 
 /**
- *@description Petición de toda la lista de inmuebles de un usuario
- *
- *
+ * @description Petición de toda la lista de inmuebles de un usuario
  * @returns
  */
 export async function getMyInmobles() {
@@ -51,17 +53,15 @@ export async function getMyInmobles() {
       "Content-Type": "application/json",
     },
   })
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log("meus inmobles");
-      // da el error
-      console.log(data);
-      meuInmobles = data;
-    })
-    .catch((error) => {
-      console.error("Error:", error.message);
-    });
-
+  .then((resp) => resp.json())
+  .then((data) => {
+    console.log("getMyInmobles: ");
+    console.log(data);
+    meuInmobles = data;
+  })
+  .catch((error) => {
+    console.error("Error:", error.message);
+  });
   return meuInmobles;
 }
 
@@ -160,13 +160,14 @@ export async function addInmoble(inmoble) {
       if (data.hasOwnProperty("error")) {
         console.log("ERROR");
         console.log(JSON.stringify(data));
+        alert("No s'ha pogut crear correctament el immoble");
       }
-      console.log("immoble registrat correctament.");
+      alert("Immoble registrat correctament.");
       window.location.assign("/dashboard.html");
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
-      return false;
+      alert("No s'ha pogut crear correctament el immoble");
     });
 }
 
@@ -186,10 +187,9 @@ export async function removeInmoble(id_immoble) {
     .then((json) => !json.hasOwnProperty("error"));
 }
 
-export async function updateInmoble(inmoble) {
-  await fetch(url + "/immobles/r/modificar", {
-    // TODO: Get correct url
-    method: "POST",
+export async function updateInmoble(inmoble, id_immoble) {
+  await fetch(url + "/immobles/r/actualitzar/"+id_immoble, {
+    method: "PUT",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -302,8 +302,8 @@ export function fillTablaInmobles(inmobles) {
     tdPreu.textContent = inmoble.Preu;
 
     let tdImatge = document.createElement("td");
-    tdImatge.setAttribute("Imatge", "Imatge-" + inmoble.Imatge);
-    tdImatge.textContent = inmoble.Imatge;
+    tdImatge.setAttribute("Imatge", "Imatge-" + inmoble.image);
+    tdImatge.textContent = inmoble.image;
 
     let tdDeleteInmoble = document.createElement("td");
     let tdButton = document.createElement("button");
