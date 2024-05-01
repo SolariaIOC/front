@@ -146,12 +146,57 @@ export async function getUsers() {
 }
 
 /**
- *
- * @param {*} rutaAPI
- * @param {*} id
- * @param {*} token
+ * @description Elimina un usuari de la base de dades
+ * @param {int} id_usuari
  */
-export function deleteUser(rutaAPI, id, token) {}
+export async function removeUser(id_usuari) {
+  return await fetch(getApiURL() + "/app/a/eliminarUsuari/" + id_usuari, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
+}
+
+/**
+ * @description Afegeix un usuari de la base de dades
+ * @param {Object} user
+ */
+export async function addUser(user) {
+  await fetch(url + "/app/registre", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+  .then((resp) => resp.json())
+  .then((data) => {
+    if (data.hasOwnProperty("error")) {
+      console.log("ERROR");
+      console.log(JSON.stringify(data));
+      alert("No s'ha pogut crear correctament l\'usuari");
+    }
+    alert("Usuari registrat correctament.");
+    window.location.assign("/dashboard.html");
+  })
+  .catch((error) => {
+    console.error("Error en el registro del usuario", error.message);
+    alert("No s'ha pogut crear correctament l\'usuari");
+  });
+}
+
+/**
+ * @description Actualitza un usuari de la base de dades
+ * @param {Object} user
+ */
+export function updateUser(user) {
+
+}
 
 /* LISTA DE USUARIOS */
 export function fillTablaUsuarios(usuaris) {

@@ -11281,7 +11281,9 @@ body.sidebar-toggled footer.sticky-footer {
 
 .remove-immoble,
 .remove-immoble-fav,
-.edit-immoble {
+.edit-immoble,
+.remove-user,
+.edit-user {
   cursor: pointer;
   text-decoration: underline;
   color: #FFC400;
@@ -11289,11 +11291,13 @@ body.sidebar-toggled footer.sticky-footer {
   display: block;
 }
 
+.remove-user:hover,
 .remove-immoble:hover,
 .remove-immoble-fav:hover {
   color: #dc3545;
 }
 
+.edit-user:hover,
 .edit-immoble:hover {
   color: #28a745;
 }

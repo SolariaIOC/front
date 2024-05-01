@@ -41,7 +41,9 @@ function getHtmlFromUrl(url){
             case 'all-usuaris':
                 return 'usuaris/llistat_usuaris.html';
             case 'afegir-usuaris':
-                return 'usuaris/llistat_usuaris.html';
+                return 'usuaris/crear_usuari.html';
+            case 'editar-usuari':
+                return 'usuaris/editar_usuari.html';
             case 'editar-immoble':
                 return 'admin_immobles/editar_immoble.html';
             case 'afegir-immoble':
