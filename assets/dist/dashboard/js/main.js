@@ -40,7 +40,7 @@ function getHtmlFromUrl(url){
         switch (urlPath) {
             case 'all-usuaris':
                 return 'usuaris/llistat_usuaris.html';
-            case 'afegir-usuaris':
+            case 'afegir-usuari':
                 return 'usuaris/crear_usuari.html';
             case 'editar-usuari':
                 return 'usuaris/editar_usuari.html';

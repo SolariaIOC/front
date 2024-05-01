@@ -1,56 +1,46 @@
-<div class="container-fluid">
+<div id="formularioInmobleContainer" class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Editar Immoble</h1>
+        <h1 class="h3 mb-0 text-gray-800">Editar Usuari</h1>
     </div>
 
-    <form id="editar-formulari-inmoble" method="POST" enctype="multipart/form-data">
+    <form id="editar-formulari-usuari" method="POST" enctype="multipart/form-data">
 
         <div class="row mb-3">
-            <div class="col-md-8">
-                <label for="Carrer" class="form-label">Carrer</label>
-                <input type="text" class="form-control" id="Carrer" name="Carrer" pattern="[a-zA-ZÀ-ÿ\s]{3,}"
-                       title="Carrer invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." required>
+            <div class="col-md-12">
+                <label for="Nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="Nom" name="Nom" pattern="[a-zA-ZÀ-ÿ\s]{3,}" title="Nom invàlid: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." spellcheck="false" data-ms-editor="true" required>
             </div>
-            <div class="col-md-4">
-                <label for="Numero" class="form-label">Numero</label>
-                <input type="text" class="form-control" id="Numero" name="Numero" required>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="Cognoms" class="form-label">Cognoms</label>
+                <input type="text" class="form-control" id="Cognoms" name="Cognoms" pattern="[a-zA-ZÀ-ÿ\s]{3,}" title="Cognoms invàlids: només s'admeten lletres, sense números ni símbols, amb un mínim de 3 caràcters." spellcheck="false" data-ms-editor="true" required>
             </div>
         </div>
 
         <div class="row mb-3">
-            <div class="col-md-3">
-                <label for="Pis" class="form-label">Pis</label>
-                <input type="text" class="form-control" id="Pis" name="Pis" required>
+            <div class="col-md-12">
+                <label for="Email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="Email" name="Email" required>
             </div>
-            <div class="col-md-3">
-                <label for="Codi_Postal" class="form-label">Codi postal</label>
-                <input type="text" class="form-control" id="Codi_Postal" name="Codi_Postal" required>
-            </div>
-            <div class="col-md-6">
-                <label for="Poblacio" class="form-label">Poblacio</label>
-                <input type="text" class="form-control" id="Poblacio" name="Poblacio" required>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="Contrasenya" class="form-label">Contrasenya</label>
+                <input type="password" class="form-control" id="Contrasenya" name="Contrasenya" pattern=".{6,}" title="La contrasenya ha de tenir com a mínim 6 caràcters">
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="Descripcio" class="form-label">Descripcio</label>
-            <input type="text" class="form-control" id="Descripcio" name="Descripcio" required>
+            <label for="TipusUsuari" class="form-label">Tipus usuari</label>
+            <select class="form-select" aria-label="Default select example" id="TipusUsuari" name="TipusUsuari" required>
+                <option value="">Selecciona una opció</option>
+                <option value="A">Administrador</option>
+                <option value="R">Registrat</option>
+            </select>
         </div>
-        <div class="mb-3">
-            <label for="current_image" class="form-label">Imatge actual</label>
-            <br />
-            <img id="current_image" width="150" alt="Imatge actual">
-        </div>
-        <div class="mb-3">
-            <label for="Imatge" class="form-label">Imatge</label>
-            <input type="file" class="form-control" id="Imatge" name="image">
-            <input name="current_image_hidden" type="hidden" id="current_image_hidden">
-        </div>
-        <div class="mb-3">
-            <label for="Preu" class="form-label">Preu</label>
-            <input type="number" class="form-control" id="Preu" name="Preu" required>
-        </div>
+
         <div class="justify-content-end">
             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" value="Guardar">Guardar</button>
         </div>

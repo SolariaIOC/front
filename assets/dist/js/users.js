@@ -166,7 +166,7 @@ export async function removeUser(id_usuari) {
  * @param {Object} user
  */
 export async function addUser(user) {
-  await fetch(url + "/app/registre", {
+  await fetch(getApiURL() + "/app/registre", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -174,17 +174,15 @@ export async function addUser(user) {
     },
     body: JSON.stringify(user),
   })
-  .then((resp) => resp.json())
-  .then((data) => {
-    if (data.hasOwnProperty("error")) {
-      console.log("ERROR");
-      console.log(JSON.stringify(data));
-      alert("No s'ha pogut crear correctament l\'usuari");
+  .then(async (resp) => {
+    if (!resp.ok) {
+      alert(await resp.text());
+    } else {
+      alert("Usuari registrat correctament.");
+      window.location.assign("/dashboard.html#all-usuaris");
+      location.reload();
     }
-    alert("Usuari registrat correctament.");
-    window.location.assign("/dashboard.html");
-  })
-  .catch((error) => {
+  }).catch((error) => {
     console.error("Error en el registro del usuario", error.message);
     alert("No s'ha pogut crear correctament l\'usuari");
   });
@@ -194,8 +192,27 @@ export async function addUser(user) {
  * @description Actualitza un usuari de la base de dades
  * @param {Object} user
  */
-export function updateUser(user) {
-
+export async function updateUser(user, id_usuari) {
+  await fetch(getApiURL() + "/app/a/actualitzarUsuari/"+id_usuari, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+      .then(async (resp) => {
+        if (!resp.ok) {
+          alert(await resp.text());
+        } else {
+          alert("Usuari editat correctament.");
+          window.location.assign("/dashboard.html#all-usuaris");
+          location.reload();
+        }
+      }).catch((error) => {
+        console.error("Error en la edición del usuario", error.message);
+        alert("No s'ha pogut editar correctament l\'usuari");
+      });
 }
 
 /* LISTA DE USUARIOS */

@@ -84,7 +84,7 @@ if(isUserAdmin()) {
             user[key] = value;
         });
 
-        await updateUser(user);
+        await updateUser(user, userToEdit.id_usuari);
     });
 
     async function removeUserFromTable(id_usuari) {
@@ -128,6 +128,6 @@ if(isUserAdmin()) {
         $("#Email").val(userToEdit.Email);
         $("#Nom").val(userToEdit.Nom);
         $("#Cognoms").val(userToEdit.Cognoms);
-        $("#TipusUsuari").val(userToEdit.TipusUsuari);
+        $("#TipusUsuari").val(userToEdit.TipusUsuari).change();
     }
 }
