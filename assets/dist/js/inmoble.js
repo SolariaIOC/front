@@ -1,4 +1,5 @@
 import { getApiURL } from "./utils.js";
+import {checkLog} from "./login.js";
 
 // Tipo de usuario A - R
 
@@ -12,11 +13,14 @@ let meuInmobles = new Array();
 //Habría que acotar la cantidad de resultados si la BBDD crece puede colapsar la app
 
 /**
+ * Hace una petición de todos los inmuebles de la BBDD
+ * @param {number} pag  Número de página
  * @description Petición de todos los inmuebles disponibles
- * @returns
+ * @returns {array} inmobles
  */
-export async function getAllInmobles() {
+export async function getAllInmobles(pag = 1) {
   inmobles = [];
+  if(pag==undefined){console.log("No se ha pasado una página")}
   await fetch(url + "/immobles", {
     headers: {
       "Content-Type": "application/json",
@@ -63,51 +67,78 @@ export async function getMyInmobles() {
 
 /**
  *@description filtre d'inmobles per códi postal
- *
  * @param {*} codiPostal
- * @returns {[{}]} retorna un array d'inmobles
+ * @param {number} pag  Número de página
+ * @returns {Array} retorna un array d'inmobles
  */
-export async function getInmoblesPerCodiPostal(codiPostal) {
-  inmobles = [];
+export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
 
-  await fetch(url+ "/immobles/codi_postal/" + codiPostal, {
+let inmuebles;
+  await fetch(`${url}/immobles/codi_postal/${codiPostal}`, {
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
   })
-    .then((resp) => resp.json())
-    .then((json) => {
-      json.forEach((element) => {
-        inmobles.push(element);
-      });
-    });
+  .then((response) => {
+    if (!response.ok) {
+      busquedaFail("No s'han trobat immobles amb aquest codi postal.");
+      throw new Error('Error en la solicitud');
+    }
+    return response.json();
+  })
+  .then((json) => {
+    busquedaOk();
+    return inmuebles = json;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+   
+    return inmuebles = []; 
+  });
 
-  return inmobles;
+  return inmuebles;
 }
 
 /**
- *@description Filtre d'inmobles per població
- *
+ * @description Filtre d'inmobles per població
  * @param {*} poblacio
+ * @param {number} pag  Número de página
+ * @returns {Array} retorna un array d'inmobles
  */
-export async function getInmoblePerPoblacio(poblacio) {
-  inmobles = [];
+export async function getInmoblePerPoblacio(poblacio, pag = 1) {
 
-  await fetch(url + "/immobles/poblacio/" + poblacio, {
+let inmuebles;
+  await fetch(`${url}/immobles/poblacio/${poblacio}`, {
     headers: {
       "Content-Type": "application/json",
+    
     },
-    credentials: "include",
+ 
+    credentials: "include"
   })
-    .then((resp) => resp.json())
-    .then((json) => {
-      json.forEach((element) => {
-        inmobles.push(element);
-      });
-    });
+  .then((response) => {
+    if (!response.ok) {
+      busquedaFail("No s'han trobat immobles en aquesta població.");
+      throw new Error('Error en la solicitud');
+    
+    }
+    return response.json();
+  })
+  .then((json) => {
+ 
+   
+    inmuebles = json;
+    busquedaOk();
+    return inmuebles;
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+ 
+    inmuebles = []; 
+  });
 
-  return inmobles;
+  return inmuebles;
 }
 
 /**
@@ -116,7 +147,7 @@ export async function getInmoblePerPoblacio(poblacio) {
  */
 
 export async function addInmoble(inmoble) {
-   await fetch(url + "/immobles/r/afegir", {
+  await fetch(url + "/immobles/r/afegir", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -127,13 +158,11 @@ export async function addInmoble(inmoble) {
     .then((resp) => resp.json())
     .then((data) => {
       if (data.hasOwnProperty("error")) {
-        console.log("ERROR")
+        console.log("ERROR");
         console.log(JSON.stringify(data));
-       
       }
-      console.log("immoble registrat correctament.")
-window.location.assign("/dashboard.html")
-     
+      console.log("immoble registrat correctament.");
+      window.location.assign("/dashboard.html");
     })
     .catch((error) => {
       console.error("Error en el registro de inmueble:", error.message);
@@ -158,7 +187,8 @@ export async function removeInmoble(id_immoble) {
 }
 
 export async function updateInmoble(inmoble) {
-  await fetch(url + "/immobles/r/modificar", { // TODO: Get correct url
+  await fetch(url + "/immobles/r/modificar", {
+    // TODO: Get correct url
     method: "POST",
     credentials: "include",
     headers: {
@@ -166,32 +196,29 @@ export async function updateInmoble(inmoble) {
     },
     body: JSON.stringify(inmoble),
   })
-      .then((response) =>
-      {
+    .then((response) => {
+      let error = true;
 
-        let error = true;
-
-        if(response.ok === true){
-          let data = response.json();
-          if(!data.hasOwnProperty("error")){
-            error = false;
-            alert('Immoble actualitzat correctament!');
-            window.location.hash = 'immobles';
-            window.location.reload();
-          }
+      if (response.ok === true) {
+        let data = response.json();
+        if (!data.hasOwnProperty("error")) {
+          error = false;
+          alert("Immoble actualitzat correctament!");
+          window.location.hash = "immobles";
+          window.location.reload();
         }
+      }
 
-        if(error){
-          alert('No s\'ha pogut actualitzar correctament el immoble');
-          console.log('Response: ');
-          console.log(response);
-        }
-
-      })
-      .catch((error) => {
-        console.error("Error en la modificación de inmueble:", error.message);
-        return false;
-      });
+      if (error) {
+        alert("No s'ha pogut actualitzar correctament el immoble");
+        console.log("Response: ");
+        console.log(response);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la modificación de inmueble:", error.message);
+      return false;
+    });
 }
 
 if (window.location.href.includes("register-inmobles")) {
@@ -307,4 +334,267 @@ export function fillTablaInmobles(inmobles) {
   });
 }
 
-//.../r/afegir
+
+
+
+export async function verTodosInmuebles(){
+  let inmuebles;
+  const verTodosInmuebles = document.getElementById('ver-todos-inmuebles')
+  verTodosInmuebles.addEventListener('click' , async ()=>{
+    inmuebles = await getAllInmobles();
+    busquedaOk();
+    pintarInmuebles(inmuebles);
+
+  })
+}
+
+
+export async function formularioBusquedaInmuebles(){
+
+  //console.log("DENTRO DE FORMULARIO BUSQUEDA");
+   let mensaje;
+   let  inmuebles = new Array();
+  const formularioBusquedaInmuebleElemento = document.getElementById('formulario-busqueda-inmuebles');
+
+
+
+
+formularioBusquedaInmuebleElemento.addEventListener('submit', async (evento)=>{
+
+  //Limpia el input
+ 
+  evento.preventDefault();
+
+  let valorBusqueda = formularioBusquedaInmuebleElemento[0].value
+  let tipoBusqueda =  formularioBusquedaInmuebleElemento[2].value
+
+
+  if(valorBusqueda == ""){
+     mensaje = "Ha de seleccionar un tipus de cerca una."
+    mensajeBusquedaError(mensaje);
+  }
+  if(valorBusqueda == "" && tipoBusqueda == 'codiPostal'){
+    mensaje = "Ha d'introdui un codi postal";
+    mensajeBusquedaError(mensaje);
+  }
+
+  if(valorBusqueda == "" && tipoBusqueda == 'poblacio'){
+    mensaje = "Ha d'introdui un poblacio";
+    mensajeBusquedaError(mensaje);
+  }
+
+
+  if(valorBusqueda){
+  switch(tipoBusqueda){
+
+    case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda);
+    valorBusqueda="";
+    break;
+    case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda);
+      valorBusqueda = "";
+    break;
+    default :inmuebles = await getAllInmobles();
+    break;
+  }
+
+pintarInmuebles(inmuebles);
+  }
+  evento.originalTarget[0].value = "";
+})
+
+
+}
+
+
+
+/**
+ * Crea y introduce el html de los inmuebles listados por la bbdd
+ * 
+ * @param {*} inmueblesPar 
+ * @param {*} pagina 
+ */
+export async function pintarInmuebles(inmueblesPar, pagina) {
+
+  let inmuebles;
+  //cantidad de inmuebles por row
+  const INMUEBLES = 3;
+  let inmueblesContainer = document.getElementById("inmuebles-container");
+
+  if(inmueblesContainer.children){
+    while (inmueblesContainer.firstChild) {
+      inmueblesContainer.firstChild.remove()
+  }
+  }
+
+  pagina = 0;
+if(inmueblesPar == undefined){
+   inmuebles = await getAllInmobles();
+}else {
+  inmuebles = inmueblesPar;
+}
+
+  let countInmuebles = 0;
+  let inmueblesMaquetados = new Array();
+
+  inmuebles.forEach((inmueble) => {
+    inmueblesMaquetados.push(crearMaquetacionInmueble(inmueble));
+  });
+
+  //console.log(inmueblesMaquetados.length)
+  //console.log('countInmuebles ' + countInmuebles)
+  while (inmueblesMaquetados.length > countInmuebles) {
+    //console.log('countInmuebles while' + countInmuebles)
+    let count = 0;
+    let divCardGroupINMOBLES = document.createElement("div");
+    divCardGroupINMOBLES.classList.add(
+      "d-flex",
+      "flex-sm-wrap",
+      "flex-md-nowrap",
+      "flex-wrap",
+      "gap-3",
+      "my-2",
+      "container",
+      "justify-content-center",
+      
+
+    );
+
+    while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
+      
+
+      divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
+      count++;
+      countInmuebles++;
+    }
+    inmueblesContainer.appendChild(divCardGroupINMOBLES)
+  }
+
+  //cada 3 pisos mostrados crea un grupo
+}
+
+function crearMaquetacionInmueble(inmueble) {
+ 
+  //crea elementos de la tarjeta
+
+  let card = document.createDocumentFragment();
+
+  let divCard = document.createElement("div");
+  let imgCardImgTop = document.createElement("img");
+  let divCardBody = document.createElement("div");
+  let h5CardTitle = document.createElement("h5");
+  let pCardText = document.createElement("p");
+  let divCardfooter = document.createElement("div");
+  let smallTextMuted = document.createElement("small");
+  let smallLiked = document.createElement("small");
+  let spanLiked = document.createElement("small");
+  let divCardgroup = document.createElement("div");
+  divCardgroup.classList.add("card-group");
+
+  h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
+  pCardText.textContent = inmueble.Descripcio;
+  imgCardImgTop.src = /* inmueble.Imatge
+    ? inmueble.image : */ "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
+
+  divCard.classList.add("card");
+  imgCardImgTop.classList.add("card-img-top");
+  imgCardImgTop.setAttribute("alt", inmueble.Descripcio);
+
+  divCardBody.classList.add("card-body");
+  h5CardTitle.classList.add("card-title", "text-start", "title-inmoble");
+  pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
+  divCardfooter.classList.add("card-footer");
+  spanLiked.classList.add("liked");
+  spanLiked.classList.add("fa", "fa-heart-o");
+  spanLiked.setAttribute("aria-hidden", true);
+
+  /*BODY*/
+  divCardBody.appendChild(h5CardTitle);
+  divCardBody.appendChild(pCardText);
+
+  /* FOOTER */
+  divCardfooter.appendChild(smallTextMuted);
+  // CORAZON
+  smallLiked.appendChild(spanLiked);
+  divCardfooter.appendChild(smallLiked);
+
+  /* DIV CARD */
+  divCard.appendChild(imgCardImgTop);
+  divCard.appendChild(divCardBody);
+  divCard.appendChild(divCardfooter);
+
+  divCardgroup.appendChild(divCard);
+  card.appendChild(divCardgroup);
+ // console.log(card);
+  return card;
+}
+
+
+
+
+ /**
+  * Añade un mensaje de fallo a la busqueda
+  * 
+  * @param {*} mensaje 
+  */
+ function busquedaFail(mensaje){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.remove('visually-hidden');
+  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
+
+ }
+ 
+ function busquedaOk(){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.add('visually-hidden');
+ }
+ function mensajeBusquedaError(mensaje){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.remove('visually-hidden');
+  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
+ }
+
+
+
+//CONTROL DE USUARIO
+export function controlLogin(){
+  checkLog() 
+}
+
+
+ // LIKE INMOBLE
+
+export function likeInmueble(){
+  document.addEventListener('click', (elemento)=> {
+    let clases  = elemento.target.classList;
+
+    console.log(clases.contains('liked'))
+    if(clases.contains("liked")){
+      if(checkLog()){
+        clases.contains('fa-heart-o') ? likeCorazon(clases) : dislikeCorazon(clases);
+      }else {
+      console.log('no esta logueado al modal...')
+modalShow()
+    }
+    
+    } 
+   
+    })
+ }
+
+ function modalShow(){
+ let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+ modal.show(); }
+ 
+ function dislikeCorazon(clases){
+   console.log("dislike")
+   clases.remove("fa-heart")
+   clases.add("fa-heart-o")
+
+ }
+ 
+  function likeCorazon(clases){
+   console.log("like")
+   clases.remove("fa-heart-o")
+   clases.add("fa-heart")
+  
+  }

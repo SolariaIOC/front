@@ -1,0 +1,40 @@
+<section id="busqueda" class="home-slider">
+    <div class="bg-black"></div>
+    <div class="bg-image"></div>
+    <div class="container text">
+        <h1>Amb més de 20 any d'experiencia</h1>
+        <p>Fundada l'any 1989, la nostra empresa és un equip de reconeguts experts en gestió immobiliària i immobiliàries sempre disposats a ajudar-te.</p>
+       
+        <!--BUSCADOR-->
+        <form id="formulario-busqueda-inmuebles" >
+
+     
+        <div class="input-group mb-3 mt-5">
+            <input type="text" class="form-control p-2" placeholder="Cerca immoble" aria-label="Cerca d'immobles" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary p-2" type="submit" aria-label="veure tots els immobles"><i class="fa-solid fa-magnifying-glass  p-3 pt-0 pb-0"></i></button>
+            </div>
+          </div>
+
+
+
+          <div class="form-row align-items-center ">
+            <div class="col-auto my-1 ">
+              <label class="mr-sm-2 sr-only" for="tipoBusqueda">Tipo de cerca</label>
+              <select class="custom-select mr-sm-2 p-3"  id="tipoBusqueda">
+                <option selected>Cerca per...</option>
+                <option value="poblacio">Poblacio</option>
+                <option value="codiPostal">Codi postal</option>
+              </select>
+              <button id = "ver-todos-inmuebles" class="btn btn-secondary p-3" type="button" >Veure tots els immobles</button>
+            </div>
+          
+          </div>
+          
+        </form>
+    </div>
+    <img class="w-100 w" src="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE">
+</section>
+<div id="busqueda-mensaje" class="text-center mt-5 mb-5 visually-hidden">
+  <b class="blockquote">No s'han trobat immobles.</b>
+</div>

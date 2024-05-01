@@ -1,5 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
-import { addInmoble } from "./inmoble.js";
+import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles, verTodosInmuebles} from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")
 
 
@@ -17,31 +17,42 @@ const contenidoDashboard = document.getElementById('page-content')
 const barraTop = document.getElementById('top-bar')
 const barraDashboardDer = document.getElementById('sidebar');
 
+/* PAGINA DE INMUEBLES  INDEX*/
+
+const inmueblesContainer = document.getElementById('inmobles');
+const busquedaContainer = document.getElementById('busqueda-container');
 
 
+/* BUSCA EL CAMBIO EN EL CONTENEDOR Y COMPRUEBA SI SE HA PINTADO EL HIJO SI ES ASÍ EJECUTA LAS FUNCIONES */
 
-console.log("Mutation Observer")
 const mutationObserver = new MutationObserver((mutations) => {
     
-   // console.log(mutations)
-   // console.log(mutations[0].target.firstChild.id)
 
     
     let mutacionId = mutations[0].target.firstChild.id;
+    //console.log(mutations[0])
 
+   // console.log(mutacionId)
   
     switch(mutacionId){
+        /*MODAL */
         case "staticBackdrop": userLogin();
         break;
+        /*BARRA DE NAVEGACIÓN */
         case "navbar":modoLogueado();
         break;
+
         case "message-modal":;
         break;
         /*DASHBOARD */
         case "barraNavegacionDashBoard":  modoLogueadoDashboard();
         break;
-        //case "formularioInmobleContainer": addInmoble();
-        //break;
+        /*INMUEBLES */
+        case "inmuebles-container": pintarInmuebles(); likeInmueble(); 
+        break;
+        /*BUSQUEDA */
+        case "busqueda":formularioBusquedaInmuebles();verTodosInmuebles();
+        break;
         
     }
 
@@ -63,6 +74,12 @@ if(ruta == dashboard){
     mutationObserver.observe(barraNavegacionContainer, {childList:true})
     mutationObserver.observe(modalLoginContainer, {childList:true})
     mutationObserver.observe(modalMessageContainer, {childList:true})
+
+    /* INMUEBLES */
+    mutationObserver.observe(inmueblesContainer, {childList:true})
+    
+    /*BUSQUEDA*/
+    mutationObserver.observe(busquedaContainer, {childList:true})
 
 }
 

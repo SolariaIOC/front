@@ -44,3 +44,7 @@ body {
     cursor: pointer;
 }
 
+.liked{
+  color: crimson;
+  cursor: pointer;
+}

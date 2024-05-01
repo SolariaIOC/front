@@ -111,7 +111,7 @@ function checkLoginAndPassword(loginEmail, loginPassword) {
 }
 
 /* CHECKEAMOS SI EL USUARIO ESTA LOGUEADO */
-function checkLog() {
+export function checkLog() {
   let usuario = localStorage.getItem("usuario");
 
   if (JSON.parse(usuario) != undefined) {
@@ -119,6 +119,7 @@ function checkLog() {
     return true;
   } else {
     console.log("el usuario no está logueado");
+
     return false;
   }
 }
@@ -150,7 +151,7 @@ export function modoLogueado() {
 /* AÑDIR NOMBRE EN EL DASHBOARD */
 export function modoLogueadoDashboard(){
 
-    console.log("MODO LOGUEADO ACTIVO")
+    //console.log("MODO LOGUEADO ACTIVO")
     const nomDashboard = document.getElementById('username');
     const logoutDashboard = document.getElementById('logoutDashborad');
 
@@ -160,7 +161,7 @@ export function modoLogueadoDashboard(){
     nomDashboard.textContent =usuario.nombre ;
    
     logoutDashboard.addEventListener('click', ()=>{
-        console.log("CLICK LOGOUT")
+       // console.log("CLICK LOGOUT")
        logout(url);
      
         
