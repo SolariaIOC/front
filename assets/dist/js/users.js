@@ -1,3 +1,5 @@
+import { getApiURL } from "./utils.js";
+
 /* MANEJO DE USUARIOS */
 let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
@@ -127,31 +129,20 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- *
- * @param {*} rutaAPI
- * @returns
+ * @returns {array} usuaris
  */
-export function getUsers(rutaAPI) {
-  let usuaris = fetch(rutaAPI + "/app/")
+export async function getUsers() {
+  return await fetch(getApiURL() + "/app/")
     .then((resp) => {
-      resp;
-      console.log("Respuesta usuarios:");
-      console.log(resp);
       if (!resp.ok) {
         throw new Error("S'ha produït un error al servidor.");
       }
       return resp.json();
-    })
-    .then((data) => {
-      console.log("Data usuarios:");
-      console.log(data);
+    }).then((data) => {
       return data;
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.error("Error en la peticio de usuaris:", error.message);
     });
-
-  return usuaris;
 }
 
 /**
