@@ -35,7 +35,7 @@ function getHtmlFromUrl(url){
     let urlPath = url.split('?')[0].split('#')[1];
     console.log('urlPath: '+urlPath);
 
-    if(isUserAdmin) {
+    if(isUserAdmin()) {
         console.log('Admin url');
         switch (urlPath) {
             case 'all-usuaris':
