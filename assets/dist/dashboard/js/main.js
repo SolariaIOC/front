@@ -20,12 +20,12 @@ await renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlF
 
 
 $(document).ready(function() {
-    $(document).on("click", '.dashboard-link', function(event) {
-        renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
+    $(document).on("click", '.dashboard-link', async function(event) {
+        await renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
 
     $('#username').html(userInformation.nombre);
-    console.log('hi: '+userInformation.nombre);
+    console.log('Welcome '+userInformation.nombre+'!');
 });
 
 function getHtmlFromUrl(url){
@@ -38,6 +38,8 @@ function getHtmlFromUrl(url){
             return 'immobles/editar_immoble.html';
         case 'crear-immoble':
             return 'immobles/crear_immoble.html';
+        case 'immobles-favorits':
+            return 'immobles/immobles_favorits.html';
         case 'immobles':
         default:
             return 'immobles/llistat_immobles.html';

@@ -1,10 +1,11 @@
 
 import {
   addInmoble,
-  getAllInmobles,
   getMyInmobles,
   removeInmoble,
   updateInmoble,
+  getMyFavInmobles,
+  removeInmobleFav,
 } from "../../../js/inmoble.js";
 
 let immobleToEdit = undefined;
@@ -35,6 +36,10 @@ $(document).ready(async function () {
 
   await loadImmoblesTable();
 
+  if(window.location.hash.split('?')[0].split('#')[1] === 'immobles-favorits'){
+    await loadImmoblesFavTable();
+  }
+
   $(document).on("click", ".edit-immoble", async function () {
     for (let j = 0; j < immobles.length; j++) {
       if (immobles[j].id_immoble === parseInt($(this).attr("data-id"))) {
@@ -48,6 +53,10 @@ $(document).ready(async function () {
 
   $(document).on("click", ".remove-immoble", async function () {
     await removeImmobleFromTable($(this).attr("data-id"));
+  });
+
+  $(document).on("click", ".remove-immoble-fav", async function () {
+    await removeImmobleFromFavTable($(this).attr("data-id"));
   });
 
   $(document).on("click", '.dashboard-link[href="#immobles"]', async function () {
@@ -152,6 +161,17 @@ async function removeImmobleFromTable(id) {
   }
 }
 
+async function removeImmobleFromFavTable(id) {
+  let hasBeenDeleted = await removeInmobleFav(id);
+  if (hasBeenDeleted) {
+    alert("Immoble eliminat!!");
+    await loadImmoblesFavTable();
+  } else {
+    alert("No s'ha pogut eliminar correctament el immoble");
+  }
+}
+
+
 async function loadImmoblesTable() {
 
   immobles = await getMyInmobles();
@@ -165,9 +185,7 @@ async function loadImmoblesTable() {
     $("#immobles-information").append("<td>" + immobles[i].Carrer + "</td>");
     $("#immobles-information").append("<td>" + immobles[i].Numero + "</td>");
     $("#immobles-information").append("<td>" + immobles[i].Pis + "</td>");
-    $("#immobles-information").append(
-        "<td>" + immobles[i].Codi_Postal + "</td>"
-    );
+    $("#immobles-information").append("<td>" + immobles[i].Codi_Postal + "</td>");
     $("#immobles-information").append("<td>" + immobles[i].Poblacio + "</td>");
     $("#immobles-information").append("<td>" + immobles[i].Preu + "</td>");
     $("#immobles-information").append(
@@ -182,6 +200,32 @@ async function loadImmoblesTable() {
         immobles[i].id_immoble +'"><i class="fa-solid fa-pencil"></i></span></td>'
     );
     $("#immobles-information").append("</tr>");
+
+  }
+}
+
+async function loadImmoblesFavTable() {
+
+  immobles = await getMyFavInmobles();
+  $("#immobles-information-favs").empty();
+
+  for (let i = 0; i < immobles.length; i++) {
+
+    let classOddEven = i % 2 === 0 ? "odd" : "even";
+
+    $("#immobles-information-favs").append('<tr class="' + classOddEven + '">');
+    $("#immobles-information-favs").append("<td>" + immobles[i].Carrer + "</td>");
+    $("#immobles-information-favs").append("<td>" + immobles[i].Numero + "</td>");
+    $("#immobles-information-favs").append("<td>" + immobles[i].Pis + "</td>");
+    $("#immobles-information-favs").append("<td>" + immobles[i].Codi_Postal + "</td>");
+    $("#immobles-information-favs").append("<td>" + immobles[i].Poblacio + "</td>");
+    $("#immobles-information-favs").append("<td>" + immobles[i].Preu + "</td>");
+    $("#immobles-information-favs").append(
+        '<td><span class="remove-immoble-fav" href="#" data-id="' +
+        immobles[i].id_immoble +
+        '"><i class="fa-solid fa-trash"></i></span></td>'
+    );
+    $("#immobles-information-favs").append("</tr>");
 
   }
 }

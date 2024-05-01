@@ -66,6 +66,30 @@ export async function getMyInmobles() {
 }
 
 /**
+ * @description Petición de toda la lista de inmuebles de un usuario
+ * @returns
+ */
+export async function getMyFavInmobles() {
+  meuInmobles = [];
+
+  await fetch(url + "/favorits", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("getMyFavInmobles: ");
+        console.log(data);
+        meuInmobles = data;
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
+  return meuInmobles;
+}
+/**
  *@description filtre d'inmobles per códi postal
  * @param {*} codiPostal
  * @param {number} pag  Número de página
@@ -185,6 +209,19 @@ export async function removeInmoble(id_immoble) {
   })
     .then((resp) => resp.json())
     .then((json) => !json.hasOwnProperty("error"));
+}
+
+export async function removeInmobleFav(id_immoble) {
+  return await fetch(url + "/eliminarImmobleFavorit", {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id_immoble}),
+  })
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
 }
 
 export async function updateInmoble(inmoble, id_immoble) {
