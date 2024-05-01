@@ -28,9 +28,6 @@ export function loginUser(rutaApi, email, pass) {
     });
 }
 
-
-
-
 /**
  * Retorna un usuario o un null
  * 
@@ -38,22 +35,20 @@ export function loginUser(rutaApi, email, pass) {
  * @returns {null} 
  */
 export function isUserLoged(){
-
    let usuario =  localStorage.getItem('usuario');
-
-   if(usuario != undefined){
+   if(usuario !== undefined){
     return JSON.parse(usuario); } else {
       return null;
     }
 }
 
 /**
- * Logout - Elimina usuario del local Storage
- * 
- * @Void
+ * Diu si un usuari es administrador o no
+ * @returns {boolean}
  */
-
-
+export function isUserAdmin(){
+  return isUserLoged().tipusUsuari === 'A';
+}
 
 /**
  *

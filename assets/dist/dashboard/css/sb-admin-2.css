@@ -10334,7 +10334,7 @@ a:focus {
 
 .sidebar .nav-item .nav-link {
   text-align: center;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.5rem 0 1rem;
   width: 6.5rem;
 }
 
@@ -10533,9 +10533,8 @@ a:focus {
   }
   .sidebar .nav-item .nav-link {
     display: block;
-    width: 100%;
     text-align: left;
-    padding: 1rem;
+    padding: 0.5rem 0.5rem 0 1rem;
     width: 14rem;
   }
   .sidebar .nav-item .nav-link i {
@@ -11281,6 +11280,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .remove-immoble,
+.remove-immoble-fav,
 .edit-immoble {
   cursor: pointer;
   text-decoration: underline;
@@ -11289,7 +11289,8 @@ body.sidebar-toggled footer.sticky-footer {
   display: block;
 }
 
-.remove-immoble:hover {
+.remove-immoble:hover,
+.remove-immoble-fav:hover {
   color: #dc3545;
 }
 

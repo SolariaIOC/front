@@ -1,5 +1,7 @@
-/* OBTENCION DE LA URL */
-
+/**
+ * @description Obtención url
+ * @returns {string}
+ */
 let url = (() => {
   if (
     window.location.hostname == "localhost" ||
@@ -13,9 +15,11 @@ let url = (() => {
   }
 })();
 
-/* PETICION BACK */
-
-
+/**
+ * @description Petición login
+ * @param {*} dataUsuari
+ * @void
+ */
 export async function peticionLogin(dataUsuari) {
   fetch(url + "/login", {
     method: "POST",
@@ -25,57 +29,60 @@ export async function peticionLogin(dataUsuari) {
     credentials: "include",
     body: JSON.stringify(dataUsuari),
   })
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error("S'ha produït un error al servidor.");
-      }
-      return resp.json();
-    })
-    .then((data) => {
-      /* GUARDA USUARIO EN LOCAL */
-      localStorage.setItem("usuario", JSON.stringify(data.datosUsuario));
-
-      modoLogueado();
-
-      window.location.assign("/dashboard.html");
-
-      return data;
-    })
-    .catch((error) => {
-      showLoginError()
-      console.error("Error en el login:", error.message);
-    });
+  .then((resp) => {
+    if (!resp.ok) {
+      throw new Error("S'ha produït un error al servidor.");
+    }
+    return resp.json();
+  })
+  .then((data) => {
+    console.log('DATA: ');
+    console.log(data.message);
+    console.log(data.datosUsuario);
+    console.log('-----');
+    localStorage.setItem("usuario", JSON.stringify(data.datosUsuario)); // GUARDA USUARIO EN LOCAL
+    modoLogueado();
+    window.location.assign("/dashboard.html");
+    return data;
+  })
+  .catch((error) => {
+    showLoginError()
+    console.error("Error en el login:", error.message);
+  });
 }
 
 
-function peticionLogout(url){
-   
-  
+/**
+ * @description Petición logout usuario
+ * @void
+ */
+async function peticionLogout(url){
   fetch(url + "/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials:"include"
-      })
-        .then((resp) => {
-          if (!resp.ok) {
-            throw new Error("S'ha produït un error al servidor.");
-          }
-          console.log("logout correcte.")
-        })
-        .catch((error) => {
-          console.error("Error en el login:", error.message);
-        });
-    
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials:"include"
+  })
+  .then((resp) => {
+    if (!resp.ok) {
+      throw new Error("S'ha produït un error al servidor.");
+    }
+    console.log("logout correcte.")
+  })
+  .catch((error) => {
+    console.error("Error en el login:", error.message);
+  });
 }
 
-/* LOGIN DE USUARIO */
-
+/**
+ * @description Login usuario
+ * @void
+ */
 export function userLogin() {
   const loginForm = document.getElementById("login-form");
 
-  loginForm.addEventListener("submit", (evento) => {
+  loginForm.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
     let email = document.getElementById("loginEmail").value;
@@ -83,7 +90,7 @@ export function userLogin() {
     let dataUsuari = { Email: email, Contrasenya: password };
 
     if (!checkLog()) {
-      peticionLogin(dataUsuari);
+      await peticionLogin(dataUsuari);
     }
   });
 
@@ -95,12 +102,12 @@ export function userLogin() {
   });
 }
 
-/* CHECKEAMOS SI HA RELLENADO LOS DATOS */
 /**
  * @description Checkea si se ha rellenado el formulario de login
  * 
  * @param {*} loginEmail 
- * @param {*} loginPassword 
+ * @param {*} loginPassword
+ * @void
  */
 function checkLoginAndPassword(loginEmail, loginPassword) {
   if (loginEmail !== "" && loginPassword !== "") {
@@ -110,7 +117,10 @@ function checkLoginAndPassword(loginEmail, loginPassword) {
   }
 }
 
-/* CHECKEAMOS SI EL USUARIO ESTA LOGUEADO */
+/**
+ * @description Checkea si el usuario esta logeado
+ * @returns {boolean}
+ */
 export function checkLog() {
   let usuario = localStorage.getItem("usuario");
 
@@ -124,8 +134,10 @@ export function checkLog() {
   }
 }
 
-/* CAMBIAR MODO LOGUEADO NAV */
-
+/**
+ * @description Cambia el modo logeado nav
+ * @void
+ */
 export function modoLogueado() {
   const nomContainer = document.getElementById("nom-usuari-container");
   const btnContainer = document.getElementById("btn-login-container");
@@ -142,39 +154,31 @@ export function modoLogueado() {
     //cambio boton login pot logout
     btnContainer.replaceChildren(botonLogout);
 
-    botonLogout.addEventListener('click', ()=>{
-        logout();
+    botonLogout.addEventListener('click', async ()=>{
+        await logout();
     })
   }
 }
 
-/* AÑDIR NOMBRE EN EL DASHBOARD */
+/**
+ * @description Añade el nombre en el dashboard
+ * @void
+ */
 export function modoLogueadoDashboard(){
 
-    //console.log("MODO LOGUEADO ACTIVO")
     const nomDashboard = document.getElementById('username');
     const logoutDashboard = document.getElementById('logoutDashborad');
 
-
     let usuario = getUsuario();
-
-    nomDashboard.textContent =usuario.nombre ;
+    nomDashboard.textContent = usuario.nombre ;
    
-    logoutDashboard.addEventListener('click', ()=>{
-       // console.log("CLICK LOGOUT")
-       logout(url);
-     
-        
+    logoutDashboard.addEventListener('click', async ()=>{
+       await logout(url);
     })
-    
 }
-
-
-
 
 /**
  * @description Devuelve un boton para hacer logout
- * 
  * @returns {button}logoutButton
  */
 function crearBotonLogout() {
@@ -198,10 +202,8 @@ function crearBotonLogout() {
   return logoutButton;
 }
 
-
 /**
  * @description  Devuelve un boton para hacer login
- * 
  * @returns {button}loginButton
  */
 function crearBotonLogin() {
@@ -227,10 +229,8 @@ function crearBotonLogin() {
   return loginButton;
 }
 
-
 /**
  * @description Devuelve un boton para acceder al dashboard
- * 
  * @returns {button}btnProfile
  */
 function crearBotonUsuario(usuario) {
@@ -254,12 +254,11 @@ function crearBotonUsuario(usuario) {
   );
 
   btnProfile.appendChild(iconoUsuario);
-
   return btnProfile;
 }
 
 /**
- *@description Devuelve el usuario que está logueado
+ * @description Devuelve el usuario que está logueado
  * @returns {json} usuario
  */
 function getUsuario() {
@@ -267,55 +266,33 @@ function getUsuario() {
   return usuario;
 }
 
-/*********#################################*************/
 /**
  *
  * @description  Desloguea al usuario
- * 
  * @void
  */
+export async function logout(){
 
-export function logout(){
+  if(window.location.pathname != "/dashboard.html"){
+    const benvinguda = document.getElementById("perfil-usuari");
+    const nomContainer = document.getElementById("nom-usuari-container");
+    const btnContainer = document.getElementById("btn-login-container");
 
-    if(window.location.pathname != "/dashboard.html"){
+    const btnLogin = crearBotonLogin();
+    btnContainer.replaceChildren(btnLogin);
 
-        
-        const benvinguda = document.getElementById("perfil-usuari");
-        const nomContainer = document.getElementById("nom-usuari-container");
-        const btnContainer = document.getElementById("btn-login-container");
-
-
-        const btnLogin = crearBotonLogin();
-        btnContainer.replaceChildren(btnLogin);
-        //quitar banner
-        nomContainer.removeChild(benvinguda);
-        localStorage.removeItem("usuario");
-        peticionLogout(url);
-
-    }
-
-
-
+    // Quitar banner
+    nomContainer.removeChild(benvinguda);
+    localStorage.removeItem("usuario");
+    await peticionLogout(url);
+  }
 
   // Elimina usuario
   localStorage.removeItem("usuario");
-  peticionLogout(url);
+  await peticionLogout(url);
   window.location.assign("/index.html")
-
-
 }
 
-/********###################################***********/
-
-function showButtonSpinner() {
-  $("#btnLogin").html('<i class="fas fa-spinner fa-spin"></i>');
-  $("#btnLogin").addClass("disabled");
-}
-
-function removeButtonSpinner() {
-  $("#btnLogin").html("Login");
-  $("#btnLogin").removeClass("disabled");
-}
 function showLoginError() {
   $(".error-message-login").show();
   $(".error-message-login").text("Usuari i/o contrasenya incorrectes");
