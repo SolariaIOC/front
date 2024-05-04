@@ -1,5 +1,5 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
-import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles, verTodosInmuebles} from "./inmoble.js";
+import { addInmoble , pintarInmuebles, likeInmueble, formularioBusquedaInmuebles, verTodosInmuebles, getAllInmoblesInformation} from "./inmoble.js";
 (()=>{console.log("OBSERVADOR INICIADO")
 
 

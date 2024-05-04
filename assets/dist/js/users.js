@@ -2,6 +2,13 @@
 let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
 
+/**
+ * 
+ * @param {*} rutaApi 
+ * @param {*} email 
+ * @param {*} pass 
+ */
+
 export function loginUser(rutaApi, email, pass) {
   let datausuari = { Email: email, Contrasenya: pass };
 
@@ -163,6 +170,11 @@ export function getUsers(rutaAPI) {
 export function deleteUser(rutaAPI, id, token) {}
 
 /* LISTA DE USUARIOS */
+/**
+ * 
+ * @param {*} usuaris 
+ * 
+ */
 export function fillTablaUsuarios(usuaris) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-usuaris");
   // let rowUsuario = document.createDocumentFragment();
