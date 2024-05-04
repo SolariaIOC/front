@@ -6,11 +6,12 @@ import {
     updateInmobleAdmin,
 } from "../../../js/inmoble.js";
 
-import {
-    isUserAdmin
-} from "../../../js/users.js";
+import { isUserAdmin } from "../../../js/users.js";
 
-if(isUserAdmin) {
+if(isUserAdmin()) {
+
+    console.log('Admin code');
+
     let immobleToEdit = undefined;
     let immobles = [];
     let currentPage = 1;
@@ -81,7 +82,8 @@ if(isUserAdmin) {
             await removeImmobleFromTable($(this).attr("data-immoble-id"), $(this).attr("data-user-id"));
         });
 
-        $(document).on("click", '.dashboard-link[href="#immobles"]', async function () {
+        $(document).on("click", '.dashboard-link[href="#all-immobles"]', async function () {
+                currentPage = 1;
                 await loadImmoblesTable();
             }
         );

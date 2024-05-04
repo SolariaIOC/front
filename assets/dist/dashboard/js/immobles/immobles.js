@@ -8,11 +8,9 @@ import {
   removeInmobleFav,
 } from "../../../js/inmoble.js";
 
-import {
-  isUserAdmin
-} from "../../../js/users.js";
+import { isUserAdmin } from "../../../js/users.js";
 
-if(!isUserAdmin) {
+if(!isUserAdmin()) {
   let immobleToEdit = undefined;
   let immobles = [];
 
