@@ -28,12 +28,12 @@ $(document).ready(function() {
         await renderizaFragmento("#page-content", "../../components/dashboard/"+getHtmlFromUrl($(this).attr('href')));
     });
 
-    $('#username').html(userInformation.nombre);
-    console.log('Welcome '+userInformation.nombre+'!');
+    $('#username').html(userInformation.nom);
+    console.log('Welcome '+userInformation.nom+'!');
 
     setTimeout(async function () {
-        $('#username').html(userInformation.nombre);
-        console.log('Welcome '+userInformation.nombre+'!');
+        $('#username').html(userInformation.nom);
+        console.log('Welcome '+userInformation.nom+'!');
     }, 500);
 
     $(document).on("click", '#logoutDashboard', async function(event) {
