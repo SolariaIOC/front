@@ -3,12 +3,12 @@ let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
 
 /**
- * 
- * @param {*} rutaApi 
- * @param {*} email 
- * @param {*} pass 
+ * @description Petició de login a l'endpoint
+ * @param {string} rutaApi ruta de l'api
+ * @param {string} email email de l'usuari
+ * @param {string} pass password de l'usuari
+ * @void
  */
-
 export function loginUser(rutaApi, email, pass) {
   let datausuari = { Email: email, Contrasenya: pass };
 
@@ -26,8 +26,8 @@ export function loginUser(rutaApi, email, pass) {
       return resp.json();
     })
     .then((data) => {
-      console.log("Data Login:");
-      console.log(data);
+      //console.log("Data Login:");
+      //console.log(data);
       return data;
     })
     .catch((error) => {
@@ -36,8 +36,7 @@ export function loginUser(rutaApi, email, pass) {
 }
 
 /**
- * Retorna un usuario o un null
- * 
+ * @description Retorna un usuari o un null segons estigui loguejat o no.
  * @returns {json} 
  * @returns {null} 
  */
@@ -50,7 +49,7 @@ export function isUserLoged(){
 }
 
 /**
- * Diu si un usuari es administrador o no
+ * @description Ens diu si un usuari es administrador o no
  * @returns {boolean}
  */
 export function isUserAdmin(){
@@ -58,10 +57,10 @@ export function isUserAdmin(){
 }
 
 /**
- *
+ * @description 
  * @param {String} rutaAPI
  * @param {Integer} id
- * @returns usuari
+ * @returns {json} usuari
  */
 export function getUser(rutaAPI, id) {
   fetch(rutaAPI + "/app/" + id)
@@ -79,8 +78,7 @@ export function getUser(rutaAPI, id) {
 }
 
 /**
- * Retorna el objeto usuario
- *
+ * @description Retorna l'objecte usuari
  * @returns usuari
  */
 export function getLocalUser() {
@@ -89,12 +87,10 @@ export function getLocalUser() {
 }
 
 /**
- *
- * @param {String} rutaAPI
- * @param {*} datos
- *
+ * @description Envia la petició de registre a l'endpoint.
+ * @param {String} rutaAPI url del endpoint
+ * @param {*} datausuari dades de l'usuari
  */
-
 export function registerUser(rutaAPI, datausuari) {
   fetch(rutaAPI + "/app/registre", {
     method: "POST",
@@ -134,24 +130,20 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- *
- * @param {*} rutaAPI
+ * @description Llista d'usuaris registrats
+ * @param {string} rutaAPI
  * @returns
  */
 export function getUsers(rutaAPI) {
   let usuaris = fetch(rutaAPI + "/app/")
     .then((resp) => {
       resp;
-      console.log("Respuesta usuarios:");
-      console.log(resp);
       if (!resp.ok) {
         throw new Error("S'ha produït un error al servidor.");
       }
       return resp.json();
     })
     .then((data) => {
-      console.log("Data usuarios:");
-      console.log(data);
       return data;
     })
     .catch((error) => {
@@ -161,9 +153,10 @@ export function getUsers(rutaAPI) {
   return usuaris;
 }
 
+// TODO ELIMINAR
 /**
- *
- * @param {*} rutaAPI
+ * @description Elimina un usuari amb token
+ * @param {string} rutaAPI
  * @param {*} id
  * @param {*} token
  */
@@ -171,9 +164,8 @@ export function deleteUser(rutaAPI, id, token) {}
 
 /* LISTA DE USUARIOS */
 /**
- * 
+ * @description Omple la tabla d'usuaris
  * @param {*} usuaris 
- * 
  */
 export function fillTablaUsuarios(usuaris) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-usuaris");

@@ -18,8 +18,8 @@ let url = (() => {
 })();
 
 /**
- * @description Petición login
- * @param {*} dataUsuari
+ * @description Petició de login a l'endpoint.
+ * @param {json} dataUsuari Dades de l'usuari
  * @void
  */
 export async function peticionLogin(dataUsuari) {
@@ -38,10 +38,6 @@ export async function peticionLogin(dataUsuari) {
     return resp.json();
   })
   .then((data) => {
-    console.log('DATA: ');
-    console.log(data.message);
-    console.log(data.datosUsuario);
-    console.log('-----');
     localStorage.setItem("usuario", JSON.stringify(data.datosUsuario)); // GUARDA USUARIO EN LOCAL
     modoLogueado();
     window.location.assign("/dashboard.html");
@@ -55,10 +51,10 @@ export async function peticionLogin(dataUsuari) {
 
 
 /**
- * @description Petición logout usuario
+ * @description Petició de tancament de sessió a l'endpoint.
  * @void
  */
-async function peticionLogout(url){
+async function peticionLogout(){
   fetch(url + "/logout", {
     method: "POST",
     headers: {
@@ -78,7 +74,7 @@ async function peticionLogout(url){
 }
 
 /**
- * @description Login usuario
+ * @description Inici de sessió de l'usuari, controla la correcció de les dades.
  * @void
  */
 export function userLogin() {
@@ -105,8 +101,7 @@ export function userLogin() {
 }
 
 /**
- * @description Checkea si se ha rellenado el formulario de login
- * 
+ * @description Comprova si s'ha omplert el formulari d'inici de sessió.
  * @param {*} loginEmail 
  * @param {*} loginPassword
  * @void
@@ -120,8 +115,8 @@ function checkLoginAndPassword(loginEmail, loginPassword) {
 }
 
 /**
- * @description Checkea si el usuario esta logeado
- * @returns {boolean}
+ * @description Comprova si l'usuari està loguejat.
+ * @returns {boolean} Verdader si està loguejat, fals si no ho està.
  */
 export function checkLog() {
   let usuario = localStorage.getItem("usuario");
@@ -137,7 +132,7 @@ export function checkLog() {
 }
 
 /**
- * @description Cambia el modo logeado nav
+ * @description Canvia el mode de navegació si està loguejat.
  * @void
  */
 export function modoLogueado() {
@@ -163,7 +158,7 @@ export function modoLogueado() {
 }
 
 /**
- * @description Añade el nombre en el dashboard
+ * @description Afegeix el nom al tauler de control.
  * @void
  */
 export function modoLogueadoDashboard(){
@@ -180,8 +175,8 @@ export function modoLogueadoDashboard(){
 }
 
 /**
- * @description Devuelve un boton para hacer logout
- * @returns {button}logoutButton
+ * @description Retorna un botó per fer tancament de sessió.
+ * @returns {button} logoutButton
  */
 function crearBotonLogout() {
   let logoutButton = document.createElement("button");
@@ -205,7 +200,7 @@ function crearBotonLogout() {
 }
 
 /**
- * @description  Devuelve un boton para hacer login
+ * @description Retorna un botó per iniciar sessió.
  * @returns {button}loginButton
  */
 function crearBotonLogin() {
@@ -232,8 +227,8 @@ function crearBotonLogin() {
 }
 
 /**
- * @description Devuelve un boton para acceder al dashboard
- * @returns {button}btnProfile
+ * @description Retorna un botó per accedir al tauler de control.
+ * @returns {button} btnProfile
  */
 function crearBotonUsuario(usuario) {
   let btnProfile = document.createElement("button");
@@ -260,8 +255,8 @@ function crearBotonUsuario(usuario) {
 }
 
 /**
- * @description Devuelve el usuario que está logueado
- * @returns {json} usuario
+ * @description Retorna l'usuari que està loguejat.
+ * @returns {json} usuari
  */
 function getUsuario() {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -269,8 +264,10 @@ function getUsuario() {
 }
 
 /**
- *
- * @description  Desloguea al usuario
+ * @description Desconnecta l'usuari i redirigeix-lo a l'índex.
+ * Elimina l'usuari del localStorage.
+ * Elimina la llista de favorits del localStorage.
+ * Elimina l'últim immoble visualitzat del localStorage. 
  * @void
  */
 export async function logout(){
@@ -302,11 +299,19 @@ export async function logout(){
   window.location.assign("/index.html")
 }
 
+/**
+ * @description Mostra el missatge d'error en cas de fallar en l'inici de sessió.
+ * @void
+ */
 function showLoginError() {
   $(".error-message-login").show();
   $(".error-message-login").text("Usuari i/o contrasenya incorrectes");
 }
 
+/**
+ * @description Amaga o mostra el camp del missatge.
+ * @void
+ */
 function hideLoginError() {
   $(".error-message-login").hide();
   $(".error-message-login").text("");

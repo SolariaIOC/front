@@ -13,9 +13,8 @@ let meuInmobles = new Array();
 //Habría que acotar la cantidad de resultados si la BBDD crece puede colapsar la app
 
 /**
- * Hace una petición de todos los inmuebles de la BBDD
- * @param {number} pag  Número de página
- * @description Petición de todos los inmuebles disponibles
+ * @description  Realiza una petició de tots els immobles de la base de dades.
+ * @param {number} pag  Número de pàgina
  * @returns {array} inmobles
  */
 export async function getAllInmobles(pag = 1) {
@@ -437,6 +436,11 @@ if (window.location.href.includes("register-inmobles")) {
   });
 }
 
+
+
+
+/*****************************************************/
+
 /* LISTA DE INMOBLES */
 export function fillTablaInmobles(inmobles) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-inmobles");
@@ -703,7 +707,7 @@ export function controlLogin() {
 /******************/
 
 /**
- * Contiene un eventListener el cual comprueba que se haga click en un corazón
+ * @description Contiene un eventListener el cual comprueba que se haga click en un corazón.
  * y comprueba el estado del mismo, si tiene la clase liked es que le gusta al usuario y lo que hace es quitarle la clase y viceversa.
  *
  */
@@ -736,25 +740,24 @@ export function likeInmueble() {
 
 
 /**
- * Guarda los favoritos en el local storage si estamos logueados
+ * @description Guarda los favoritos en el local storage si estamos logueados.
  */
 export async function cargarFavoritos(){
 
   let favoritos = await  getMyFavInmobles();
   let favoritosArray =  new Array();
-
+  if (checkLog()) {
   favoritos.forEach( e => {    
           favoritosArray.push(e.id_immoble)     
     })
-    if (checkLog()) {
+    
     localStorage.setItem('favoritos', favoritosArray);
     }
 }
 
 
 /**
- * Comprueba que el inmueble esta en favoritos
- * 
+ * @description Comprueba que el inmueble esta en favoritos.
  * @param {*} id_immoble 
  * @returns 
  */
@@ -770,7 +773,7 @@ function esFavorito(id_immoble ){
 
 
 /**
- * Activa el modal de login
+ * @description Activa el modal de login.
  */
 function modalShow() {
   let modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
@@ -790,10 +793,8 @@ function dislikeCorazon(clases) {
 }
  
 /**
- * Elimina la clase de corazon vacia y pone la rellena
- * Recibe como parametro una lista de clases del padre
- *
- * @param {*} clases
+ * @description Elimina la clase de corazon vacia y pone la rellena.
+ * @param {*} clases Recibe como parametro una lista de clases del padre
  */
 function likeCorazon(clases) {
   //console.log("like");
@@ -804,14 +805,11 @@ function likeCorazon(clases) {
 /******************/
 /* PAGINACION */
 /******************/
-/**
- * 
- * 
- */
+
   document.addEventListener("click", (evento) => {
 
-    console.log("PAGINACION");
-    console.log(evento.target);
+    // console.log("PAGINACION");
+    // console.log(evento.target);
     let raiz = evento.target.parentElement.parentElement.parentElement.id;
 
     if(raiz == 'paginacion'){
@@ -842,14 +840,12 @@ function clearPaginacion(){
   paginacionPadre.firstChild.children[i].classList.remove('active')
  }
   paginacionPadre.firstChild.firstChild.classList.add("active");
-
 }
 
 
 /**
- * Crea la paginacion cogiendo el numero de paginas 
- * 
- * 
+ * @description Crea la paginacion cogiendo el numero de paginas 
+ * @void
  */
 export function crearPaginacion() {
 
@@ -857,6 +853,12 @@ export function crearPaginacion() {
   const pagina = document.getElementById("paginacion");
   let navegacionPaginas = document.createElement("nav");
   let contenedorPaginas = document.createElement("ul");
+
+  //Limpia la paginación
+  if (pagina.children) {
+    while (pagina.firstChild) {
+      pagina.firstChild.remove();
+  }}
 
   
 pagina.classList.add(
@@ -900,21 +902,9 @@ pagina.classList.add(
 
    // pagina.firstChild.remove;  
   }
-
-
-
-
 }
 
-/*
-const paginacionSeleccion =  document.getElementsByClassName('paginacion-sel');
 
-paginacionSeleccion.addEventListener()
-
-function listaDePaginas(){}
-
-
-*/
 
 /******************/
 /* SELECCION INMUEBLE */
@@ -939,11 +929,7 @@ if(clickEn == 'card-body' || clickEn == 'card-footer'){
       window.location.assign('./immoble-details.html')
     }
 
-})
-
-//console.log('********** INMUEBLE CLICK ************')
-
-})
+})})
 
 
 
@@ -952,15 +938,11 @@ if(clickEn == 'card-body' || clickEn == 'card-footer'){
 /* HIPOTECA */
 /******************/
 
-
-
-
 /**
- * Calculo de hipoteca aplica un interes fijo del 5%
- * 
- * @param {*} quantitat Cantidad de dinero pedido
- * @param {*} anys  Años para devolverlo
- * @returns 
+ * @description Calculo de hipoteca aplica un interes fijo del 5%.
+ * @param {*} quantitat Cantidad de dinero pedido.
+ * @param {*} anys  Años para devolverlo.
+ * @returns {array} Resultado de cuota mensual y deuda total del prestamo.
  */
 
 function calcularHipoteca( quantitat, anys){
@@ -973,8 +955,6 @@ function calcularHipoteca( quantitat, anys){
        const totalAPagar = quotaMensual * numPagaments;
 
        // Preparar i enviar la resposta com un objecte JSON
-
-      // console.log( quotaMensual.toFixed(2) + ' ' + totalAPagar.toFixed(2))
        let resultado = new Array();
        resultado.push(quotaMensual.toFixed(2));
        resultado.push(totalAPagar.toFixed(2));
@@ -983,7 +963,9 @@ function calcularHipoteca( quantitat, anys){
 }
 
 
-
+/**
+ * 
+ */
 export function cargarDetallesImmoble(){
 
   let immoble = JSON.parse(localStorage.getItem('immoble'));
@@ -1005,7 +987,6 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
     formHipoteca = document.getElementById('formHipoteca');  
     let calculaButton = document.getElementById('calculaButton');  
 
-
     formHipoteca.addEventListener('change', ()=>{
       let anysLabel = document.getElementById('anysLabel');
       let anysInput = document.getElementById('anys')
@@ -1014,35 +995,23 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
 
     calculaButton.addEventListener('click',  (evento)=>{
       console.log(evento)
-
-
+  
       evento.preventDefault();
       console.log('DENTRO FORMULARIO CHANGE')
 
       
         let quantitat = document.getElementById('prestec');
-
         let anys = document.getElementById('anys');
-
         let resultado =  calcularHipoteca(quantitat.value, anys.value);
-
         let quota = document.getElementById('quotaHipoteca');
         let total = document.getElementById('resultadoHipoteca');
-
         let resultadosCard = document.getElementById('resultadosCard')
 
         if(!resultadosCard){
           formHipoteca.appendChild(crearMaquetacionResultadoHipoteca(resultado));
-
-        } 
-        
+        }        
           quota.textContent = 'La quota mensual es: '  + resultado[0];
           total.textContent = 'El total del prestec es: '+resultado[1];
-        
-      
-       
-        
-
        
       })
 
@@ -1065,21 +1034,15 @@ function crearMaquetacionResultadoHipoteca(resultado){
   let divCardgroup = document.createElement("div");
   let divCard = document.createElement("div");
   let divCardBody = document.createElement("div");
-
   let quota = document.createElement("p");
   let total =  document.createElement('b');
 
 
   quota.setAttribute('id', 'quotaHipoteca');
   total.setAttribute('id', 'resultadoHipoteca');
-
   quota.textContent = 'La quota mensual es: '  + resultado[0];
   total.textContent = 'El total del prestec es: '+resultado[1];
-
-
   divCardgroup.setAttribute('id', 'resultadosCard');
-
-
 
   divCardBody.appendChild(quota);
   divCardBody.appendChild(total);
@@ -1101,8 +1064,6 @@ function crearMaquetacioncalcularHipoteca(){
   let divCardgroup = document.createElement("div");
   let divCard = document.createElement("div");
   let divCardBody = document.createElement("div");
-
-
   let form = document.createElement('form');
   let inputAnysLabel = document.createElement('label');
   let inputAnys = document.createElement('input');
@@ -1152,22 +1113,15 @@ function crearMaquetacioncalcularHipoteca(){
   buttonCalcula.setAttribute('id', 'calculaButton');
   buttonCalcula.textContent = 'calcula';
   buttonCalcula.classList.add("btn", "btn-primary",  "col-3", 'mt-3');
-
-
   divCardgroup.classList.add("card-group");
   divCard.classList.add("card");
-
-
 
   /* CARD */
   form.appendChild(inputAnysLabel);
   form.appendChild(inputAnys);
-
   form.appendChild(inputPrestecLabel);
   form.appendChild(inputPrestec);
   form.appendChild(divButton);
-
- 
   divCardBody.appendChild(form);
   divCard.appendChild(divCardBody);
   divCardgroup.appendChild(divCard)
@@ -1212,58 +1166,35 @@ function crearMaquetacionInmueble(inmueble, listado) {
 
  let pLocalizacion = document.createElement('p');
  let bPreu = document.createElement('b');
-
   h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
   pCardText.textContent = inmueble.Descripcio;
   pLocalizacion.textContent = inmueble.Carrer +', ' +inmueble.Numero +', '+ inmueble.Pis +', '+  inmueble.Codi_Postal +', '+  inmueble.Poblacio;
   bPreu.textContent =  inmueble.Preu + ' €';
-  imgCardImgTop.src = /*inmueble.Imatge ? inmueble.image : */ "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
-
+  imgCardImgTop.src = inmueble.Imatge ? inmueble.image :  "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
   divCardgroup.classList.add("card-group");
   divCard.classList.add("card");
-
-
 /* HIPOTECA */
   buttonHipoteca.textContent = "calcula hipoteca";
   buttonHipoteca.classList.add("btn", "btn-primary", "p2", "col-3");
-  buttonHipoteca.setAttribute('id','calcularHipotecaBtn' )
-
-
-
+  buttonHipoteca.setAttribute('id','calcularHipotecaBtn' );
   divCardgroup.classList.add("card-group");
-
-
   divCard.classList.add("card");
-  
   divCard.setAttribute( 'id', inmueble.id_immoble);
   imgCardImgTop.classList.add("card-img-top");
   imgCardImgTop.setAttribute("alt", inmueble.Descripcio);
-
   divCardBody.classList.add("card-body");
   h5CardTitle.classList.add("card-title", "text-start", "title-inmoble");
   /* TEXTOS */
   pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
   pLocalizacion.classList.add("card-text", "text-start", "decripcion-inmoble");
-
-
   /* PRECIO */
   bPreu.classList.add("col-4", "card-text",  "d-flex",  "align-items-center");
-
   divCardfooter.classList.add("card-footer");
-
-
   divMaquetacionFooter.classList.add( "row", "justify-content-end", "text-center" );
   smallLiked.classList.add( "col-3", "d-flex", "justify-content-center", "align-items-center");
   spanLiked.classList.add("liked");
-
-
-
-
   esFavorito(inmueble.id_immoble) ? spanLiked.classList.add("fa", "fa-heart") :spanLiked.classList.add("fa", "fa-heart-o") ;
   spanLiked.setAttribute("aria-hidden", true);
-
-
-
 
 if(!listado){
 
@@ -1273,8 +1204,6 @@ if(!listado){
     divCardBody.appendChild(h5CardTitle); 
     divCardBody.appendChild(pCardText);
     divCardBody.appendChild(pLocalizacion);
-
-  
     /* FOOTER */
     // divCardfooter.appendChild(smallTextMuted);
  
@@ -1294,9 +1223,6 @@ if(!listado){
    // console.log(card);
     return card;
 }
-
-
-
   /*BODY*/
   divCardBody.appendChild(h5CardTitle); 
   divCardBody.appendChild(pCardText);
