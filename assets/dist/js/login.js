@@ -241,7 +241,8 @@ function crearBotonUsuario(usuario) {
  * @returns {json} usuari
  */
 function getUsuario() {
-  return JSON.parse(localStorage.getItem("usuario"));
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  return usuario;
 }
 
 /**
