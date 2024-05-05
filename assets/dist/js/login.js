@@ -20,7 +20,7 @@ let url = (() => {
 /**
  * @description Petición login
  * @param {*} dataUsuari
- * @void
+ * @returns {void}
  */
 export async function peticionLogin(dataUsuari) {
   fetch(url + "/login", {
@@ -56,7 +56,8 @@ export async function peticionLogin(dataUsuari) {
 
 /**
  * @description Petición logout usuario
- * @void
+ * @param {string} url
+ * @returns {void}
  */
 async function peticionLogout(url){
   fetch(url + "/logout", {
@@ -79,7 +80,7 @@ async function peticionLogout(url){
 
 /**
  * @description Login usuario
- * @void
+ * @returns {void}
  */
 export function userLogin() {
   const loginForm = document.getElementById("login-form");
@@ -106,10 +107,9 @@ export function userLogin() {
 
 /**
  * @description Checkea si se ha rellenado el formulario de login
- * 
- * @param {*} loginEmail 
- * @param {*} loginPassword
- * @void
+ * @param {string} loginEmail
+ * @param {string} loginPassword
+ * @returns {void}
  */
 function checkLoginAndPassword(loginEmail, loginPassword) {
   if (loginEmail !== "" && loginPassword !== "") {
@@ -138,7 +138,7 @@ export function checkLog() {
 
 /**
  * @description Cambia el modo logeado nav
- * @void
+ * @returns {void}
  */
 export function modoLogueado() {
   const nomContainer = document.getElementById("nom-usuari-container");
@@ -164,7 +164,7 @@ export function modoLogueado() {
 
 /**
  * @description Añade el nombre en el dashboard
- * @void
+ * @returns {void}
  */
 export function modoLogueadoDashboard(){
 
@@ -181,7 +181,7 @@ export function modoLogueadoDashboard(){
 
 /**
  * @description Devuelve un boton para hacer logout
- * @returns {button}logoutButton
+ * @returns {button} logoutButton
  */
 function crearBotonLogout() {
   let logoutButton = document.createElement("button");
@@ -205,8 +205,8 @@ function crearBotonLogout() {
 }
 
 /**
- * @description  Devuelve un boton para hacer login
- * @returns {button}loginButton
+ * @description Devuelve un boton para hacer login
+ * @returns {button} loginButton
  */
 function crearBotonLogin() {
   let loginButton = document.createElement("button");
@@ -232,8 +232,9 @@ function crearBotonLogin() {
 }
 
 /**
+ * @param {Object} usuario
  * @description Devuelve un boton para acceder al dashboard
- * @returns {button}btnProfile
+ * @returns {HTMLButtonElement} btnProfile
  */
 function crearBotonUsuario(usuario) {
   let btnProfile = document.createElement("button");
@@ -264,14 +265,12 @@ function crearBotonUsuario(usuario) {
  * @returns {json} usuario
  */
 function getUsuario() {
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  return usuario;
+  return JSON.parse(localStorage.getItem("usuario"));
 }
 
 /**
- *
  * @description  Desloguea al usuario
- * @void
+ * @returns {void}
  */
 export async function logout(){
 
@@ -302,11 +301,19 @@ export async function logout(){
   window.location.assign("/index.html")
 }
 
+/**
+ * @description Muestra el mensaje de error al hacer Login
+ * @returns {void}
+ */
 function showLoginError() {
   $(".error-message-login").show();
   $(".error-message-login").text("Usuari i/o contrasenya incorrectes");
 }
 
+/**
+ * @description Esconde el mensaje de error al hacer Login
+ * @returns {void}
+ */
 function hideLoginError() {
   $(".error-message-login").hide();
   $(".error-message-login").text("");

@@ -1,6 +1,6 @@
 /**
  * Retorna la URL de l'aplicació
- * @return {string} La url de l'aplicació
+ * @returns {string} La url de l'aplicació
  */
 export function getApiURL(){
     if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {

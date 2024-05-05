@@ -5,12 +5,12 @@ let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
 
 /**
- * 
- * @param {*} rutaApi 
- * @param {*} email 
- * @param {*} pass 
+ * @description Permet fer login
+ * @param {String} rutaApi
+ * @param {String} email
+ * @param {String} pass
+ * @returns {void}
  */
-
 export function loginUser(rutaApi, email, pass) {
   let datausuari = { Email: email, Contrasenya: pass };
 
@@ -38,8 +38,7 @@ export function loginUser(rutaApi, email, pass) {
 }
 
 /**
- * Retorna un usuario o un null
- * 
+ * @description Retorna un usuario o un null
  * @returns {json} 
  * @returns {null} 
  */
@@ -52,7 +51,7 @@ export function isUserLoged(){
 }
 
 /**
- * Diu si un usuari es administrador o no
+ * @description Diu si un usuari es administrador o no
  * @returns {boolean}
  */
 export function isUserAdmin(){
@@ -60,9 +59,9 @@ export function isUserAdmin(){
 }
 
 /**
- *
+ * @description Obte un usuari de base de dades
  * @param {String} rutaAPI
- * @param {Integer} id
+ * @param {int} id
  * @returns usuari
  */
 export function getUser(rutaAPI, id) {
@@ -82,8 +81,7 @@ export function getUser(rutaAPI, id) {
 
 /**
  * Retorna el objeto usuario
- *
- * @returns usuari
+ * @returns {Object} usuari
  */
 export function getLocalUser() {
   let usuari = JSON.parse(localStorage.getItem("usuario"));
@@ -91,12 +89,11 @@ export function getLocalUser() {
 }
 
 /**
- *
+ * @description Registra l'usuari a la base de dades
  * @param {String} rutaAPI
- * @param {*} datos
- *
+ * @param {Object} datausuari
+ * @returns {void}
  */
-
 export function registerUser(rutaAPI, datausuari) {
   fetch(rutaAPI + "/app/registre", {
     method: "POST",
@@ -136,7 +133,8 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- * @returns {array} usuaris
+ * @description Retorna el llistat d'usuaris
+ * @returns {Array} usuaris
  */
 export async function getUsers() {
   return await fetch(getApiURL() + "/app/")
@@ -155,6 +153,7 @@ export async function getUsers() {
 /**
  * @description Elimina un usuari de la base de dades
  * @param {int} id_usuari
+ * @returns {void}
  */
 export async function removeUser(id_usuari) {
   return await fetch(getApiURL() + "/app/a/eliminarUsuari/" + id_usuari, {
@@ -171,6 +170,7 @@ export async function removeUser(id_usuari) {
 /**
  * @description Afegeix un usuari de la base de dades
  * @param {Object} user
+ * @returns {void}
  */
 export async function addUser(user) {
   await fetch(getApiURL() + "/app/registre", {
@@ -198,6 +198,7 @@ export async function addUser(user) {
 /**
  * @description Actualitza un usuari de la base de dades
  * @param {Object} user
+ * @returns {void}
  */
 export async function updateUser(user, id_usuari) {
   await fetch(getApiURL() + "/app/a/actualitzarUsuari/"+id_usuari, {
@@ -222,11 +223,10 @@ export async function updateUser(user, id_usuari) {
       });
 }
 
-/* LISTA DE USUARIOS */
 /**
- * 
- * @param {*} usuaris 
- * 
+ * @description Crea una taula amb els usuaris
+ * @param {Object} usuaris
+ * @returns {void}
  */
 export function fillTablaUsuarios(usuaris) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-usuaris");

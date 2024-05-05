@@ -1,6 +1,8 @@
 import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
 import {busquedaPorTipo, cargarDetallesImmoble,cargarFavoritos ,  likeInmueble, formularioBusquedaInmuebles} from "./inmoble.js";
-(()=>{console.log("OBSERVADOR INICIADO")
+(()=>{
+
+    console.log("OBSERVADOR INICIADO")
 
 
 //window.addEventListener("beforeunload", () => localStorage.removeItem('usuario'));
@@ -19,93 +21,68 @@ const contenidoDashboard = document.getElementById('page-content')
 const barraTop = document.getElementById('top-bar')
 const barraDashboardDer = document.getElementById('sidebar');
 
-/* PAGINA DE INMUEBLES  INDEX*/
+/* PAGINA DE INMUEBLES  INDEX */
 
 const inmueblesContainer = document.getElementById('inmobles');
 const busquedaContainer = document.getElementById('busqueda-container');
 
-/* DETALLES INMUEBLE */
-
+/**
+ * @description DETALLES INMUEBLE
+ * @returns {HTMLElement}
+ */
 const inmuebleDetalleContainer = document.getElementById('immoble-details');
 
+    /**
+     * @description BUSCA EL CAMBIO EN EL CONTENEDOR Y COMPRUEBA SI SE HA PINTADO EL HIJO SI ES ASÍ EJECUTA LAS FUNCIONES
+     * @returns {MutationObserver}
+     */
+    const mutationObserver = new MutationObserver((mutations) => {
 
-/* BUSCA EL CAMBIO EN EL CONTENEDOR Y COMPRUEBA SI SE HA PINTADO EL HIJO SI ES ASÍ EJECUTA LAS FUNCIONES */
+        let mutacionId = mutations[0].target.firstChild.id;
 
-const mutationObserver = new MutationObserver((mutations) => {
-    
+        switch(mutacionId){
+            /*MODAL */
+            case "staticBackdrop": userLogin();
+            break;
+            /*BARRA DE NAVEGACIÓN */
+            case "navbar":modoLogueado();
+            break;
 
-    
-    let mutacionId = mutations[0].target.firstChild.id;
-    //console.log(mutations[0])
+            case "message-modal":;
+            break;
+            /*DASHBOARD */
+            case "barraNavegacionDashBoard":  modoLogueadoDashboard();
+            break;
+            /*INMUEBLES */
+            case "inmuebles-container":  cargarFavoritos();likeInmueble(); busquedaPorTipo();
+            break;
+            /*BUSQUEDA */
+            case "busqueda":formularioBusquedaInmuebles();
+            break;
+            /* INMUEBLE DETALLE */
+            case "immoble-container": cargarDetallesImmoble();
+            break;
 
-   // console.log(mutacionId)
-  
-    switch(mutacionId){
-        /*MODAL */
-        case "staticBackdrop": userLogin();
-        break;
-        /*BARRA DE NAVEGACIÓN */
-        case "navbar":modoLogueado();
-        break;
+        }
+    });
 
-        case "message-modal":;
-        break;
-        /*DASHBOARD */
-        case "barraNavegacionDashBoard":  modoLogueadoDashboard();
-        break;
-        /*INMUEBLES */
-        case "inmuebles-container":  cargarFavoritos();likeInmueble(); busquedaPorTipo();  
-        break;
-        /*BUSQUEDA */
-        case "busqueda":formularioBusquedaInmuebles();
-        break;
-        /* INMUEBLE DETALLE */
-        case "immoble-container": cargarDetallesImmoble();
-        break;
-        
+    if(ruta == immobleDetail){
+
+        mutationObserver.observe(barraNavegacionContainer, { childList: true })
+        mutationObserver.observe(modalLoginContainer, { childList: true })
+
+        mutationObserver.observe(inmuebleDetalleContainer, { childList: true })
+    } else {
+
+        mutationObserver.observe(barraNavegacionContainer, { childList: true })
+        mutationObserver.observe(modalLoginContainer, { childList: true })
+        mutationObserver.observe(modalMessageContainer, { childList: true })
+
+        /* INMUEBLES */
+        mutationObserver.observe(inmueblesContainer, { childList: true })
+
+        /*BUSQUEDA*/
+        mutationObserver.observe(busquedaContainer, { childList: true })
     }
-
-
-})
-
-
-
-/*
-if(ruta == dashboard){
-
-    mutationObserver.observe(contenidoDashboard, {childList:true})
-    mutationObserver.observe(barraTop, {childList:true})
-
-} */
-
-if(ruta == immobleDetail){
-
-    mutationObserver.observe(barraNavegacionContainer, {childList:true})
-    mutationObserver.observe(modalLoginContainer, {childList:true})
-
-    /* DETALLE INMUEBLE */
-    mutationObserver.observe(inmuebleDetalleContainer, {childList:true})
-}
-
-
-else {
-
-    //console.log(ruta)
-
-    mutationObserver.observe(barraNavegacionContainer, {childList:true})
-    mutationObserver.observe(modalLoginContainer, {childList:true})
-    mutationObserver.observe(modalMessageContainer, {childList:true})
-
-    /* INMUEBLES */
-    mutationObserver.observe(inmueblesContainer, {childList:true})
-    
-    /*BUSQUEDA*/
-    mutationObserver.observe(busquedaContainer, {childList:true})
-
-    
-
-
-}
-
 })()
 
