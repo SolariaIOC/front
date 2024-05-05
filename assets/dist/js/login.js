@@ -38,7 +38,7 @@ export async function peticionLogin(dataUsuari) {
     return resp.json();
   })
   .then((data) => {
-    localStorage.setItem("usuario", JSON.stringify(data.datosUsuario)); // GUARDA USUARIO EN LOCAL
+    localStorage.setItem("usuario", JSON.stringify(data.dadesUsuari)); // GUARDA USUARIO EN LOCAL
     modoLogueado();
     window.location.assign("/dashboard.html");
     return data;
