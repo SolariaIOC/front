@@ -1,16 +1,44 @@
-import { getApiURL } from "./utils.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: users.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: users.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getApiURL } from "./utils.js";
 
 /* MANEJO DE USUARIOS */
 let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
 
 /**
- * @description Petició de login a l'endpoint
- * @param {string} rutaApi ruta de l'api
- * @param {string} email email de l'usuari
- * @param {string} pass password de l'usuari
- * @returns {void}
+ * 
+ * @param {*} rutaApi 
+ * @param {*} email 
+ * @param {*} pass 
  */
+
 export function loginUser(rutaApi, email, pass) {
   let datausuari = { Email: email, Contrasenya: pass };
 
@@ -28,8 +56,8 @@ export function loginUser(rutaApi, email, pass) {
       return resp.json();
     })
     .then((data) => {
-      //console.log("Data Login:");
-      //console.log(data);
+      console.log("Data Login:");
+      console.log(data);
       return data;
     })
     .catch((error) => {
@@ -38,7 +66,8 @@ export function loginUser(rutaApi, email, pass) {
 }
 
 /**
- * @description Retorna un usuari o un null segons estigui loguejat o no.
+ * Retorna un usuario o un null
+ * 
  * @returns {json} 
  * @returns {null} 
  */
@@ -51,7 +80,7 @@ export function isUserLoged(){
 }
 
 /**
- * @description Ens diu si un usuari es administrador o no
+ * Diu si un usuari es administrador o no
  * @returns {boolean}
  */
 export function isUserAdmin(){
@@ -59,10 +88,10 @@ export function isUserAdmin(){
 }
 
 /**
- * @description Obte un usuari de base de dades
+ *
  * @param {String} rutaAPI
- * @param {int} id
- * @returns {json} usuari
+ * @param {Integer} id
+ * @returns usuari
  */
 export function getUser(rutaAPI, id) {
   fetch(rutaAPI + "/app/" + id)
@@ -80,8 +109,9 @@ export function getUser(rutaAPI, id) {
 }
 
 /**
- * @description Retorna l'objecte usuari
- * @returns {Object} usuari
+ * Retorna el objeto usuario
+ *
+ * @returns usuari
  */
 export function getLocalUser() {
   let usuari = JSON.parse(localStorage.getItem("usuario"));
@@ -89,11 +119,12 @@ export function getLocalUser() {
 }
 
 /**
- * @description Envia la petició de registre a l'endpoint.
- * @param {String} rutaAPI url del endpoint
- * @param {Object} datausuari dades de l'usuari
- * @returns {void}
+ *
+ * @param {String} rutaAPI
+ * @param {*} datos
+ *
  */
+
 export function registerUser(rutaAPI, datausuari) {
   fetch(rutaAPI + "/app/registre", {
     method: "POST",
@@ -133,8 +164,7 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- * @description Llista d'usuaris registrats
- * @returns {Array} usuaris
+ * @returns {array} usuaris
  */
 export async function getUsers() {
   return await fetch(getApiURL() + "/app/")
@@ -153,7 +183,6 @@ export async function getUsers() {
 /**
  * @description Elimina un usuari de la base de dades
  * @param {int} id_usuari
- * @returns {void}
  */
 export async function removeUser(id_usuari) {
   return await fetch(getApiURL() + "/app/a/eliminarUsuari/" + id_usuari, {
@@ -170,7 +199,6 @@ export async function removeUser(id_usuari) {
 /**
  * @description Afegeix un usuari de la base de dades
  * @param {Object} user
- * @returns {void}
  */
 export async function addUser(user) {
   await fetch(getApiURL() + "/app/registre", {
@@ -196,13 +224,8 @@ export async function addUser(user) {
 }
 
 /**
- * @description Elimina un usuari amb token
- * @param {string} rutaAPI
- * @param {*} id
- * @param {*} token
  * @description Actualitza un usuari de la base de dades
  * @param {Object} user
- * @returns {void}
  */
 export async function updateUser(user, id_usuari) {
   await fetch(getApiURL() + "/app/a/actualitzarUsuari/"+id_usuari, {
@@ -227,10 +250,11 @@ export async function updateUser(user, id_usuari) {
       });
 }
 
+/* LISTA DE USUARIOS */
 /**
- * @description Omple la tabla d'usuaris
- * @param {Object} usuaris
- * @returns {void}
+ * 
+ * @param {*} usuaris 
+ * 
  */
 export function fillTablaUsuarios(usuaris) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-usuaris");
@@ -298,3 +322,26 @@ export function fillTablaUsuarios(usuaris) {
       : (usuariSelected.selected = true);
   });
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
