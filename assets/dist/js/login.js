@@ -147,8 +147,6 @@ export function modoLogueado() {
     let botonUsuario = crearBotonUsuario(usuario);
 
     nomContainer.appendChild(botonUsuario);
-
-    //cambio boton login pot logout
     btnContainer.replaceChildren(botonLogout);
 
     botonLogout.addEventListener('click', async ()=>{
