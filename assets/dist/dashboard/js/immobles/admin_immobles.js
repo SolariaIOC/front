@@ -4,7 +4,6 @@ import { isUserAdmin, getUsers } from "../../../js/users.js";
 
 if(isUserAdmin()) {
 
-if(isUserAdmin) {
     let immobleToEdit = undefined;
     let immobles = [];
     let currentPage = 1;
@@ -71,14 +70,14 @@ if(isUserAdmin) {
         });
 
         $(document).on("click", ".previous", async function () {
-            if(currentPage !== 1 ){
+            if (currentPage !== 1) {
                 currentPage--;
                 await loadImmoblesTable();
             }
         });
 
         $(document).on("click", ".next", async function () {
-            if(currentPage !== totalPages ){
+            if (currentPage !== totalPages) {
                 currentPage++;
                 await loadImmoblesTable();
             }
@@ -197,7 +196,6 @@ if(isUserAdmin) {
         }
     }
 
-
     async function loadImmoblesTable() {
 
         let immoblesInformation = await getAllInmoblesInformation(currentPage);
@@ -226,7 +224,7 @@ if(isUserAdmin) {
         $("#pages").append('<li class="page-item previous"><a class="page-link" href="#">Previous</a></li>');
         for (let i = 1; i <= totalPages; i++) {
             let extraClass = i === currentPage ? 'active' : '';
-            $("#pages").append('<li class="page-item direct '+extraClass+'" data-page="'+i+'"><a class="page-link" href="#">'+i+'</a></li>');
+            $("#pages").append('<li class="page-item direct ' + extraClass + '" data-page="' + i + '"><a class="page-link" href="#">' + i + '</a></li>');
         }
         $("#pages").append('<li class="page-item next"><a class="page-link" href="#">Next</a></li>');
     }
@@ -238,9 +236,9 @@ if(isUserAdmin) {
 
         let users = await getUsers();
 
-        for(let i = 0; i<users.length; i++){
+        for (let i = 0; i < users.length; i++) {
             let selected = immobleToEdit.id_usuari === users[i].id_usuari ? 'selected' : '';
-            $('#id_usuari').append('<option value="'+users[i].id_usuari+'" '+selected+'>'+users[i].Nom+' '+users[i].Cognoms+'</option>');
+            $('#id_usuari').append('<option value="' + users[i].id_usuari + '" ' + selected + '>' + users[i].Nom + ' ' + users[i].Cognoms + '</option>');
         }
 
         $("#Carrer").val(immobleToEdit.Carrer);
@@ -255,14 +253,14 @@ if(isUserAdmin) {
         $("#id_usuari").val(immobleToEdit.id_usuari);
     }
 
-    async function loadCreateEditForm(){
+    async function loadCreateEditForm() {
         $('#id_usuari').empty()
         $('#id_usuari').append('<option value="">Selecciona un usuari</option>');
 
         let users = await getUsers();
 
-        for(let i = 0; i<users.length; i++){
-            $('#id_usuari').append('<option value="'+users[i].id_usuari+'">'+users[i].Nom+' '+users[i].Cognoms+'</option>');
+        for (let i = 0; i < users.length; i++) {
+            $('#id_usuari').append('<option value="' + users[i].id_usuari + '">' + users[i].Nom + ' ' + users[i].Cognoms + '</option>');
         }
     }
 }
