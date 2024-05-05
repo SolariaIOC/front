@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utils.js</title>
+    <title>JSDoc: Source: utils/token.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utils.js</h1>
+    <h1 class="page-title">Source: utils/token.js</h1>
 
     
 
@@ -27,17 +27,36 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @description Distingeix si ens trobem en desenvolupament o producció.
- * @returns {string} Retorna la URL segons la fase en què ens trobem.
+ * @description Codifica el token
+ * @param {String} token Token del usuario
+ * @returns {Object|undefined}
  */
-export function getApiURL(){
-    if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {
-        console.log('DEV');
-        return "http://"+window.location.hostname+":3333";
-    } else {
-        console.log('LIVE');
-        return "https://"+window.location.hostname+":3333";
-    }
+export function decodificaJWT(token) {
+
+  const arrayToken = token.split('.');
+  if(token.length >= 1) {
+    return JSON.parse(atob(arrayToken[1]));
+  }
+
+  return null;
+
+}
+
+/**
+ * @description Permite comprobar el token del usuario
+ * @param {String} token Token del usuario
+ * @returns {boolean}
+ */
+export function checkToken(token){
+  let tokenDescodificado =  decodificaJWT(token)
+  if (tokenDescodificado.exp &lt; Date.now() / 1000) {
+    console.log('El token ha caducado');
+    localStorage.removeItem('token')
+    console.log('redireccion a index.')
+    //location.assign('index.html')
+    return false;
+  }
+  return true;
 }</code></pre>
         </article>
     </section>

@@ -46,9 +46,9 @@ let url = (() => {
 })();
 
 /**
- * @description Petición login
- * @param {*} dataUsuari
- * @void
+ * @description Petició de login a l'endpoint.
+ * @param {json} dataUsuari Dades de l'usuari
+ * @returns {void}
  */
 export async function peticionLogin(dataUsuari) {
   fetch(url + "/login", {
@@ -66,10 +66,6 @@ export async function peticionLogin(dataUsuari) {
     return resp.json();
   })
   .then((data) => {
-    console.log('DATA: ');
-    console.log(data.message);
-    console.log(data.datosUsuario);
-    console.log('-----');
     localStorage.setItem("usuario", JSON.stringify(data.datosUsuario)); // GUARDA USUARIO EN LOCAL
     modoLogueado();
     window.location.assign("/dashboard.html");
@@ -83,10 +79,10 @@ export async function peticionLogin(dataUsuari) {
 
 
 /**
- * @description Petición logout usuario
- * @void
+ * @description Petició de tancament de sessió a l'endpoint.
+ * @returns {void}
  */
-async function peticionLogout(url){
+async function peticionLogout(){
   fetch(url + "/logout", {
     method: "POST",
     headers: {
@@ -106,8 +102,8 @@ async function peticionLogout(url){
 }
 
 /**
- * @description Login usuario
- * @void
+ * @description Inici de sessió de l'usuari, controla la correcció de les dades.
+ * @returns {void}
  */
 export function userLogin() {
   const loginForm = document.getElementById("login-form");
@@ -133,11 +129,10 @@ export function userLogin() {
 }
 
 /**
- * @description Checkea si se ha rellenado el formulario de login
- * 
- * @param {*} loginEmail 
- * @param {*} loginPassword
- * @void
+ * @description Comprova si s'ha omplert el formulari d'inici de sessió.
+ * @param {string} loginEmail
+ * @param {string} loginPassword
+ * @returns {void}
  */
 function checkLoginAndPassword(loginEmail, loginPassword) {
   if (loginEmail !== "" &amp;&amp; loginPassword !== "") {
@@ -148,8 +143,8 @@ function checkLoginAndPassword(loginEmail, loginPassword) {
 }
 
 /**
- * @description Checkea si el usuario esta logeado
- * @returns {boolean}
+ * @description Comprova si l'usuari està loguejat.
+ * @returns {boolean} Verdader si està loguejat, fals si no ho està.
  */
 export function checkLog() {
   let usuario = localStorage.getItem("usuario");
@@ -165,8 +160,8 @@ export function checkLog() {
 }
 
 /**
- * @description Cambia el modo logeado nav
- * @void
+ * @description Canvia el mode de navegació si està loguejat.
+ * @returns {void}
  */
 export function modoLogueado() {
   const nomContainer = document.getElementById("nom-usuari-container");
@@ -180,8 +175,6 @@ export function modoLogueado() {
     let botonUsuario = crearBotonUsuario(usuario);
 
     nomContainer.appendChild(botonUsuario);
-
-    //cambio boton login pot logout
     btnContainer.replaceChildren(botonLogout);
 
     botonLogout.addEventListener('click', async ()=>{
@@ -191,25 +184,8 @@ export function modoLogueado() {
 }
 
 /**
- * @description Añade el nombre en el dashboard
- * @void
- */
-export function modoLogueadoDashboard(){
-
-    const nomDashboard = document.getElementById('username');
-    const logoutDashboard = document.getElementById('logoutDashborad');
-
-    let usuario = getUsuario();
-    nomDashboard.textContent = usuario.nombre ;
-   
-    logoutDashboard.addEventListener('click', async ()=>{
-       await logout(url);
-    })
-}
-
-/**
- * @description Devuelve un boton para hacer logout
- * @returns {button}logoutButton
+ * @description Retorna un botó per fer tancament de sessió.
+ * @returns {button} logoutButton
  */
 function crearBotonLogout() {
   let logoutButton = document.createElement("button");
@@ -233,8 +209,8 @@ function crearBotonLogout() {
 }
 
 /**
- * @description  Devuelve un boton para hacer login
- * @returns {button}loginButton
+ * @description Retorna un botó per iniciar sessió.
+ * @returns {button} loginButton
  */
 function crearBotonLogin() {
   let loginButton = document.createElement("button");
@@ -260,8 +236,9 @@ function crearBotonLogin() {
 }
 
 /**
- * @description Devuelve un boton para acceder al dashboard
- * @returns {button}btnProfile
+ * @description Retorna un botó per accedir al tauler de control.
+ * @param {Object} usuario
+ * @returns {HTMLButtonElement} btnProfile
  */
 function crearBotonUsuario(usuario) {
   let btnProfile = document.createElement("button");
@@ -288,20 +265,24 @@ function crearBotonUsuario(usuario) {
 }
 
 /**
- * @description Devuelve el usuario que está logueado
- * @returns {json} usuario
+ * @description Retorna l'usuari que està loguejat.
+ * @returns {json} usuari
  */
 function getUsuario() {
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
-  return usuario;
+  return JSON.parse(localStorage.getItem("usuario"));
 }
 
 /**
- *
- * @description  Desloguea al usuario
- * @void
+ * @description Desconnecta l'usuari i redirigeix-lo a l'índex.
+ * Elimina l'usuari del localStorage.
+ * Elimina la llista de favorits del localStorage.
+ * Elimina l'últim immoble visualitzat del localStorage.
+ * @returns {void}
  */
 export async function logout(){
+
+  console.log("window.location.pathname");
+  console.log(window.location.pathname);
 
   if(window.location.pathname != "/dashboard.html"){
     const benvinguda = document.getElementById("perfil-usuari");
@@ -317,7 +298,7 @@ export async function logout(){
     localStorage.removeItem("favoritos");
     localStorage.removeItem('immoble');
  
-    await peticionLogout(url);
+    await peticionLogout();
   }
 
   // Elimina usuario
@@ -330,11 +311,19 @@ export async function logout(){
   window.location.assign("/index.html")
 }
 
+/**
+ * @description Mostra el missatge d'error en cas de fallar en l'inici de sessió.
+ * @returns {void}
+ */
 function showLoginError() {
   $(".error-message-login").show();
   $(".error-message-login").text("Usuari i/o contrasenya incorrectes");
 }
 
+/**
+ * @description Amaga o mostra el camp del missatge.
+ * @returns {void}
+ */
 function hideLoginError() {
   $(".error-message-login").hide();
   $(".error-message-login").text("");
@@ -349,13 +338,13 @@ function hideLoginError() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#checkToken">checkToken</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#decodificaJWT">decodificaJWT</a></li><li><a href="global.html#detalleInmueble">detalleInmueble</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#hideLoginError">hideLoginError</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#showLoginError">showLoginError</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 21:06:35 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -178,7 +178,7 @@
 
 
 <div class="description">
-    Añade un immueble a la base de datos
+    Afegeix un immoble.
 </div>
 
 
@@ -333,7 +333,7 @@
 
 
 <div class="description">
-    Añade un immueble a un usuario, a la base de datos
+    Afegeix un immoble com administrador.
 </div>
 
 
@@ -488,7 +488,7 @@
 
 
 <div class="description">
-    Añade un immueble como favoritos al usuario
+    Afegeix l'immoble a favorits.
 </div>
 
 
@@ -635,7 +635,7 @@
     
 
     
-    <h4 class="name" id="addUser"><span class="type-signature"></span>addUser<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addUser"><span class="type-signature"></span>addUser<span class="signature">(user)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -761,6 +761,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -780,7 +798,7 @@
 
 
 <div class="description">
-    Añade un mensaje de fallo a la busqueda de inmuebles
+    Afegeix un missatge de fallada a la cerca d'immobles.
 </div>
 
 
@@ -873,7 +891,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line689">line 689</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line647">line 647</a>
     </li></ul></dd>
     
 
@@ -927,7 +945,7 @@
     
 
     
-    <h4 class="name" id="busquedaOk"><span class="type-signature"></span>busquedaOk<span class="signature">(mensaje)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="busquedaOk"><span class="type-signature"></span>busquedaOk<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -935,7 +953,7 @@
 
 
 <div class="description">
-    Añade un mensaje de OK a la busqueda de inmuebles
+    Mostra el missatge de cerca.
 </div>
 
 
@@ -944,55 +962,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>mensaje</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -1028,7 +997,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line700">line 700</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line657">line 657</a>
     </li></ul></dd>
     
 
@@ -1090,7 +1059,7 @@
 
 
 <div class="description">
-    Control de busqueda, busca segun el tipo de busqueda y crea la paginacion.
+    Control de cerca. Cerca segons el tipus de cerca i crea la paginació.
 </div>
 
 
@@ -1183,7 +1152,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line606">line 606</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line617">line 617</a>
     </li></ul></dd>
     
 
@@ -1241,7 +1210,7 @@
     
 
     
-    <h4 class="name" id="calcularHipoteca"><span class="type-signature"></span>calcularHipoteca<span class="signature">(quantitat, anys)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="calcularHipoteca"><span class="type-signature"></span>calcularHipoteca<span class="signature">(quantitat, anys)</span><span class="type-signature"> &rarr; {array}</span></h4>
     
 
     
@@ -1249,7 +1218,7 @@
 
 
 <div class="description">
-    Calculo de hipoteca aplica un interes fijo del 5%
+    Càlcul d'hipoteca que aplica un interès fix del 5%.
 </div>
 
 
@@ -1301,7 +1270,7 @@
 
             
 
-            <td class="description last">Cantidad de dinero pedido</td>
+            <td class="description last">Quantitat de diners demanada.</td>
         </tr>
 
     
@@ -1324,7 +1293,7 @@
 
             
 
-            <td class="description last">Años para devolverlo</td>
+            <td class="description last">Anys per tornar-ho.</td>
         </tr>
 
     
@@ -1365,7 +1334,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line982">line 982</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line986">line 986</a>
     </li></ul></dd>
     
 
@@ -1393,6 +1362,10 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    Quota mensual i deute total del préstec.
+</div>
+
 
 
 <dl>
@@ -1401,7 +1374,7 @@
     </dt>
     <dd>
         
-<span class="param-type">number</span>
+<span class="param-type">array</span>
 
 
     </dd>
@@ -1427,7 +1400,7 @@
 
 
 <div class="description">
-    Carga lso detalles del immueble
+    Carrega els detalls de l'immoble.
 </div>
 
 
@@ -1471,7 +1444,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1005">line 1005</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1007">line 1007</a>
     </li></ul></dd>
     
 
@@ -1533,7 +1506,7 @@
 
 
 <div class="description">
-    Guarda los favoritos en el local storage si estamos logueados
+    Guarda els favorits a la memòria local si estem connectats.
 </div>
 
 
@@ -1577,7 +1550,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line764">line 764</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line745">line 745</a>
     </li></ul></dd>
     
 
@@ -1639,7 +1612,7 @@
 
 
 <div class="description">
-    Checkea si el usuario esta logeado
+    Comprova si l'usuari està loguejat.
 </div>
 
 
@@ -1683,7 +1656,344 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line126">line 126</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line121">line 121</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Verdader si està loguejat, fals si no ho està.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkLoginAndPassword"><span class="type-signature"></span>checkLoginAndPassword<span class="signature">(loginEmail, loginPassword)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Comprova si s'ha omplert el formulari d'inici de sessió.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>loginEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>loginPassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line109">line 109</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkToken"><span class="type-signature"></span>checkToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Permite comprobar el token del usuario
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Token del usuario</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_token.js.html">utils/token.js</a>, <a href="utils_token.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -1737,166 +2047,6 @@
     
 
     
-    <h4 class="name" id="checkLoginAndPassword"><span class="type-signature"></span>checkLoginAndPassword<span class="signature">(loginEmail, loginPassword)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Checkea si se ha rellenado el formulario de login
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>loginEmail</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>loginPassword</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line114">line 114</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="clearPaginacion"><span class="type-signature"></span>clearPaginacion<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
@@ -1905,7 +2055,7 @@
 
 
 <div class="description">
-    Limpia paginación
+    Neteja la paginació.
 </div>
 
 
@@ -1949,7 +2099,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line859">line 859</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line847">line 847</a>
     </li></ul></dd>
     
 
@@ -2011,7 +2161,7 @@
 
 
 <div class="description">
-    Controla el login
+    Controla si l'usuari ha iniciat sessió.
 </div>
 
 
@@ -2055,7 +2205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line720">line 720</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line679">line 679</a>
     </li></ul></dd>
     
 
@@ -2117,7 +2267,7 @@
 
 
 <div class="description">
-    Devuelve un boton para hacer login
+    Retorna un botó per iniciar sessió.
 </div>
 
 
@@ -2161,7 +2311,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line211">line 211</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line187">line 187</a>
     </li></ul></dd>
     
 
@@ -2227,7 +2377,7 @@
 
 
 <div class="description">
-    Devuelve un boton para hacer logout
+    Retorna un botó per fer tancament de sessió.
 </div>
 
 
@@ -2271,7 +2421,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line186">line 186</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -2329,7 +2479,7 @@
     
 
     
-    <h4 class="name" id="crearBotonUsuario"><span class="type-signature"></span>crearBotonUsuario<span class="signature">()</span><span class="type-signature"> &rarr; {button}</span></h4>
+    <h4 class="name" id="crearBotonUsuario"><span class="type-signature"></span>crearBotonUsuario<span class="signature">(usuario)</span><span class="type-signature"> &rarr; {HTMLButtonElement}</span></h4>
     
 
     
@@ -2337,7 +2487,7 @@
 
 
 <div class="description">
-    Devuelve un boton para acceder al dashboard
+    Retorna un botó per accedir al tauler de control.
 </div>
 
 
@@ -2346,6 +2496,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>usuario</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2381,7 +2580,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line238">line 238</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line215">line 215</a>
     </li></ul></dd>
     
 
@@ -2421,7 +2620,7 @@
     </dt>
     <dd>
         
-<span class="param-type">button</span>
+<span class="param-type">HTMLButtonElement</span>
 
 
     </dd>
@@ -2447,7 +2646,7 @@
 
 
 <div class="description">
-    Crea los elemento HTNML de inmueble para mostrar
+    Crea els elements HTML de l'immoble per mostrar.
 </div>
 
 
@@ -2499,7 +2698,7 @@
 
             
 
-            <td class="description last">Se pasa un inmueble como parametro</td>
+            <td class="description last">Es passa un immoble com a paràmetre.</td>
         </tr>
 
     
@@ -2522,7 +2721,7 @@
 
             
 
-            <td class="description last">Es un boleano  true si es del inidice, false si es detalle de inmueble</td>
+            <td class="description last">És un booleà, true si és de l'índex, false si és detall d'immoble.</td>
         </tr>
 
     
@@ -2563,7 +2762,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1209">line 1209</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1175">line 1175</a>
     </li></ul></dd>
     
 
@@ -2592,7 +2791,7 @@
 
         
 <div class="param-desc">
-    Retorna un elemento HTML
+    Retorna un element HTML.
 </div>
 
 
@@ -2629,7 +2828,7 @@
 
 
 <div class="description">
-    Pinta en HTML el resultado del calculo de la hipoteca
+    Pinta en HTML el resultat del càlcul de la hipoteca.
 </div>
 
 
@@ -2681,7 +2880,7 @@
 
             
 
-            <td class="description last">Resultado del calculo de la hipoteca [cuota, total]</td>
+            <td class="description last">Resultat del càlcul de la hipoteca [quota, total].</td>
         </tr>
 
     
@@ -2722,7 +2921,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1080">line 1080</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1064">line 1064</a>
     </li></ul></dd>
     
 
@@ -2784,7 +2983,7 @@
 
 
 <div class="description">
-    Crea la maquetación de calcular hipoteca
+    Fragment HTML amb la maquetació del formulari per al càlcul de la hipoteca.
 </div>
 
 
@@ -2828,7 +3027,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1116">line 1116</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1093">line 1093</a>
     </li></ul></dd>
     
 
@@ -2856,10 +3055,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    FragmentoHTML el cual tiene la maquetacion del formulario para el calculo de la hipoteca
-</div>
-
 
 
 <dl>
@@ -2894,7 +3089,7 @@
 
 
 <div class="description">
-    Crea la paginacion cogiendo el numero de paginas
+    Crea la paginació agafant el nombre de pàgines.
 </div>
 
 
@@ -2938,7 +3133,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line877">line 877</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line870">line 870</a>
     </li></ul></dd>
     
 
@@ -2992,6 +3187,324 @@
     
 
     
+    <h4 class="name" id="decodificaJWT"><span class="type-signature"></span>decodificaJWT<span class="signature">(token)</span><span class="type-signature"> &rarr; {Object|undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Codifica el token
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Token del usuario</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_token.js.html">utils/token.js</a>, <a href="utils_token.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="detalleInmueble"><span class="type-signature"></span>detalleInmueble<span class="signature">(inmobles, idImmoble)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    T'envia al detall de l'immoble seleccionat.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>inmobles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>idImmoble</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line964">line 964</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="dislikeCorazon"><span class="type-signature"></span>dislikeCorazon<span class="signature">(clases)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
@@ -3000,7 +3513,7 @@
 
 
 <div class="description">
-    Elimina la clase de corazon relleno y pone la vacia, Recibe como parametro una lista de clases del padre
+    Elimina la classe del cor verd i posa la buida. Rep com a paràmetre una llista de classes del pare.
 </div>
 
 
@@ -3093,7 +3606,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line808">line 808</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line795">line 795</a>
     </li></ul></dd>
     
 
@@ -3155,7 +3668,7 @@
 
 
 <div class="description">
-    Comprueba que el inmueble esta en favoritos
+    Comprova si l'immoble està als preferits.
 </div>
 
 
@@ -3248,7 +3761,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line783">line 783</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line771">line 771</a>
     </li></ul></dd>
     
 
@@ -3403,7 +3916,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line460">line 460</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line466">line 466</a>
     </li></ul></dd>
     
 
@@ -3457,12 +3970,16 @@
     
 
     
-    <h4 class="name" id="fillTablaUsuarios"><span class="type-signature"></span>fillTablaUsuarios<span class="signature">(usuaris)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="fillTablaUsuarios"><span class="type-signature"></span>fillTablaUsuarios<span class="signature">(usuaris)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Omple la tabla d'usuaris
+</div>
 
 
 
@@ -3503,7 +4020,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
             
@@ -3554,7 +4071,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line231">line 231</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line235">line 235</a>
     </li></ul></dd>
     
 
@@ -3579,6 +4096,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3642,7 +4177,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line557">line 557</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line569">line 569</a>
     </li></ul></dd>
     
 
@@ -3704,7 +4239,7 @@
 
 
 <div class="description">
-    Petición de todos los inmuebles disponibles
+    Fa una sol·licitud de tots els immobles de la base de dades.
 </div>
 
 
@@ -3756,7 +4291,7 @@
 
             
 
-            <td class="description last">Número de página</td>
+            <td class="description last">Nombre de pàgina</td>
         </tr>
 
     
@@ -3797,7 +4332,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line21">line 21</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -3826,7 +4361,7 @@
 
         
 <div class="param-desc">
-    inmobles
+    immobles
 </div>
 
 
@@ -3863,7 +4398,7 @@
 
 
 <div class="description">
-    Devuelve todos los inmuebles paginados
+    Fa una sol·licitud de tots els immobles de la base de dades.
 </div>
 
 
@@ -3956,7 +4491,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line47">line 47</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -4022,7 +4557,7 @@
 
 
 <div class="description">
-    Retorna la URL de l'aplicació
+    Distingeix si ens trobem en desenvolupament o producció.
 </div>
 
 
@@ -4095,7 +4630,7 @@
 
         
 <div class="param-desc">
-    La url de l'aplicació
+    Retorna la URL segons la fase en què ens trobem.
 </div>
 
 
@@ -4132,7 +4667,7 @@
 
 
 <div class="description">
-    Filtre d'inmobles per població
+    Filtre d'inmobles per població.
 </div>
 
 
@@ -4207,7 +4742,7 @@
 
             
 
-            <td class="description last">Número de página</td>
+            <td class="description last">Nombre de pàgina.</td>
         </tr>
 
     
@@ -4277,7 +4812,7 @@
 
         
 <div class="param-desc">
-    retorna un array d'inmobles
+    retorna un array d'inmobles.
 </div>
 
 
@@ -4314,7 +4849,7 @@
 
 
 <div class="description">
-    filtre d'inmobles per códi postal
+    filtre d'inmobles per códi postal.
 </div>
 
 
@@ -4389,7 +4924,7 @@
 
             
 
-            <td class="description last">Número de página</td>
+            <td class="description last">Nombre de pàgina.</td>
         </tr>
 
     
@@ -4430,7 +4965,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line121">line 121</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -4459,7 +4994,7 @@
 
         
 <div class="param-desc">
-    retorna un array d'inmobles
+    retorna un array d'inmobles.
 </div>
 
 
@@ -4488,7 +5023,7 @@
     
 
     
-    <h4 class="name" id="getLocalUser"><span class="type-signature"></span>getLocalUser<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getLocalUser"><span class="type-signature"></span>getLocalUser<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -4496,7 +5031,7 @@
 
 
 <div class="description">
-    Retorna el objeto usuario
+    Retorna l'objecte usuari
 </div>
 
 
@@ -4540,7 +5075,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line88">line 88</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -4574,6 +5109,18 @@
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
     
 
 
@@ -4594,7 +5141,7 @@
 
 
 <div class="description">
-    Petición de toda la lista de inmuebles de un usuario
+    Petició de tota la llista d'immobles favorits d'un usuari.
 </div>
 
 
@@ -4638,7 +5185,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line97">line 97</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -4748,7 +5295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line71">line 71</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -4806,12 +5353,16 @@
     
 
     
-    <h4 class="name" id="getUser"><span class="type-signature"></span>getUser<span class="signature">(rutaAPI, id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getUser"><span class="type-signature"></span>getUser<span class="signature">(rutaAPI, id)</span><span class="type-signature"> &rarr; {json}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Obte un usuari de base de dades
+</div>
 
 
 
@@ -4875,7 +5426,7 @@
             <td class="type">
             
                 
-<span class="param-type">Integer</span>
+<span class="param-type">int</span>
 
 
             
@@ -4926,7 +5477,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line68">line 68</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -4960,6 +5511,18 @@
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">json</span>
+
+
+    </dd>
+</dl>
+
     
 
 
@@ -4972,12 +5535,16 @@
     
 
     
-    <h4 class="name" id="getUsers"><span class="type-signature"></span>getUsers<span class="signature">()</span><span class="type-signature"> &rarr; {array}</span></h4>
+    <h4 class="name" id="getUsers"><span class="type-signature"></span>getUsers<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Llista d'usuaris registrats
+</div>
 
 
 
@@ -5020,7 +5587,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line141">line 141</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -5060,7 +5627,7 @@
     </dt>
     <dd>
         
-<span class="param-type">array</span>
+<span class="param-type">Array</span>
 
 
     </dd>
@@ -5086,7 +5653,7 @@
 
 
 <div class="description">
-    Devuelve el usuario que está logueado
+    Retorna l'usuari que està loguejat.
 </div>
 
 
@@ -5130,7 +5697,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line266">line 266</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line243">line 243</a>
     </li></ul></dd>
     
 
@@ -5159,7 +5726,7 @@
 
         
 <div class="param-desc">
-    usuario
+    usuari
 </div>
 
 
@@ -5188,7 +5755,7 @@
     
 
     
-    <h4 class="name" id="isUserAdmin"><span class="type-signature"></span>isUserAdmin<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="hideLoginError"><span class="type-signature"></span>hideLoginError<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -5196,7 +5763,7 @@
 
 
 <div class="description">
-    Diu si un usuari es administrador o no
+    Amaga o mostra el camp del missatge.
 </div>
 
 
@@ -5240,7 +5807,113 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line58">line 58</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line299">line 299</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isUserAdmin"><span class="type-signature"></span>isUserAdmin<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ens diu si un usuari es administrador o no
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -5302,7 +5975,7 @@
 
 
 <div class="description">
-    Retorna un usuario o un null
+    Retorna un usuari o un null segons estigui loguejat o no.
 </div>
 
 
@@ -5346,7 +6019,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line46">line 46</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -5424,7 +6097,7 @@
 
 
 <div class="description">
-    Elimina la clase de corazon vacia y pone la rellena, Recibe como parametro una lista de clases del padre
+    Elimina la classe del cor buit i posa la plena.
 </div>
 
 
@@ -5476,7 +6149,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Rebut com a paràmetre una llista de classes del pare.</td>
         </tr>
 
     
@@ -5517,7 +6190,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line819">line 819</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line806">line 806</a>
     </li></ul></dd>
     
 
@@ -5579,7 +6252,7 @@
 
 
 <div class="description">
-    Contiene un eventListener el cual comprueba que se haga click en un corazón y comprueba el estado del mismo, si tiene la clase liked es que le gusta al usuario y lo que hace es quitarle la clase y viceversa.
+    Conté un eventListener que verifica si es fa clic en un cor o no. Comprova l'estat del mateix, si té la classe liked és que agrada a l'usuari i el que fa és treure-li la classe i viceversa.
 </div>
 
 
@@ -5623,7 +6296,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line732">line 732</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line690">line 690</a>
     </li></ul></dd>
     
 
@@ -5677,12 +6350,16 @@
     
 
     
-    <h4 class="name" id="loginUser"><span class="type-signature"></span>loginUser<span class="signature">(rutaApi, email, pass)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="loginUser"><span class="type-signature"></span>loginUser<span class="signature">(rutaApi, email, pass)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Petició de login a l'endpoint
+</div>
 
 
 
@@ -5723,7 +6400,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">string</span>
 
 
             
@@ -5733,7 +6410,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">ruta de l'api</td>
         </tr>
 
     
@@ -5746,7 +6423,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">string</span>
 
 
             
@@ -5756,7 +6433,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">email de l'usuari</td>
         </tr>
 
     
@@ -5769,7 +6446,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">string</span>
 
 
             
@@ -5779,7 +6456,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">password de l'usuari</td>
         </tr>
 
     
@@ -5845,6 +6522,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -5856,7 +6551,7 @@
     
 
     
-    <h4 class="name" id="logout"><span class="type-signature"></span>logout<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="logout"><span class="type-signature"></span>logout<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -5864,7 +6559,10 @@
 
 
 <div class="description">
-    Desloguea al usuario
+    Desconnecta l'usuari i redirigeix-lo a l'índex.
+Elimina l'usuari del localStorage.
+Elimina la llista de favorits del localStorage.
+Elimina l'últim immoble visualitzat del localStorage.
 </div>
 
 
@@ -5908,7 +6606,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line276">line 276</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line254">line 254</a>
     </li></ul></dd>
     
 
@@ -5933,6 +6631,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -5952,7 +6668,7 @@
 
 
 <div class="description">
-    Añade un mensaje de error a la busqueda de inmuebles
+    Mostra un missatge d'error.
 </div>
 
 
@@ -6045,7 +6761,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line710">line 710</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line667">line 667</a>
     </li></ul></dd>
     
 
@@ -6107,7 +6823,7 @@
 
 
 <div class="description">
-    Activa el modal de login
+    Activa el modal d'inici de sessió.
 </div>
 
 
@@ -6151,7 +6867,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line798">line 798</a>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line785">line 785</a>
     </li></ul></dd>
     
 
@@ -6205,7 +6921,7 @@
     
 
     
-    <h4 class="name" id="modoLogueado"><span class="type-signature"></span>modoLogueado<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="modoLogueado"><span class="type-signature"></span>modoLogueado<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -6213,7 +6929,7 @@
 
 
 <div class="description">
-    Cambia el modo logeado nav
+    Canvia el mode de navegació si està loguejat.
 </div>
 
 
@@ -6257,7 +6973,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line143">line 143</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -6282,94 +6998,24 @@
 
 
 
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="modoLogueadoDashboard"><span class="type-signature"></span>modoLogueadoDashboard<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
 
 
-
-<div class="description">
-    Añade el nombre en el dashboard
-</div>
-
-
-
-
-
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
 
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line169">line 169</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -6381,7 +7027,7 @@
     
 
     
-    <h4 class="name" id="peticionLogin"><span class="type-signature"></span>peticionLogin<span class="signature">(dataUsuari)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="peticionLogin"><span class="type-signature"></span>peticionLogin<span class="signature">(dataUsuari)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -6389,7 +7035,7 @@
 
 
 <div class="description">
-    Petición login
+    Petició de login a l'endpoint.
 </div>
 
 
@@ -6431,7 +7077,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">json</span>
 
 
             
@@ -6441,7 +7087,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Dades de l'usuari</td>
         </tr>
 
     
@@ -6507,94 +7153,24 @@
 
 
 
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="peticionLogout"><span class="type-signature">(async) </span>peticionLogout<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
 
 
-
-<div class="description">
-    Petición logout usuario
-</div>
-
-
-
-
-
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
 
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line61">line 61</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -6606,7 +7182,7 @@
     
 
     
-    <h4 class="name" id="pintarInmuebles"><span class="type-signature"></span>pintarInmuebles<span class="signature">(inmuebles)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="peticionLogout"><span class="type-signature">(async) </span>peticionLogout<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -6614,7 +7190,7 @@
 
 
 <div class="description">
-    Crea y introduce el html de los inmuebles listados por la bbdd
+    Petició de tancament de sessió a l'endpoint.
 </div>
 
 
@@ -6623,55 +7199,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>inmuebles</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Se le pasa un array de inmuebles</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -6707,7 +7234,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line633">line 633</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -6761,12 +7288,171 @@
     
 
     
-    <h4 class="name" id="registerUser"><span class="type-signature"></span>registerUser<span class="signature">(rutaAPI, datos)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="pintarInmuebles"><span class="type-signature"></span>pintarInmuebles<span class="signature">(inmuebles)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Crea i insereix l'HTML dels immobles llistats per la base de dades.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>inmuebles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Se li passa un array d'immobles.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="inmoble.js.html">inmoble.js</a>, <a href="inmoble.js.html#line1288">line 1288</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="registerUser"><span class="type-signature"></span>registerUser<span class="signature">(rutaAPI, datausuari)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Envia la petició de registre a l'endpoint.
+</div>
 
 
 
@@ -6817,20 +7503,20 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">url del endpoint</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>datos</code></td>
+                <td class="name"><code>datausuari</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
             
@@ -6840,7 +7526,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">dades de l'usuari</td>
         </tr>
 
     
@@ -6881,7 +7567,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line100">line 100</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -6906,6 +7592,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -6925,7 +7629,7 @@
 
 
 <div class="description">
-    Elimina un inmueble de un usuario, de la base de datos
+    Elimina un immoble com administrador.
 </div>
 
 
@@ -7103,7 +7807,7 @@
 
 
 <div class="description">
-    Elimina un inmueble de la base de datos
+    Elimina un immoble.
 </div>
 
 
@@ -7258,7 +7962,7 @@
 
 
 <div class="description">
-    Elimina un immueble de favoritos al usuario
+    Elimina un immoble de la llista de favorits.
 </div>
 
 
@@ -7405,7 +8109,7 @@
     
 
     
-    <h4 class="name" id="removeUser"><span class="type-signature"></span>removeUser<span class="signature">(id_usuari)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="removeUser"><span class="type-signature"></span>removeUser<span class="signature">(id_usuari)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -7506,7 +8210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line159">line 159</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -7531,6 +8235,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -7542,12 +8264,16 @@
     
 
     
-    <h4 class="name" id="renderizaFragmento"><span class="type-signature"></span>renderizaFragmento<span class="signature">(destinoInyeccion, rutaHtml)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="renderizaFragmento"><span class="type-signature"></span>renderizaFragmento<span class="signature">(destinoInyeccion, rutaHtml)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Permite inyectar codigo html en diferentes partes de la aplicaicón
+</div>
 
 
 
@@ -7588,7 +8314,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">String</span>
 
 
             
@@ -7611,7 +8337,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">String</span>
 
 
             
@@ -7662,7 +8388,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_modularizacionHtml.js.html">utils/modularizacionHtml.js</a>, <a href="utils_modularizacionHtml.js.html#line7">line 7</a>
+        <a href="utils_modularizacionHtml.js.html">utils/modularizacionHtml.js</a>, <a href="utils_modularizacionHtml.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -7687,6 +8413,130 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showLoginError"><span class="type-signature"></span>showLoginError<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mostra el missatge d'error en cas de fallar en l'inici de sessió.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line290">line 290</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -7706,7 +8556,7 @@
 
 
 <div class="description">
-    Actualiza un inmueble como usuario registrado
+    Actualizació de l'immoble.
 </div>
 
 
@@ -7884,7 +8734,7 @@
 
 
 <div class="description">
-    Actualiza un inmueble como usuario administrador
+    Actualització de l'immoble per l'administrador.
 </div>
 
 
@@ -8054,7 +8904,7 @@
     
 
     
-    <h4 class="name" id="updateUser"><span class="type-signature"></span>updateUser<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="updateUser"><span class="type-signature"></span>updateUser<span class="signature">(rutaAPI, id, token, user)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -8094,6 +8944,75 @@
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rutaAPI</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
     
 
         <tr>
@@ -8155,7 +9074,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="users.js.html">users.js</a>, <a href="users.js.html#line202">line 202</a>
+        <a href="users.js.html">users.js</a>, <a href="users.js.html#line207">line 207</a>
     </li></ul></dd>
     
 
@@ -8180,6 +9099,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -8191,7 +9128,7 @@
     
 
     
-    <h4 class="name" id="userLogin"><span class="type-signature"></span>userLogin<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="userLogin"><span class="type-signature"></span>userLogin<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -8199,7 +9136,7 @@
 
 
 <div class="description">
-    Login usuario
+    Inici de sessió de l'usuari, controla la correcció de les dades.
 </div>
 
 
@@ -8243,7 +9180,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="login.js.html">login.js</a>, <a href="login.js.html#line84">line 84</a>
+        <a href="login.js.html">login.js</a>, <a href="login.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -8268,6 +9205,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -8289,13 +9244,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#checkToken">checkToken</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#decodificaJWT">decodificaJWT</a></li><li><a href="global.html#detalleInmueble">detalleInmueble</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#hideLoginError">hideLoginError</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#showLoginError">showLoginError</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 21:06:35 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

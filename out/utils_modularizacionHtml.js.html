@@ -28,9 +28,10 @@
         <article>
             <pre class="prettyprint source linenums"><code>
 /**
- * 
- * @param {*} destinoInyeccion  Donde queremos insertar el snippet 
- * @param {*} rutaHtml El snippet en si que es un codigo html en un archivo pasar la ruta del snippet ej "/aviso"
+ * @description Permite inyectar codigo html en diferentes partes de la aplicaicón
+ * @param {String} destinoInyeccion  Donde queremos insertar el snippet
+ * @param {String} rutaHtml El snippet en si que es un codigo html en un archivo pasar la ruta del snippet ej "/aviso"
+ * @returns {void}
  */
 export async function renderizaFragmento(destinoInyeccion, rutaHtml) {
     const inyectarHTML = document.querySelector(destinoInyeccion);
@@ -53,37 +54,7 @@ export async function renderizaFragmento(destinoInyeccion, rutaHtml) {
             });
         })
         .catch(error => console.error("Error en el renderizado", error));
-}
-
-// TODO  MENSAJE DEL MODAL DINÁMICO
-/*
-export function renderizaModal(destinoInyeccion, rutaHtml, message) {
-    const inyectarHTML = document.querySelector(destinoInyeccion);
-
-    
-   
-
-    fetch(rutaHtml)
-        .then(resp => resp.text())
-        .then(data => {
-            inyectarHTML.innerHTML = data;
-
-            // Convierte texto en elementos html
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
-
-            // Busca y ejecuta los scripts si existen
-            const scripts = doc.querySelectorAll('script');
-            scripts.forEach(script => {
-                const nuevoScript = document.createElement('script');
-                nuevoScript.textContent = script.textContent;
-                document.body.appendChild(nuevoScript);
-               
-            });
-        })
-        .catch(error => console.error("Error en el renderizado", error));
-}
-*/</code></pre>
+}</code></pre>
         </article>
     </section>
 
@@ -93,13 +64,13 @@ export function renderizaModal(destinoInyeccion, rutaHtml, message) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#checkToken">checkToken</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#decodificaJWT">decodificaJWT</a></li><li><a href="global.html#detalleInmueble">detalleInmueble</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#hideLoginError">hideLoginError</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#showLoginError">showLoginError</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 21:06:35 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

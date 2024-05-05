@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utils.js</title>
+    <title>JSDoc: Source: registre.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utils.js</h1>
+    <h1 class="page-title">Source: registre.js</h1>
 
     
 
@@ -26,19 +26,84 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @description Distingeix si ens trobem en desenvolupament o producció.
- * @returns {string} Retorna la URL segons la fase en què ens trobem.
+            <pre class="prettyprint source linenums"><code>import { getApiURL } from "./utils.js";
+import {peticionLogin } from "./login.js"
+
+
+const url = getApiURL();
+  
+/**
+ *  @description Maquetació del registre d'usuari
+ *  @returns {void}
  */
-export function getApiURL(){
-    if (window.location.hostname == "localhost" || window.location.hostname == "127.0.0.1" ) {
-        console.log('DEV');
-        return "http://"+window.location.hostname+":3333";
-    } else {
-        console.log('LIVE');
-        return "https://"+window.location.hostname+":3333";
-    }
-}</code></pre>
+document.onload = () => {console.log("cargado Registre.js")}
+  const formularioRegistro = document.getElementById("registre-formulari-dades");
+  const btnRegistre = document.getElementById("btnRegistre");
+  const messageModal = document.getElementById("message-modal");
+
+/**
+ * @description Listener para el formulario de registro, al modificar el formulario
+ * @returns {void}
+ */
+formularioRegistro.addEventListener('change', ()=>{
+
+      let nom =  document.getElementById("nom").value;
+      let cognoms = document.getElementById("cognoms").value;
+      let email = document.getElementById("email").value;
+      let contrasenya = document.getElementById("contrasenya").value;
+
+      if(nom != "" &amp;&amp; cognoms != "" &amp;&amp; email != "" &amp;&amp; contrasenya!= ""){
+        btnRegistre.classList.remove("disabled");
+      }else{
+        btnRegistre.classList.add("disabled");
+      }
+})
+  let errorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
+  let confMssg = "Registre amb èxit!";
+
+  console.log("dentro de registro");
+
+/**
+ * @description Listener para el formulario de registro, al enviar el formulario
+ * @returns {void}
+ */
+  formularioRegistro.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    const formData = new FormData(formularioRegistro);
+    //console.log(formData)
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    const usuariologin = {"Email":data.Email, "Contrasenya":data.Contrasenya}
+
+    fetch(url + "/app/registre", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      credentials: "include"
+    })
+    .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "S'ha produït un error en registrar. Si us plau, torneu-ho a provar."
+          );
+        }
+        // return response.json();
+      })
+      .then((data) => {
+        console.log("Registro correcto:", data);
+          peticionLogin(usuariologin);
+      })
+      .catch((error) => {
+        console.error("Error en el registro:", error.message);
+      });
+  });
+
+</code></pre>
         </article>
     </section>
 
