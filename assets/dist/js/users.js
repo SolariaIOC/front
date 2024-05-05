@@ -137,7 +137,12 @@ export function registerUser(rutaAPI, datausuari) {
  * @returns {Array} usuaris
  */
 export async function getUsers() {
-  return await fetch(getApiURL() + "/app/")
+  return await fetch(getApiURL() + "/app/", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((resp) => {
       if (!resp.ok) {
         throw new Error("S'ha produït un error al servidor.");
