@@ -23,16 +23,16 @@ export async function getAllInmobles(pag = 1) {
     },
     credentials: "include",
   })
-    .then((resp) => resp.json())
-    .then((data) => {
-      localStorage.removeItem('tipoDeBusqueda')
-      localStorage.removeItem('paginacion')
-      localStorage.setItem('tipoDeBusqueda', 'all')
-      localStorage.setItem('paginacion', JSON.stringify(data.pagination))
-      data.results.forEach(async (element) => {
-        inmobles.push(await element);
+      .then((resp) => resp.json())
+      .then((data) => {
+        localStorage.removeItem('tipoDeBusqueda')
+        localStorage.removeItem('paginacion')
+        localStorage.setItem('tipoDeBusqueda', 'all')
+        localStorage.setItem('paginacion', JSON.stringify(data.pagination))
+        data.results.forEach(async (element) => {
+          inmobles.push(await element);
+        });
       });
-    });
   return inmobles;
 }
 
@@ -43,8 +43,8 @@ export async function getAllInmobles(pag = 1) {
  */
 export async function getAllInmoblesInformation(pag = 1) {
 
-    if (pag === undefined) {
-        console.log("No se ha pasado una página");
+  if (pag === undefined) {
+    console.log("No se ha pasado una página");
   }
 
   return await fetch(url + "/immobles/?page="+pag, {
@@ -66,7 +66,7 @@ export async function getAllInmoblesInformation(pag = 1) {
  * @returns {Array} Devuelve todos los inmuebles de un usuario
  */
 export async function getMyInmobles() {
-  
+
   meuInmobles = [];
 
   await fetch(url + "/immobles/r", {
@@ -75,15 +75,15 @@ export async function getMyInmobles() {
       "Content-Type": "application/json",
     },
   })
-  .then((resp) => resp.json())
-  .then((data) => {
-    console.log("getMyInmobles: ");
-    console.log(data);
-    meuInmobles = data;
-  })
-  .catch((error) => {
-    console.error("Error:", error.message);
-  });
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("getMyInmobles: ");
+        console.log(data);
+        meuInmobles = data;
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
   return meuInmobles;
 }
 
@@ -127,26 +127,26 @@ export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
     },
     credentials: "include",
   })
-  .then((response) => {
-    if (!response.ok) {
-      busquedaFail("No s'han trobat immobles amb aquest codi postal.");
-      throw new Error('Error en la solicitud');
-    }
-    return response.json();
-  })
-  .then((json) => {
-    busquedaOk();
-    localStorage.removeItem('tipoDeBusqueda')
-    localStorage.removeItem('paginacion')
-      localStorage.setItem('tipoDeBusqueda', 'codiPostal')
-      localStorage.setItem('paginacion', JSON.stringify(json.pagination))
-      return (inmobles = json.results);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-   
-    return inmobles = [];
-  });
+      .then((response) => {
+        if (!response.ok) {
+          busquedaFail("No s'han trobat immobles amb aquest codi postal.");
+          throw new Error('Error en la solicitud');
+        }
+        return response.json();
+      })
+      .then((json) => {
+        busquedaOk();
+        localStorage.removeItem('tipoDeBusqueda')
+        localStorage.removeItem('paginacion')
+        localStorage.setItem('tipoDeBusqueda', 'codiPostal')
+        localStorage.setItem('paginacion', JSON.stringify(json.pagination))
+        return (inmobles = json.results);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+
+        return inmobles = [];
+      });
 
   return inmobles;
 }
@@ -163,32 +163,32 @@ export async function getInmoblePerPoblacio(poblacio, pag = 1) {
     headers: {
       "Content-Type": "application/json",
     },
- 
+
     credentials: "include"
   })
-  .then((response) => {
-    if (!response.ok) {
-      busquedaFail("No s'han trobat immobles en aquesta població.");
-      throw new Error('Error en la solicitud');
-    
-    }
-    return response.json();
-  })
-  .then((json) => {
-    inmobles = json.results;
-      busquedaOk();
-      localStorage.removeItem('tipoDeBusqueda')
-      localStorage.removeItem('paginacion')
-      localStorage.setItem('tipoDeBusqueda', 'poblacio')
-      localStorage.setItem('paginacion', JSON.stringify(json.pagination))
- 
-    return inmobles;
-  })
-  .catch((error) => {
-    console.error('Error:', error);
- 
-    inmobles = [];
-  });
+      .then((response) => {
+        if (!response.ok) {
+          busquedaFail("No s'han trobat immobles en aquesta població.");
+          throw new Error('Error en la solicitud');
+
+        }
+        return response.json();
+      })
+      .then((json) => {
+        inmobles = json.results;
+        busquedaOk();
+        localStorage.removeItem('tipoDeBusqueda')
+        localStorage.removeItem('paginacion')
+        localStorage.setItem('tipoDeBusqueda', 'poblacio')
+        localStorage.setItem('paginacion', JSON.stringify(json.pagination))
+
+        return inmobles;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+
+        inmobles = [];
+      });
 
   return inmobles;
 }
@@ -207,20 +207,20 @@ export async function addInmoble(inmoble) {
     },
     body: JSON.stringify(inmoble),
   })
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (data.hasOwnProperty("error")) {
-        console.log("ERROR");
-        console.log(JSON.stringify(data));
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.hasOwnProperty("error")) {
+          console.log("ERROR");
+          console.log(JSON.stringify(data));
+          alert("No s'ha pogut crear correctament el immoble");
+        }
+        alert("Immoble registrat correctament.");
+        window.location.assign("/dashboard.html");
+      })
+      .catch((error) => {
+        console.error("Error en el registro de inmueble:", error.message);
         alert("No s'ha pogut crear correctament el immoble");
-      }
-      alert("Immoble registrat correctament.");
-      window.location.assign("/dashboard.html");
-    })
-    .catch((error) => {
-      console.error("Error en el registro de inmueble:", error.message);
-      alert("No s'ha pogut crear correctament el immoble");
-    });
+      });
 }
 
 /**
@@ -230,7 +230,7 @@ export async function addInmoble(inmoble) {
  */
 export async function addInmobleAdmin(inmoble) {
   await fetch(url + "/immobles/a/afegirUsuariImmoble", {
-      method: "POST",
+    method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -261,17 +261,17 @@ export async function addInmobleAdmin(inmoble) {
  */
 export async function removeImmobleAdmin(id_immoble, id_usuari) {
   return await fetch(
-    url + "/immobles/a/eliminarImmoble/" + id_immoble + "/" + id_usuari,
-    {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+      url + "/immobles/a/eliminarImmoble/" + id_immoble + "/" + id_usuari,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
   )
-    .then((resp) => resp.json())
-    .then((json) => !json.hasOwnProperty("error"));
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
 }
 
 /**
@@ -281,14 +281,14 @@ export async function removeImmobleAdmin(id_immoble, id_usuari) {
  */
 export async function removeInmoble(id_immoble) {
   return await fetch(url + "/immobles/r/eliminar/" + id_immoble, {
-      method: "DELETE",
+    method: "DELETE",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
   })
-    .then((resp) => resp.json())
-    .then((json) => !json.hasOwnProperty("error"));
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
 }
 
 /*************/
@@ -311,10 +311,10 @@ export async function addInmobleFavorir(id_immoble) {
     body: JSON.stringify({ 'id_immoble': id_immoble }),
   })
       .then((resp) => resp.json())
-    .then((json) => !json.hasOwnProperty("error"))
-    .catch((error) => {
-      console.error("Error al afegir un immoble", error.message);
-    });
+      .then((json) => !json.hasOwnProperty("error"))
+      .catch((error) => {
+        console.error("Error al afegir un immoble", error.message);
+      });
 }
 
 /**
@@ -324,7 +324,7 @@ export async function addInmobleFavorir(id_immoble) {
  */
 export async function removeInmobleFav(id_immoble) {
   return await fetch(url + "/eliminarImmobleFavorit", {
-      method: "DELETE",
+    method: "DELETE",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -342,7 +342,7 @@ export async function removeInmobleFav(id_immoble) {
  * @returns {void}
  */
 export async function updateInmoble(inmoble, id_immoble) {
-    await fetch(url + "/immobles/r/actualitzar/" + id_immoble, {
+  await fetch(url + "/immobles/r/actualitzar/" + id_immoble, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -350,29 +350,29 @@ export async function updateInmoble(inmoble, id_immoble) {
     },
     body: JSON.stringify(inmoble),
   })
-    .then((response) => {
-      let error = true;
+      .then((response) => {
+        let error = true;
 
-      if (response.ok === true) {
-        let data = response.json();
-        if (!data.hasOwnProperty("error")) {
-          error = false;
-          alert("Immoble actualitzat correctament!");
-          window.location.hash = "immobles";
-          window.location.reload();
+        if (response.ok === true) {
+          let data = response.json();
+          if (!data.hasOwnProperty("error")) {
+            error = false;
+            alert("Immoble actualitzat correctament!");
+            window.location.hash = "immobles";
+            window.location.reload();
+          }
         }
-      }
 
-      if (error) {
-        alert("No s'ha pogut actualitzar correctament el immoble");
-        console.log("Response: ");
-        console.log(response);
-      }
-    })
-    .catch((error) => {
-      console.error("Error en la modificación de inmueble:", error.message);
-      return false;
-    });
+        if (error) {
+          alert("No s'ha pogut actualitzar correctament el immoble");
+          console.log("Response: ");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error en la modificación de inmueble:", error.message);
+        return false;
+      });
 }
 
 /**
@@ -382,7 +382,7 @@ export async function updateInmoble(inmoble, id_immoble) {
  * @returns {void}
  */
 export async function updateInmobleAdmin(inmoble, id_immoble) {
-    await fetch(url + "/immobles/a/actualitzar/" + id_immoble, {
+  await fetch(url + "/immobles/a/actualitzar/" + id_immoble, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -492,8 +492,8 @@ export function fillTablaInmobles(inmobles) {
 
     let tdCodi_Postal = document.createElement("td");
     tdCodi_Postal.setAttribute(
-      "Codi_Postal",
-      "Codi_Postal-" + inmoble.Codi_Postal
+        "Codi_Postal",
+        "Codi_Postal-" + inmoble.Codi_Postal
     );
     tdCodi_Postal.textContent = inmoble.Codi_Postal;
 
@@ -510,8 +510,8 @@ export function fillTablaInmobles(inmobles) {
     tdPreu.textContent = inmoble.Preu;
 
     let tdImatge = document.createElement("td");
-    tdImatge.setAttribute("Imatge", "Imatge-" + inmoble.image);
-    tdImatge.textContent = inmoble.image;
+    tdImatge.setAttribute("Imatge", "Imatge-" + inmoble.Imatge);
+    tdImatge.textContent = inmoble.Imatge;
 
     let tdDeleteInmoble = document.createElement("td");
     let tdButton = document.createElement("button");
@@ -554,12 +554,12 @@ document.addEventListener('click' , async (evento)=>{
   if(evento.target.id  == 'ver-todos-inmuebles'){
     localStorage.removeItem('valorBusqueda')
     localStorage.removeItem('tipoBusqueda')
-   
+
     busquedaPorTipo('all');
     clearPaginacion();
   }
 
-  })
+})
 /*********************************************************************/
 
 /**
@@ -568,7 +568,7 @@ document.addEventListener('click' , async (evento)=>{
  */
 export async function formularioBusquedaInmuebles(){
   //console.log("DENTRO DE FORMULARIO BUSQUEDA");
-   let mensaje;
+  let mensaje;
 
   const formularioBusquedaInmuebleElemento = document.getElementById('formulario-busqueda-inmuebles');
 
@@ -587,7 +587,7 @@ export async function formularioBusquedaInmuebles(){
     localStorage.setItem('tipoBusqueda',tipoBusqueda );
 
     if(valorBusqueda == ""){
-       mensaje = "Ha de seleccionar un tipus de cerca una."
+      mensaje = "Ha de seleccionar un tipus de cerca una."
       mensajeBusquedaError(mensaje);
     }
 
@@ -604,7 +604,7 @@ export async function formularioBusquedaInmuebles(){
     if(valorBusqueda){
       busquedaPorTipo(tipoBusqueda, valorBusqueda);
     }
- 
+
     evento.originalTarget[0].value = "";
   });
 }
@@ -616,20 +616,20 @@ export async function formularioBusquedaInmuebles(){
  */
 export async function busquedaPorTipo(pagina){
   let tipoBusqueda = localStorage.getItem('tipoBusqueda');
-    let valorBusqueda = localStorage.getItem('valorBusqueda');
+  let valorBusqueda = localStorage.getItem('valorBusqueda');
   let inmuebles = new Array();
 
-    switch(tipoBusqueda){
-      case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda, pagina);
+  switch(tipoBusqueda){
+    case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda, pagina);
       clearPaginacion();
       break;
-      case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda, pagina);
+    case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda, pagina);
       clearPaginacion();
       break;
-      default :inmuebles = await getAllInmobles(pagina);
+    default :inmuebles = await getAllInmobles(pagina);
       break;
-    }
-  
+  }
+
   await pintarInmuebles( inmuebles);
   crearPaginacion();
 
@@ -639,39 +639,39 @@ export async function busquedaPorTipo(pagina){
 /*********************************************************************/
 /* MENSAJES BUSQUEDAS */
 
- /**
-  * @description Afegeix un missatge de fallada a la cerca d'immobles.
-  * @param {string} mensaje
-  * @returns {void}
-  */
- function busquedaFail(mensaje){
-  const busquedaMensaje = document.getElementById('busqueda-mensaje');
-     busquedaMensaje.classList.remove('visually-hidden');
-  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
- }
-
- /**
-  * @description Mostra el missatge de cerca.
-  * @returns {void}
-  */
- function busquedaOk(){
-  const busquedaMensaje = document.getElementById('busqueda-mensaje');
-     busquedaMensaje.classList.add('visually-hidden');
- }
-
- /**
-  * @description Mostra un missatge d'error.
-  * @param {string} mensaje
-  * @returns {void}
-  */
- function mensajeBusquedaError(mensaje){
+/**
+ * @description Afegeix un missatge de fallada a la cerca d'immobles.
+ * @param {string} mensaje
+ * @returns {void}
+ */
+function busquedaFail(mensaje){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
   busquedaMensaje.classList.remove('visually-hidden');
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
- }
+}
 
- /*********************************************************************/
- /*                         CONTROL DE USUARIO                        */
+/**
+ * @description Mostra el missatge de cerca.
+ * @returns {void}
+ */
+function busquedaOk(){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.add('visually-hidden');
+}
+
+/**
+ * @description Mostra un missatge d'error.
+ * @param {string} mensaje
+ * @returns {void}
+ */
+function mensajeBusquedaError(mensaje){
+  const busquedaMensaje = document.getElementById('busqueda-mensaje');
+  busquedaMensaje.classList.remove('visually-hidden');
+  busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
+}
+
+/*********************************************************************/
+/*                         CONTROL DE USUARIO                        */
 /**
  * @description Controla si l'usuari ha iniciat sessió.
  * @returns {void}
@@ -686,7 +686,7 @@ export function controlLogin() {
 /**
  * @description Conté un eventListener que verifica si es fa clic en un cor o no. Comprova l'estat del mateix, si té la classe liked és que agrada a l'usuari i el que fa és treure-li la classe i viceversa.
  * @returns {void}
-*/
+ */
 export function likeInmueble() {
 // carga los favoritos
 
@@ -719,7 +719,7 @@ export function likeInmueble() {
           likeCorazon(clases);
           cargarFavoritos();
 
-      } else {
+        } else {
 
           await removeInmobleFav(elemento.target.offsetParent.id);
           dislikeCorazon(clases);
@@ -748,16 +748,19 @@ export async function cargarFavoritos(){
 
   let favoritos = await getMyFavInmobles();
 
-  let favoritosArray = new Array();
+  let favoritosArray = [];
 
-    if (checkLog() &&  favoritos) {
+  if (checkLog() &&  favoritos) {
 
-  favoritos.forEach( e => {
-          favoritosArray.push(e.id_immoble)     
-    })
+    console.log('FAVORITOS');
+    console.log(favoritos);
+
+    favoritos.forEach( e => {
+      favoritosArray.push(e.id_immoble)
+    });
 
     localStorage.setItem('favoritos', favoritosArray);
-    }
+  }
 }
 
 /**
@@ -770,7 +773,7 @@ function esFavorito(id_immoble ){
   let id_immobleString = id_immoble.toString();
   let favoritos;
   if(localStorage.getItem('favoritos')){
-      favoritos = localStorage.getItem('favoritos').split(',');
+    favoritos = localStorage.getItem('favoritos').split(',');
   }
   return  favoritos !=  undefined ? favoritos.includes(id_immobleString) :  false
 }
@@ -781,9 +784,9 @@ function esFavorito(id_immoble ){
  */
 function modalShow() {
   let modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
- modal.show();
+  modal.show();
 }
- 
+
 /**
  * @description Elimina la classe del cor verd i posa la buida. Rep com a paràmetre una llista de classes del pare.
  * @param {Array} clases
@@ -791,10 +794,10 @@ function modalShow() {
  */
 function dislikeCorazon(clases) {
   //console.log("dislike");
-   clases.remove("fa-heart");
-   clases.add("fa-heart-o");
+  clases.remove("fa-heart");
+  clases.add("fa-heart-o");
 }
- 
+
 /**
  * @description Elimina la classe del cor buit i posa la plena.
  * @param {Array} clases Rebut com a paràmetre una llista de classes del pare.
@@ -802,8 +805,8 @@ function dislikeCorazon(clases) {
  */
 function likeCorazon(clases) {
   //console.log("like");
-   clases.remove("fa-heart-o");
-   clases.add("fa-heart");
+  clases.remove("fa-heart-o");
+  clases.add("fa-heart");
 }
 
 /*********************************************************************/
@@ -813,29 +816,29 @@ function likeCorazon(clases) {
  * @description Listener para clicks de numero de pagina en la paginación
  * @returns {void}
  */
-  document.addEventListener("click", (evento) => {
+document.addEventListener("click", (evento) => {
 
 
-    console.log("PAGINACION ACTIVO O NO");
-     console.log(evento.target);
-    let raiz = evento.target.parentElement.parentElement.parentElement.id;
-    console.log(raiz);
-    if(raiz == 'paginacion'){
-      let pagina = evento.target.parentElement.id;
-      let paginas = evento.target.parentElement.parentElement.children.length;
-      if(paginas){
-        for(let i=0; i <paginas; i++){
-          console.log(          evento.target.parentElement.parentElement.children[i].classList
-          )
-            evento.target.parentElement.parentElement.children[i].classList.remove('active')
-         }
-         evento.target.parentElement.classList.add("active");
-        
+  console.log("PAGINACION ACTIVO O NO");
+  console.log(evento.target);
+  let raiz = evento.target.parentElement.parentElement.parentElement.id;
+  console.log(raiz);
+  if(raiz == 'paginacion'){
+    let pagina = evento.target.parentElement.id;
+    let paginas = evento.target.parentElement.parentElement.children.length;
+    if(paginas){
+      for(let i=0; i <paginas; i++){
+        console.log(          evento.target.parentElement.parentElement.children[i].classList
+        )
+        evento.target.parentElement.parentElement.children[i].classList.remove('active')
       }
-      busquedaPorTipo(pagina)
-    }
+      evento.target.parentElement.classList.add("active");
 
-  });
+    }
+    busquedaPorTipo(pagina)
+  }
+
+});
 
 /**
  * @description Neteja la paginació.
@@ -846,18 +849,18 @@ function clearPaginacion(){
   //console.log('PaGINACION CLEAR')
   //console.log(paginacionPadre);
 
-    //Limpia la paginación
-    if (paginacionPadre.children) {
-      while (paginacionPadre.firstChild) {
-        paginacionPadre.firstChild.remove();
+  //Limpia la paginación
+  if (paginacionPadre.children) {
+    while (paginacionPadre.firstChild) {
+      paginacionPadre.firstChild.remove();
     }}
-/*
- let cantidadDePaginas = paginacionPadre.firstChild.children.length
- for(let i=0; i <cantidadDePaginas; i++){
-  paginacionPadre.firstChild.children[i].classList.remove('active')
- }
-  paginacionPadre.firstChild.firstChild.classList.add("active");
-  */
+  /*
+   let cantidadDePaginas = paginacionPadre.firstChild.children.length
+   for(let i=0; i <cantidadDePaginas; i++){
+    paginacionPadre.firstChild.children[i].classList.remove('active')
+   }
+    paginacionPadre.firstChild.firstChild.classList.add("active");
+    */
 }
 
 /**
@@ -874,52 +877,52 @@ export function crearPaginacion() {
   console.log('DATOS PAG')
   console.log()
 
-if(paginacionDatos.currentPage == 1){
+  if(paginacionDatos.currentPage == 1){
 
-  const navegacionPaginasSel = document.getElementById('navegadorPaginas')
+    const navegacionPaginasSel = document.getElementById('navegadorPaginas')
 
 
-pagina.classList.add(
-  'container',
-  "d-flex",
-  "justify-content-end",
-  'my-3'
-)
+    pagina.classList.add(
+        'container',
+        "d-flex",
+        "justify-content-end",
+        'my-3'
+    )
 
-  if(paginacionDatos.totalPages > 1 && pagina.children.length == 0){
-  
-  navegacionPaginas.setAttribute("aria-label", "...");
-  navegacionPaginas.setAttribute('id', 'navegadorPaginas')
+    if(paginacionDatos.totalPages > 1 && pagina.children.length == 0){
 
-  contenedorPaginas.classList.add(
-    "col-3",
-    "d-flex",
-    "justify-content-end",
-    "align-items-center",
-    "pagination",
-   
-  );
+      navegacionPaginas.setAttribute("aria-label", "...");
+      navegacionPaginas.setAttribute('id', 'navegadorPaginas')
 
-  for (let i = 1; i < paginacionDatos.totalPages + 1; i++) {
-    let pagina = document.createElement("li");
-    pagina.classList.add("page-item");
-    pagina.setAttribute('id', i)
-    i == 1 ? pagina.classList.add("active") : pagina.classList.remove("active") 
-    let a = document.createElement("a");
-    a.classList.add("p-3", "page-link");
-    a.textContent = i;
+      contenedorPaginas.classList.add(
+          "col-3",
+          "d-flex",
+          "justify-content-end",
+          "align-items-center",
+          "pagination",
 
-    pagina.appendChild(a);
-    contenedorPaginas.appendChild(pagina);
+      );
 
+      for (let i = 1; i < paginacionDatos.totalPages + 1; i++) {
+        let pagina = document.createElement("li");
+        pagina.classList.add("page-item");
+        pagina.setAttribute('id', i)
+        i == 1 ? pagina.classList.add("active") : pagina.classList.remove("active")
+        let a = document.createElement("a");
+        a.classList.add("p-3", "page-link");
+        a.textContent = i;
+
+        pagina.appendChild(a);
+        contenedorPaginas.appendChild(pagina);
+
+      }
+
+      pagina.append(contenedorPaginas);
+
+    } else {
+      // pagina.firstChild.remove;
+    }
   }
-
-  pagina.append(contenedorPaginas);
-
-  } else {
-   // pagina.firstChild.remove;  
-  }
-}
 
 }
 
@@ -934,20 +937,20 @@ document.addEventListener('click', (evento)=>{
 
   console.log('SELECCIÓN INMUEBLE')
   console.log(evento.target.parentElement.classList[0])
-let clickEn = evento.target.parentElement.classList[0];
-let idImmoble;
+  let clickEn = evento.target.parentElement.classList[0];
+  let idImmoble;
 
-if(clickEn == 'card' ){
-  console.log('dentro card')
-  console.log(evento.target.parentElement.id)
-  idImmoble = evento.target.parentElement.id;
-  detalleInmueble(inmobles, idImmoble);
-}
-if(clickEn == 'card-body' || clickEn == 'card-footer'){
-  console.log('dentro de card-body o card-footer');
-  console.log(evento.target.parentElement.parentElement.id)
-  idImmoble = evento.target.parentElement.parentElement.id;
-  detalleInmueble(inmobles, idImmoble);
+  if(clickEn == 'card' ){
+    console.log('dentro card')
+    console.log(evento.target.parentElement.id)
+    idImmoble = evento.target.parentElement.id;
+    detalleInmueble(inmobles, idImmoble);
+  }
+  if(clickEn == 'card-body' || clickEn == 'card-footer'){
+    console.log('dentro de card-body o card-footer');
+    console.log(evento.target.parentElement.parentElement.id)
+    idImmoble = evento.target.parentElement.parentElement.id;
+    detalleInmueble(inmobles, idImmoble);
   }
   console.log('inmuebles');
   console.log(inmobles)
@@ -959,14 +962,14 @@ if(clickEn == 'card-body' || clickEn == 'card-footer'){
  * @param {*} idImmoble
  */
 function detalleInmueble(inmobles, idImmoble){
-    //GUARDA INMUEBLE EN LOCAL Y REDIRIGE
-    inmobles.forEach(async (immoble)=>{
-      console.log('DENTRO DE FOREACH INMOBLE')
-      if( await immoble.id_immoble == idImmoble ){
-        localStorage.removeItem('immoble');
-        localStorage.setItem('immoble',  JSON.stringify(immoble));
-        window.location.assign('./immoble-details.html')
-      }
+  //GUARDA INMUEBLE EN LOCAL Y REDIRIGE
+  inmobles.forEach(async (immoble)=>{
+    console.log('DENTRO DE FOREACH INMOBLE')
+    if( await immoble.id_immoble == idImmoble ){
+      localStorage.removeItem('immoble');
+      localStorage.setItem('immoble',  JSON.stringify(immoble));
+      window.location.assign('./immoble-details.html')
+    }
 
   })
 }
@@ -982,19 +985,19 @@ function detalleInmueble(inmobles, idImmoble){
  */
 function calcularHipoteca( quantitat, anys){
 
-       // Calcular l'import total a tornar (prèstec + interessos)
-       const interesAnual = 0.05; 
-       const interesMensual = interesAnual / 12; 
-       const numPagaments = anys * 12; 
-       const quotaMensual = (quantitat * interesMensual) / (1 - Math.pow(1 + interesMensual, -numPagaments));
-       const totalAPagar = quotaMensual * numPagaments;
+  // Calcular l'import total a tornar (prèstec + interessos)
+  const interesAnual = 0.05;
+  const interesMensual = interesAnual / 12;
+  const numPagaments = anys * 12;
+  const quotaMensual = (quantitat * interesMensual) / (1 - Math.pow(1 + interesMensual, -numPagaments));
+  const totalAPagar = quotaMensual * numPagaments;
 
-       // Preparar i enviar la resposta com un objecte JSON
-       let resultado = new Array();
-       resultado.push(quotaMensual.toFixed(2));
-       resultado.push(totalAPagar.toFixed(2));
+  // Preparar i enviar la resposta com un objecte JSON
+  let resultado = new Array();
+  resultado.push(quotaMensual.toFixed(2));
+  resultado.push(totalAPagar.toFixed(2));
 
-       return resultado;
+  return resultado;
 }
 
 /**
@@ -1008,19 +1011,19 @@ export function cargarDetallesImmoble(){
   let detalles = crearMaquetacionInmueble(immoble, false);
 
 
-immobleHTML.appendChild(detalles);
+  immobleHTML.appendChild(detalles);
 
-let calcularHipotecaBtn = document.getElementById('calcularHipotecaBtn');
-let hipotecaForm = crearMaquetacioncalcularHipoteca();
-let formHipoteca; 
+  let calcularHipotecaBtn = document.getElementById('calcularHipotecaBtn');
+  let hipotecaForm = crearMaquetacioncalcularHipoteca();
+  let formHipoteca;
 
 
 
-calcularHipotecaBtn.addEventListener('click', (event)=>{
+  calcularHipotecaBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-    immobleHTML.appendChild(hipotecaForm); 
-    formHipoteca = document.getElementById('formHipoteca');  
-    let calculaButton = document.getElementById('calculaButton');  
+    immobleHTML.appendChild(hipotecaForm);
+    formHipoteca = document.getElementById('formHipoteca');
+    let calculaButton = document.getElementById('calculaButton');
 
     formHipoteca.addEventListener('change', ()=>{
       let anysLabel = document.getElementById('anysLabel');
@@ -1034,22 +1037,22 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
       evento.preventDefault();
       console.log('DENTRO FORMULARIO CHANGE')
 
-      
-        let quantitat = document.getElementById('prestec');
-        let anys = document.getElementById('anys');
-        let resultado =  calcularHipoteca(quantitat.value, anys.value);
-        let quota = document.getElementById('quotaHipoteca');
-        let total = document.getElementById('resultadoHipoteca');
-        let resultadosCard = document.getElementById('resultadosCard')
 
-        if(!resultadosCard){
-          formHipoteca.appendChild(crearMaquetacionResultadoHipoteca(resultado));
-        }
-          quota.textContent = 'La quota mensual es: '  + resultado[0];
-          total.textContent = 'El total del prestec es: '+resultado[1];
+      let quantitat = document.getElementById('prestec');
+      let anys = document.getElementById('anys');
+      let resultado =  calcularHipoteca(quantitat.value, anys.value);
+      let quota = document.getElementById('quotaHipoteca');
+      let total = document.getElementById('resultadoHipoteca');
+      let resultadosCard = document.getElementById('resultadosCard')
 
-      })
-})
+      if(!resultadosCard){
+        formHipoteca.appendChild(crearMaquetacionResultadoHipoteca(resultado));
+      }
+      quota.textContent = 'La quota mensual es: '  + resultado[0];
+      total.textContent = 'El total del prestec es: '+resultado[1];
+
+    })
+  })
 
 }
 
@@ -1079,7 +1082,7 @@ function crearMaquetacionResultadoHipoteca(resultado){
   divCard.appendChild(divCardBody);
   divCardgroup.appendChild(divCard)
   card.appendChild(divCardgroup);
-return card;
+  return card;
 
 }
 
@@ -1098,13 +1101,13 @@ function crearMaquetacioncalcularHipoteca(){
   let inputAnys = document.createElement('input');
   let inputPrestecLabel = document.createElement('label')
   let inputPrestec = document.createElement('input')
-  //TODO CONTROL QUE SEAN NUMEROS. 
+  //TODO CONTROL QUE SEAN NUMEROS.
 
   let divButton = document.createElement('div');
   let buttonCalcula = document.createElement("submit");
 
 
-/* FORM */
+  /* FORM */
   form.classList.add('container','p-3')
   form.setAttribute('id', 'formHipoteca')
 
@@ -1113,7 +1116,7 @@ function crearMaquetacioncalcularHipoteca(){
   inputPrestecLabel.textContent = "Quantitat";
 
 
-/* LABELS */
+  /* LABELS */
   inputAnysLabel.setAttribute('for', 'anys');
   inputAnysLabel.classList.add('form-label', 'mt-2');
 
@@ -1121,7 +1124,7 @@ function crearMaquetacioncalcularHipoteca(){
   inputPrestecLabel.setAttribute('for', 'prestec');
   inputPrestecLabel.classList.add('form-label', 'mt-3');
 
-/* INPUTS */
+  /* INPUTS */
 //type="password" class="form-control" id="loginPassword" placeholder="Contrasenya"
   inputPrestec.setAttribute('type', 'text');
   inputPrestec.setAttribute('id', 'prestec');
@@ -1135,7 +1138,7 @@ function crearMaquetacioncalcularHipoteca(){
   inputAnys.setAttribute('max', 40);
   inputAnys.setAttribute('step', 1);
 
-/* BOTON CALCULA */
+  /* BOTON CALCULA */
 
   divButton.appendChild(buttonCalcula);
   divButton.classList.add( 'd-grid',  'd-flex', 'justify-content-end');
@@ -1172,7 +1175,9 @@ function crearMaquetacioncalcularHipoteca(){
 function crearMaquetacionInmueble(inmueble, listado) {
   //crea elementos de la tarjeta
 
-/* BASE */
+  console.log('INMUEBLE');
+  console.log(inmueble);
+  /* BASE */
   let card = document.createDocumentFragment();
 
   let divCard = document.createElement("div");
@@ -1190,16 +1195,16 @@ function crearMaquetacionInmueble(inmueble, listado) {
 
   /* DETALLE */
 
- let pLocalizacion = document.createElement('p');
- let bPreu = document.createElement('b');
+  let pLocalizacion = document.createElement('p');
+  let bPreu = document.createElement('b');
   h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
   pCardText.textContent = inmueble.Descripcio;
   pLocalizacion.textContent = inmueble.Carrer +', ' +inmueble.Numero +', '+ inmueble.Pis +', '+  inmueble.Codi_Postal +', '+  inmueble.Poblacio;
   bPreu.textContent =  inmueble.Preu + ' €';
-  imgCardImgTop.src = inmueble.Imatge ? inmueble.image :  "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
+  imgCardImgTop.src = 'assets/uploaded/'+inmueble.Imatge;
   divCardgroup.classList.add("card-group");
   divCard.classList.add("card");
-/* HIPOTECA */
+  /* HIPOTECA */
   buttonHipoteca.textContent = "calcula hipoteca";
   buttonHipoteca.classList.add("btn", "btn-primary", "p2", "col-3");
   buttonHipoteca.setAttribute('id','calcularHipotecaBtn' );
@@ -1223,35 +1228,35 @@ function crearMaquetacionInmueble(inmueble, listado) {
   esFavorito(inmueble.id_immoble) ? spanLiked.classList.add("fa", "fa-heart") :spanLiked.classList.add("fa", "fa-heart-o") ;
   spanLiked.setAttribute("aria-hidden", true);
 
-if(!listado){
+  if(!listado){
 
     divMaquetacionFooter.classList.add( "row", "justify-content-between", "text-center" ,'p-3');
 
     /*BODY*/
-    divCardBody.appendChild(h5CardTitle); 
+    divCardBody.appendChild(h5CardTitle);
     divCardBody.appendChild(pCardText);
     divCardBody.appendChild(pLocalizacion);
     /* FOOTER */
     // divCardfooter.appendChild(smallTextMuted);
- 
+
     divMaquetacionFooter.appendChild(bPreu);
     //HIPOTECA
     divMaquetacionFooter.appendChild(buttonHipoteca);
-  
+
     divCardfooter.appendChild(divMaquetacionFooter);
-  
+
     /* DIV CARD */
     divCard.appendChild(imgCardImgTop);
     divCard.appendChild(divCardBody);
     divCard.appendChild(divCardfooter);
-  
+
     divCardgroup.appendChild(divCard);
     card.appendChild(divCardgroup);
-   // console.log(card);
+    // console.log(card);
     return card;
-}
+  }
   /*BODY*/
-  divCardBody.appendChild(h5CardTitle); 
+  divCardBody.appendChild(h5CardTitle);
   divCardBody.appendChild(pCardText);
 
   /* FOOTER */
@@ -1271,7 +1276,7 @@ if(!listado){
 
   divCardgroup.appendChild(divCard);
   card.appendChild(divCardgroup);
- // console.log(card);
+  // console.log(card);
   return card;
 }
 
@@ -1291,16 +1296,16 @@ export async function pintarInmuebles(inmuebles) {
   if (inmueblesContainer.children) {
     while (inmueblesContainer.firstChild) {
       inmueblesContainer.firstChild.remove();
-  }
+    }
   }
 
   let countInmuebles = 0;
   let inmueblesMaquetados = new Array();
 
   await inmuebles.forEach(  (inmueble) => {
-if(inmueblesMaquetados.length < MAX){
-  inmueblesMaquetados.push(  crearMaquetacionInmueble(  inmueble, true));
-}
+    if(inmueblesMaquetados.length < MAX){
+      inmueblesMaquetados.push(  crearMaquetacionInmueble(  inmueble, true));
+    }
 
   });
 
@@ -1310,14 +1315,14 @@ if(inmueblesMaquetados.length < MAX){
     let count = 0;
     let divCardGroupINMOBLES = document.createElement("div");
     divCardGroupINMOBLES.classList.add(
-      "d-flex",
-      "flex-sm-wrap",
-      "flex-md-nowrap",
-      "flex-wrap",
-      "gap-3",
-      "my-2",
-      "container",
-      "justify-content-center"
+        "d-flex",
+        "flex-sm-wrap",
+        "flex-md-nowrap",
+        "flex-wrap",
+        "gap-3",
+        "my-2",
+        "container",
+        "justify-content-center"
     );
 
     while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
