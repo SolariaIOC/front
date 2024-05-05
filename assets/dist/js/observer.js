@@ -69,13 +69,15 @@ if(ruta == immobleDetail){
     /* DETALLE INMUEBLE */
     mutationObserver.observe(inmuebleDetalleContainer, {childList:true})
 }else {
-    //console.log(ruta)
-    mutationObserver.observe(barraNavegacionContainer, {childList:true})
-    mutationObserver.observe(modalLoginContainer, {childList:true})
-    mutationObserver.observe(modalMessageContainer, {childList:true})
-    /* INMUEBLES */
-    mutationObserver.observe(inmueblesContainer, {childList:true})
-    /*BUSQUEDA*/
-    mutationObserver.observe(busquedaContainer, {childList:true})
+    if(!ruta.includes('dashboard.html')) {
+        //console.log(ruta)
+        mutationObserver.observe(barraNavegacionContainer, {childList: true})
+        mutationObserver.observe(modalLoginContainer, {childList: true})
+        mutationObserver.observe(modalMessageContainer, {childList: true})
+        /* INMUEBLES */
+        mutationObserver.observe(inmueblesContainer, {childList: true})
+        /*BUSQUEDA*/
+        mutationObserver.observe(busquedaContainer, {childList: true})
+    }
 }})()
 
