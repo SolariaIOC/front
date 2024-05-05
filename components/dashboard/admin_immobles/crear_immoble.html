@@ -7,6 +7,13 @@
     <form id="crear-formulari-inmoble" method="POST" enctype="multipart/form-data">
 
         <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="id_usuari" class="form-label">Usuari</label>
+                <select class="form-select" aria-label="Default select example" id="id_usuari" name="id_usuari" required></select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
             <div class="col-md-8">
                 <label for="Carrer" class="form-label">Carrer</label>
                 <input type="text" class="form-control" id="Carrer" name="Carrer" pattern="[a-zA-ZÀ-ÿ\s]{3,}"

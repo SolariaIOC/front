@@ -1,3 +1,5 @@
+import { getApiURL } from "./utils.js";
+
 /* MANEJO DE USUARIOS */
 let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
@@ -134,40 +136,91 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- *
- * @param {*} rutaAPI
- * @returns
+ * @returns {array} usuaris
  */
-export function getUsers(rutaAPI) {
-  let usuaris = fetch(rutaAPI + "/app/")
+export async function getUsers() {
+  return await fetch(getApiURL() + "/app/")
     .then((resp) => {
-      resp;
-      console.log("Respuesta usuarios:");
-      console.log(resp);
       if (!resp.ok) {
         throw new Error("S'ha produït un error al servidor.");
       }
       return resp.json();
-    })
-    .then((data) => {
-      console.log("Data usuarios:");
-      console.log(data);
+    }).then((data) => {
       return data;
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.error("Error en la peticio de usuaris:", error.message);
     });
-
-  return usuaris;
 }
 
 /**
- *
- * @param {*} rutaAPI
- * @param {*} id
- * @param {*} token
+ * @description Elimina un usuari de la base de dades
+ * @param {int} id_usuari
  */
-export function deleteUser(rutaAPI, id, token) {}
+export async function removeUser(id_usuari) {
+  return await fetch(getApiURL() + "/app/a/eliminarUsuari/" + id_usuari, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
+}
+
+/**
+ * @description Afegeix un usuari de la base de dades
+ * @param {Object} user
+ */
+export async function addUser(user) {
+  await fetch(getApiURL() + "/app/registre", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+  .then(async (resp) => {
+    if (!resp.ok) {
+      alert(await resp.text());
+    } else {
+      alert("Usuari registrat correctament.");
+      window.location.assign("/dashboard.html#all-usuaris");
+      location.reload();
+    }
+  }).catch((error) => {
+    console.error("Error en el registro del usuario", error.message);
+    alert("No s'ha pogut crear correctament l\'usuari");
+  });
+}
+
+/**
+ * @description Actualitza un usuari de la base de dades
+ * @param {Object} user
+ */
+export async function updateUser(user, id_usuari) {
+  await fetch(getApiURL() + "/app/a/actualitzarUsuari/"+id_usuari, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+      .then(async (resp) => {
+        if (!resp.ok) {
+          alert(await resp.text());
+        } else {
+          alert("Usuari editat correctament.");
+          window.location.assign("/dashboard.html#all-usuaris");
+          location.reload();
+        }
+      }).catch((error) => {
+        console.error("Error en la edición del usuario", error.message);
+        alert("No s'ha pogut editar correctament l\'usuari");
+      });
+}
 
 /* LISTA DE USUARIOS */
 /**

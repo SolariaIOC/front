@@ -1,17 +1,10 @@
 
-import {
-    getAllInmoblesInformation,
-    addInmobleAdmin,
-    removeImmobleAdmin,
-    updateInmobleAdmin,
-} from "../../../js/inmoble.js";
-
-import { isUserAdmin } from "../../../js/users.js";
+import { getAllInmoblesInformation, addInmobleAdmin, removeImmobleAdmin, updateInmobleAdmin } from "../../../js/inmoble.js";
+import { isUserAdmin, getUsers } from "../../../js/users.js";
 
 if(isUserAdmin()) {
 
-    console.log('Admin code');
-
+if(isUserAdmin) {
     let immobleToEdit = undefined;
     let immobles = [];
     let currentPage = 1;
@@ -20,12 +13,18 @@ if(isUserAdmin()) {
     function handleURLChange() {
         if (window.location.hash.split("?")[0].split("#")[1] === "editar-immoble") {
             if (immobleToEdit !== undefined) {
-                setTimeout(function () {
-                    loadImmobleEditForm();
+                setTimeout(async function () {
+                    await loadImmobleEditForm();
                 }, 200);
             } else {
                 window.location.replace("dashboard.html");
             }
+        }
+
+        if (window.location.hash.split('?')[0].split('#')[1] === 'afegir-immoble') {
+            setTimeout(async function () {
+                await loadCreateEditForm();
+            }, 200);
         }
     }
 
@@ -37,10 +36,23 @@ if(isUserAdmin()) {
                 loadImmobleEditForm();
             }, 200);
         }
+
+        if (window.location.hash.split('?')[0].split('#')[1] === 'afegir-immoble') {
+            setTimeout(async function () {
+                await loadCreateEditForm();
+            }, 200);
+        }
+
     });
 
     if (immobleToEdit === undefined && window.location.hash.split('?')[0].split('#')[1] === 'editar-immoble') {
         window.location.replace('dashboard.html');
+    }
+
+    if (window.location.hash.split('?')[0].split('#')[1] === 'afegir-immoble') {
+        setTimeout(async function () {
+            await loadCreateEditForm();
+        }, 200);
     }
 
     $(document).ready(async function () {
@@ -219,7 +231,18 @@ if(isUserAdmin()) {
         $("#pages").append('<li class="page-item next"><a class="page-link" href="#">Next</a></li>');
     }
 
-    function loadImmobleEditForm() {
+    async function loadImmobleEditForm() {
+
+        $('#id_usuari').empty()
+        $('#id_usuari').append('<option value="">Selecciona un usuari</option>');
+
+        let users = await getUsers();
+
+        for(let i = 0; i<users.length; i++){
+            let selected = immobleToEdit.id_usuari === users[i].id_usuari ? 'selected' : '';
+            $('#id_usuari').append('<option value="'+users[i].id_usuari+'" '+selected+'>'+users[i].Nom+' '+users[i].Cognoms+'</option>');
+        }
+
         $("#Carrer").val(immobleToEdit.Carrer);
         $("#Numero").val(immobleToEdit.Numero);
         $("#Pis").val(immobleToEdit.Pis);
@@ -230,5 +253,16 @@ if(isUserAdmin()) {
         $("#current_image").attr('src', '/assets/uploaded/' + immobleToEdit.Imatge);
         $("#current_image_hidden").val(immobleToEdit.Imatge);
         $("#id_usuari").val(immobleToEdit.id_usuari);
+    }
+
+    async function loadCreateEditForm(){
+        $('#id_usuari').empty()
+        $('#id_usuari').append('<option value="">Selecciona un usuari</option>');
+
+        let users = await getUsers();
+
+        for(let i = 0; i<users.length; i++){
+            $('#id_usuari').append('<option value="'+users[i].id_usuari+'">'+users[i].Nom+' '+users[i].Cognoms+'</option>');
+        }
     }
 }
