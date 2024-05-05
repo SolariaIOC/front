@@ -10,13 +10,10 @@ const url = getApiURL();
 let inmobles = new Array();
 let meuInmobles = new Array();
 
-//Habría que acotar la cantidad de resultados si la BBDD crece puede colapsar la app
-
 /**
- * Hace una petición de todos los inmuebles de la BBDD
- * @param {number} pag  Número de página
- * @description Petición de todos los inmuebles disponibles
- * @returns {array} inmobles
+ * @description Fa una sol·licitud de tots els immobles de la base de dades.
+ * @param {number} pag  Nombre de pàgina
+ * @returns {array} immobles
  */
 export async function getAllInmobles(pag = 1) {
   inmobles = [];
@@ -40,7 +37,7 @@ export async function getAllInmobles(pag = 1) {
 }
 
 /**
- * @description Devuelve todos los inmuebles paginados
+ * @description Fa una sol·licitud de tots els immobles de la base de dades.
  * @param {int} pag
  * @returns {Array} Devuelve todos los inmuebles paginados
  */
@@ -90,8 +87,12 @@ export async function getMyInmobles() {
   return meuInmobles;
 }
 
+
+
+/*********************************************************************/
+
 /**
- * @description Petición de toda la lista de inmuebles de un usuario
+ * @description Petició de tota la llista d'immobles favorits d'un usuari.
  * @returns {Array} Lista de inmuebles de un usuario
  */
 export async function getMyFavInmobles() {
@@ -113,14 +114,13 @@ export async function getMyFavInmobles() {
   return meuInmobles;
 }
 /**
- *@description filtre d'inmobles per códi postal
+ *@description filtre d'inmobles per códi postal.
  * @param {*} codiPostal
- * @param {number} pag  Número de página
- * @returns {Array} retorna un array d'inmobles
+ * @param {number} pag  Nombre de pàgina.
+ * @returns {Array} retorna un array d'inmobles.
  */
 export async function getInmoblesPerCodiPostal(codiPostal, pag = 1) {
 
-let inmuebles;
   await fetch(`${url}/immobles/codi_postal/${codiPostal}?page="` + pag, {
     headers: {
       "Content-Type": "application/json",
@@ -140,26 +140,26 @@ let inmuebles;
     localStorage.removeItem('paginacion')
       localStorage.setItem('tipoDeBusqueda', 'codiPostal')
       localStorage.setItem('paginacion', JSON.stringify(json.pagination))
-      return (inmuebles = json.results);
+      return (inmobles = json.results);
   })
   .catch((error) => {
     console.error('Error:', error);
    
-    return inmuebles = []; 
+    return inmobles = [];
   });
 
-  return inmuebles;
+  return inmobles;
 }
 
 /**
- * @description Filtre d'inmobles per població
+ * @description Filtre d'inmobles per població.
  * @param {*} poblacio
- * @param {number} pag  Número de página
- * @returns {Array} retorna un array d'inmobles
+ * @param {number} pag  Nombre de pàgina.
+ * @returns {Array} retorna un array d'inmobles.
  */
 export async function getInmoblePerPoblacio(poblacio, pag = 1) {
-let inmuebles;
-  await fetch(`${url}/immobles/poblacio/${poblacio}`, {
+
+  await fetch(`${url}/immobles/poblacio/${poblacio}?page="` + pag, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -175,26 +175,26 @@ let inmuebles;
     return response.json();
   })
   .then((json) => {
-      inmuebles = json.results;
+    inmobles = json.results;
       busquedaOk();
       localStorage.removeItem('tipoDeBusqueda')
       localStorage.removeItem('paginacion')
       localStorage.setItem('tipoDeBusqueda', 'poblacio')
       localStorage.setItem('paginacion', JSON.stringify(json.pagination))
  
-    return inmuebles;
+    return inmobles;
   })
   .catch((error) => {
     console.error('Error:', error);
  
-    inmuebles = []; 
+    inmobles = [];
   });
 
-  return inmuebles;
+  return inmobles;
 }
 
 /**
- * @description Añade un immueble a la base de datos
+ * @description Afegeix un immoble.
  * @param {Object} inmoble
  * @returns {void}
  */
@@ -224,7 +224,7 @@ export async function addInmoble(inmoble) {
 }
 
 /**
- * @description Añade un immueble a un usuario, a la base de datos
+ * @description Afegeix un immoble com administrador.
  * @param {Object} inmoble
  * @returns {void}
  */
@@ -254,7 +254,7 @@ export async function addInmobleAdmin(inmoble) {
 }
 
 /**
- * @description Elimina un inmueble de un usuario, de la base de datos
+ * @description Elimina un immoble com administrador.
  * @param {int} id_immoble
  * @param {int} id_usuari
  * @returns {void}
@@ -275,7 +275,7 @@ export async function removeImmobleAdmin(id_immoble, id_usuari) {
 }
 
 /**
- * @description Elimina un inmueble de la base de datos
+ * @description Elimina un immoble.
  * @param {int} id_immoble
  * @returns {void}
  */
@@ -296,7 +296,7 @@ export async function removeInmoble(id_immoble) {
 /*************/
 
 /**
- * @description Añade un immueble como favoritos al usuario
+ * @description Afegeix el immoble a favorits.
  * @param {int} id_immoble
  * @returns {void}
  */
@@ -308,7 +308,7 @@ export async function addInmobleFavorir(id_immoble) {
       "Content-Type": "application/json",
     },
 
-    body: JSON.stringify({ id_immoble }),
+    body: JSON.stringify({ 'id_immoble': id_immoble }),
   })
       .then((resp) => resp.json())
     .then((json) => !json.hasOwnProperty("error"))
@@ -318,7 +318,7 @@ export async function addInmobleFavorir(id_immoble) {
 }
 
 /**
- * @description Elimina un immueble de favoritos al usuario
+ * @description Elimina un immoble de la llista de favorits.
  * @param {int} id_immoble
  * @returns {void}
  */
@@ -329,14 +329,14 @@ export async function removeInmobleFav(id_immoble) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id_immoble }),
+    body: JSON.stringify({ 'id_immoble':id_immoble }),
   })
       .then((resp) => resp.json())
       .then((json) => !json.hasOwnProperty("error"));
 }
 
 /**
- * @description Actualiza un inmueble como usuario registrado
+ * @description Actualizació de l'immoble.
  * @param {Object} inmoble
  * @param {int} id_immoble
  * @returns {void}
@@ -376,7 +376,7 @@ export async function updateInmoble(inmoble, id_immoble) {
 }
 
 /**
- * @description Actualiza un inmueble como usuario administrador
+ * @description Actualització de l'immoble per l'administrador.
  * @param {Object} inmoble
  * @param {int} id_immoble
  * @returns {void}
@@ -415,6 +415,8 @@ export async function updateInmobleAdmin(inmoble, id_immoble) {
       });
 }
 
+/*********************************************************************/
+/*******                   REGISTRO USUARIO                   ********/
 /**
  * @description Carga el formulario de registrar formularios
  * @returns {void}
@@ -451,12 +453,15 @@ if (window.location.href.includes("register-inmobles")) {
     formulariInmoble.reset();
   });
 }
+/*********************************************************************/
 
+/*********************************************************************/
+/*              LISTA DE INMOBLES  SE UTILIZA?                       */
 /**
  * @description Carga la tabla de inmuebles
  * @param {int} inmobles
  * @returns {void}
- */
+ */                      */
 export function fillTablaInmobles(inmobles) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-inmobles");
   // let rowUsuario = document.createDocumentFragment();
@@ -535,7 +540,11 @@ export function fillTablaInmobles(inmobles) {
     contenidoTabla.appendChild(tr);
   });
 }
+/*********************************************************************/
 
+
+/*********************************************************************/
+/*              LISTENER VER TODOS LOS INMUEBLES                     */
 /**
  * @description Listener para filtrar inmuebles
  * @returns {void}
@@ -548,14 +557,15 @@ document.addEventListener('click' , async (evento)=>{
     busquedaPorTipo('all');
     clearPaginacion();
   }
-})
+
+  })
+/*********************************************************************/
 
 /**
  * @description Listener para filtrar inmuebles
  * @returns {void}
  */
 export async function formularioBusquedaInmuebles(){
-
   //console.log("DENTRO DE FORMULARIO BUSQUEDA");
    let mensaje;
 
@@ -599,24 +609,25 @@ export async function formularioBusquedaInmuebles(){
 }
 
 /**
- * @description Control de busqueda, busca segun el tipo de busqueda y crea la paginacion.
+ * @description Control de cerca. Cerca segons el tipus de cerca i crea la paginació.
  * @param {int} pagina
  * @returns {Array} inmuebles
  */
 export async function busquedaPorTipo(pagina){
-
   let tipoBusqueda = localStorage.getItem('tipoBusqueda');
   let valorBusqueda = localStorage.getItem('valorBusqueda');
   let inmuebles = new Array();
 
-  switch(tipoBusqueda){
-    case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda, pagina);
-    break;
-    case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda, pagina);
-    break;
-    default :inmuebles = await getAllInmobles(pagina);
-    break;
-  }
+    switch(tipoBusqueda){
+      case 'codiPostal' : inmuebles = await getInmoblesPerCodiPostal(valorBusqueda, pagina);
+      clearPaginacion();
+      break;
+      case 'poblacio':  inmuebles =  await getInmoblePerPoblacio(valorBusqueda, pagina);
+      clearPaginacion();
+      break;
+      default :inmuebles = await getAllInmobles(pagina);
+      break;
+    }
   
   await pintarInmuebles( inmuebles);
   crearPaginacion();
@@ -624,65 +635,11 @@ export async function busquedaPorTipo(pagina){
   console.log('creando paginacionde en la busqueda');
 }
 
-
-/**
- * @description Crea y introduce el html de los inmuebles listados por la bbdd
- * @param {Object} inmuebles Se le pasa un array de inmuebles
- * @returns {void}
- */
-export async function pintarInmuebles(inmuebles) {
-
-  //cantidad de inmuebles por row
-  const INMUEBLES = 3;
-
-  //Máximo de inmuebles por página
-  const MAX = 10;
-  let inmueblesContainer = document.getElementById("inmuebles-container");
-
-  if (inmueblesContainer.children) {
-    while (inmueblesContainer.firstChild) {
-      inmueblesContainer.firstChild.remove();
-    }
-  }
-
-  let countInmuebles = 0;
-  let inmueblesMaquetados = new Array();
-
-  await inmuebles.forEach(  (inmueble) => {
-    if(inmueblesMaquetados.length < MAX){
-      inmueblesMaquetados.push(  crearMaquetacionInmueble(  inmueble, true));
-    }
-  });
-
-  while (inmueblesMaquetados.length > countInmuebles) {
-    //console.log('countInmuebles while' + countInmuebles)
-    let count = 0;
-    let divCardGroupINMOBLES = document.createElement("div");
-    divCardGroupINMOBLES.classList.add(
-      "d-flex",
-      "flex-sm-wrap",
-      "flex-md-nowrap",
-      "flex-wrap",
-      "gap-3",
-      "my-2",
-      "container",
-      "justify-content-center"
-    );
-
-    while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
-      divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
-      count++;
-      countInmuebles++;
-    }
-    inmueblesContainer.appendChild(divCardGroupINMOBLES);
-  }
-}
-
-
+/*********************************************************************/
 /* MENSAJES BUSQUEDAS */
 
  /**
-  * @description Añade un mensaje de fallo a la busqueda de inmuebles
+  * @description Afegeix un missatge de fallada a la cerca d'immobles.
   * @param {string} mensaje
   * @returns {void}
   */
@@ -692,62 +649,82 @@ export async function pintarInmuebles(inmuebles) {
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
  }
 
-/**
- * @description Añade un mensaje de OK a la busqueda de inmuebles
- * @param {string} mensaje
- * @returns {void}
- */
+ /**
+  * @description Mostra el missatge de cerca.
+  * @returns {void}
+  */
  function busquedaOk(){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
   busquedaMensaje.classList.add('visually-hidden');
  }
 
-/**
- * @description Añade un mensaje de error a la busqueda de inmuebles
- * @param {string} mensaje
- * @returns {void}
- */
+ /**
+  * @description Mostra un missatge d'error.
+  * @param {string} mensaje
+  * @returns {void}
+  */
  function mensajeBusquedaError(mensaje){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
   busquedaMensaje.classList.remove('visually-hidden');
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
  }
 
+ /*********************************************************************/
+ /*                         CONTROL DE USUARIO                        */
 /**
- * @description Controla el login
+ * @description Controla si l'usuari ha iniciat sessió.
  * @returns {void}
  */
 export function controlLogin() {
   checkLog();
 }
 
-/******************/
+/*********************************************************************/
 /* LIKE INMOBLE */
-/******************/
 
 /**
- * @description Contiene un eventListener el cual comprueba que se haga click en un corazón y comprueba el estado del mismo, si tiene la clase liked es que le gusta al usuario y lo que hace es quitarle la clase y viceversa.
+ * @description Conté un eventListener que verifica si es fa clic en un cor o no. Comprova l'estat del mateix, si té la classe liked és que agrada a l'usuari i el que fa és treure-li la classe i viceversa.
  * @returns {void}
- */
+*/
 export function likeInmueble() {
 // carga los favoritos
 
-  document.addEventListener("click", (elemento) => {
+  document.addEventListener("click", async (elemento) => {
+
+    // Comprobar si clica en el corazon
+    // COMPROBAR SI ESTA LOGUEADO
+    // COMPROBAR SI TIENE CORAZON ROJO O NO
+    // COMPROBAR SI ESTA EN LA LISTA DE FAVORITOS DEL USUARIO
+    // SI NO ESTA SE AÑADE
+
+
     let clases = elemento.target.classList;
 
+    console.log('CORAZON')
     console.log(clases.contains("liked"));
     if (clases.contains("liked")) {
+      console.log('corazon clicado');
       if (checkLog()) {
+        console.log('usuario logueado')
+        console.log(localStorage.getItem('usuario'))
         if (clases.contains("fa-heart-o")) {
+          console.log('tiene el corazón vacio se añade a favoritos')
+          console.log(await getMyFavInmobles())
+          await addInmobleFavorir(elemento.target.offsetParent.id);
+          console.log('id del nuevo inmueble en favoritos')
+          console.log(elemento.target.offsetParent.id)
+          console.log(await getMyFavInmobles())
+
           likeCorazon(clases);
-          addInmobleFavorir(elemento.target.offsetParent.value);
-         
+          cargarFavoritos();
+
       } else {
+
+          await removeInmobleFav(elemento.target.offsetParent.id);
           dislikeCorazon(clases);
-          removeInmobleFav(elemento.target.offsetParent.value);
-         
+          cargarFavoritos();
         }
-        cargarFavoritos();
+
       } else {
         console.log("no esta logueado al modal...");
         modalShow();
@@ -756,31 +733,39 @@ export function likeInmueble() {
   });
 }
 
+document.addEventListener('load', ()=>{
+
+})
 
 /**
- * @description Guarda los favoritos en el local storage si estamos logueados
+ * @description Guarda els favorits a la memòria local si estem connectats.
  * @returns {void}
  */
 export async function cargarFavoritos(){
 
-  let favoritos = await  getMyFavInmobles();
+  localStorage.removeItem('favoritos');
+
+  let favoritos = await getMyFavInmobles();
+
   let favoritosArray =  new Array();
 
-  favoritos.forEach( e => {    
+  if (checkLog() &&  favoritos) {
+
+  favoritos.forEach( e => {
           favoritosArray.push(e.id_immoble)     
     })
-    if (checkLog()) {
+
     localStorage.setItem('favoritos', favoritosArray);
     }
 }
 
-
 /**
- * @description Comprueba que el inmueble esta en favoritos
+ * @description Comprova si l'immoble està als preferits.
  * @param {int} id_immoble
  * @returns {boolean}
  */
 function esFavorito(id_immoble ){
+
   let id_immobleString = id_immoble.toString();
   let favoritos;
   if(localStorage.getItem('favoritos')){
@@ -789,11 +774,9 @@ function esFavorito(id_immoble ){
   return  favoritos !=  undefined ? favoritos.includes(id_immobleString) :  false
 }
 
-
-
 /**
- * @description Activa el modal de login
- * @returns {void}
+ * @description Activa el modal d'inici de sessió.
+ @returns {void}
  */
 function modalShow() {
   let modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
@@ -801,7 +784,7 @@ function modalShow() {
 }
  
 /**
- * @description Elimina la clase de corazon relleno y pone la vacia, Recibe como parametro una lista de clases del padre
+ * @description Elimina la classe del cor verd i posa la buida. Rep com a paràmetre una llista de classes del pare.
  * @param {Array} clases
  * @returns {void}
  */
@@ -812,8 +795,8 @@ function dislikeCorazon(clases) {
 }
  
 /**
- * @description Elimina la clase de corazon vacia y pone la rellena, Recibe como parametro una lista de clases del padre
- * @param {Array} clases
+ * @description Elimina la classe del cor buit i posa la plena.
+ * @param {Array} clases Rebut com a paràmetre una llista de classes del pare.
  * @returns {void}
  */
 function likeCorazon(clases) {
@@ -822,26 +805,27 @@ function likeCorazon(clases) {
    clases.add("fa-heart");
 }
 
-/******************/
+/*********************************************************************/
 /* PAGINACION */
-/******************/
+
 /**
  * @description Listener para clicks de numero de pagina en la paginación
  * @returns {void}
  */
   document.addEventListener("click", (evento) => {
 
-    console.log("PAGINACION");
-    console.log(evento.target);
-    let raiz = evento.target.parentElement.parentElement.parentElement.id;
 
+    console.log("PAGINACION ACTIVO O NO");
+     console.log(evento.target);
+    let raiz = evento.target.parentElement.parentElement.parentElement.id;
+    console.log(raiz);
     if(raiz == 'paginacion'){
       let pagina = evento.target.parentElement.id;
-    
-
       let paginas = evento.target.parentElement.parentElement.children.length;
       if(paginas){
         for(let i=0; i <paginas; i++){
+          console.log(          evento.target.parentElement.parentElement.children[i].classList
+        )
           evento.target.parentElement.parentElement.children[i].classList.remove('active')
          }
          evento.target.parentElement.classList.add("active");
@@ -853,25 +837,30 @@ function likeCorazon(clases) {
   });
 
 /**
- * @description Limpia paginación
+ * @description Neteja la paginació.
  * @returns {void}
  */
 function clearPaginacion(){
   let paginacionPadre = document.getElementById('paginacion');
-  console.log('PaGINACION CLEAR')
-  console.log(paginacionPadre);
+  //console.log('PaGINACION CLEAR')
+  //console.log(paginacionPadre);
 
+    //Limpia la paginación
+    if (paginacionPadre.children) {
+      while (paginacionPadre.firstChild) {
+        paginacionPadre.firstChild.remove();
+    }}
+/*
  let cantidadDePaginas = paginacionPadre.firstChild.children.length
  for(let i=0; i <cantidadDePaginas; i++){
   paginacionPadre.firstChild.children[i].classList.remove('active')
  }
   paginacionPadre.firstChild.firstChild.classList.add("active");
-
+  */
 }
 
-
 /**
- * @description Crea la paginacion cogiendo el numero de paginas
+ * @description Crea la paginació agafant el nombre de pàgines.
  * @returns {void}
  */
 export function crearPaginacion() {
@@ -881,7 +870,14 @@ export function crearPaginacion() {
   let navegacionPaginas = document.createElement("nav");
   let contenedorPaginas = document.createElement("ul");
 
-  
+  console.log('DATOS PAG')
+  console.log()
+
+if(paginacionDatos.currentPage == 1){
+
+  const navegacionPaginasSel = document.getElementById('navegadorPaginas')
+
+
 pagina.classList.add(
   'container',
   "d-flex",
@@ -892,6 +888,7 @@ pagina.classList.add(
   if(paginacionDatos.totalPages > 1 && pagina.children.length == 0){
   
   navegacionPaginas.setAttribute("aria-label", "...");
+  navegacionPaginas.setAttribute('id', 'navegadorPaginas')
 
   contenedorPaginas.classList.add(
     "col-3",
@@ -923,61 +920,64 @@ pagina.classList.add(
   }
 }
 
-/*
-const paginacionSeleccion =  document.getElementsByClassName('paginacion-sel');
+}
 
-paginacionSeleccion.addEventListener()
-
-function listaDePaginas(){}
-
-*/
-
-/******************/
+/*********************************************************************/
 /* SELECCION INMUEBLE */
-/******************/
 
 /**
- * @description Listener para cuando haces click a los immuebles
+ * @description Listener per a quan fas click als inmobles
  * @returns {void}
  */
 document.addEventListener('click', (evento)=>{
 
-let clickEn = evento.target.parentElement.classList;
+  console.log('SELECCIÓN INMUEBLE')
+  console.log(evento.target.parentElement.classList[0])
+let clickEn = evento.target.parentElement.classList[0];
 let idImmoble;
 
 if(clickEn == 'card' ){
+  console.log('dentro card')
+  console.log(evento.target.parentElement.id)
   idImmoble = evento.target.parentElement.id;
+  detalleInmueble(inmobles, idImmoble);
 }
 if(clickEn == 'card-body' || clickEn == 'card-footer'){
+  console.log('dentro de card-body o card-footer');
+  console.log(evento.target.parentElement.parentElement.id)
   idImmoble = evento.target.parentElement.parentElement.id;
+  detalleInmueble(inmobles, idImmoble);
   }
-
-  //GUARDA INMUEBLE EN LOCAL Y REDIRIGE
-  inmobles.forEach(async (immoble)=>{
-    if( await immoble.id_immoble == idImmoble ){
-      localStorage.removeItem('immoble');
-      localStorage.setItem('immoble',  JSON.stringify(immoble));
-      window.location.assign('./immoble-details.html')
-    }
-
+  console.log('inmuebles');
+  console.log(inmobles)
 })
-
-//console.log('********** INMUEBLE CLICK ************')
-
-})
-
-
-
-
-/******************/
-/* HIPOTECA */
-/******************/
 
 /**
- * @description Calculo de hipoteca aplica un interes fijo del 5%
- * @param {int} quantitat Cantidad de dinero pedido
- * @param {int} anys Años para devolverlo
- * @returns {number}
+ * @description T'envia al detall de l'immoble seleccionat.
+ * @param {*} inmobles
+ * @param {*} idImmoble
+ */
+function detalleInmueble(inmobles, idImmoble){
+    //GUARDA INMUEBLE EN LOCAL Y REDIRIGE
+    inmobles.forEach(async (immoble)=>{
+      console.log('DENTRO DE FOREACH INMOBLE')
+      if( await immoble.id_immoble == idImmoble ){
+        localStorage.removeItem('immoble');
+        localStorage.setItem('immoble',  JSON.stringify(immoble));
+        window.location.assign('./immoble-details.html')
+      }
+
+  })
+}
+
+/*********************************************************************/
+/* HIPOTECA */
+
+/**
+ * @description Càlcul d'hipoteca que aplica un interès fix del 5%.
+ * @param {int} quantitat Quantitat de diners demanada.
+ * @param {int} anys  Anys per tornar-ho.
+ * @returns {array} Quota mensual i deute total del préstec.
  */
 function calcularHipoteca( quantitat, anys){
 
@@ -989,8 +989,6 @@ function calcularHipoteca( quantitat, anys){
        const totalAPagar = quotaMensual * numPagaments;
 
        // Preparar i enviar la resposta com un objecte JSON
-
-      // console.log( quotaMensual.toFixed(2) + ' ' + totalAPagar.toFixed(2))
        let resultado = new Array();
        resultado.push(quotaMensual.toFixed(2));
        resultado.push(totalAPagar.toFixed(2));
@@ -999,7 +997,7 @@ function calcularHipoteca( quantitat, anys){
 }
 
 /**
- * @description Carga lso detalles del immueble
+ * @description Carrega els detalls de l'immoble.
  * @returns {void}
  */
 export function cargarDetallesImmoble(){
@@ -1023,7 +1021,6 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
     formHipoteca = document.getElementById('formHipoteca');  
     let calculaButton = document.getElementById('calculaButton');  
 
-
     formHipoteca.addEventListener('change', ()=>{
       let anysLabel = document.getElementById('anysLabel');
       let anysInput = document.getElementById('anys')
@@ -1033,48 +1030,31 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
     calculaButton.addEventListener('click',  (evento)=>{
       console.log(evento)
 
-
       evento.preventDefault();
       console.log('DENTRO FORMULARIO CHANGE')
 
       
         let quantitat = document.getElementById('prestec');
-
         let anys = document.getElementById('anys');
-
         let resultado =  calcularHipoteca(quantitat.value, anys.value);
-
         let quota = document.getElementById('quotaHipoteca');
         let total = document.getElementById('resultadoHipoteca');
-
         let resultadosCard = document.getElementById('resultadosCard')
 
         if(!resultadosCard){
           formHipoteca.appendChild(crearMaquetacionResultadoHipoteca(resultado));
-
-        } 
-        
+        }
           quota.textContent = 'La quota mensual es: '  + resultado[0];
           total.textContent = 'El total del prestec es: '+resultado[1];
-        
-      
-       
-        
 
-       
       })
-
 })
-
-
-
-
 
 }
 
 /**
- * @description Pinta en HTML el resultado del calculo de la hipoteca
- * @param {array} resultado Resultado del calculo de la hipoteca [cuota, total]
+ * @description Pinta en HTML el resultat del càlcul de la hipoteca.
+ * @param {array} resultado Resultat del càlcul de la hipoteca [quota, total].
  * @returns {DocumentFragment}
  */
 function crearMaquetacionResultadoHipoteca(resultado){
@@ -1083,21 +1063,15 @@ function crearMaquetacionResultadoHipoteca(resultado){
   let divCardgroup = document.createElement("div");
   let divCard = document.createElement("div");
   let divCardBody = document.createElement("div");
-
   let quota = document.createElement("p");
   let total =  document.createElement('b');
 
 
   quota.setAttribute('id', 'quotaHipoteca');
   total.setAttribute('id', 'resultadoHipoteca');
-
   quota.textContent = 'La quota mensual es: '  + resultado[0];
   total.textContent = 'El total del prestec es: '+resultado[1];
-
-
   divCardgroup.setAttribute('id', 'resultadosCard');
-
-
 
   divCardBody.appendChild(quota);
   divCardBody.appendChild(total);
@@ -1108,10 +1082,9 @@ return card;
 
 }
 
-
 /**
- * @description Crea la maquetación de calcular hipoteca
- * @returns {DocumentFragment} FragmentoHTML el cual tiene la maquetacion del formulario para el calculo de la hipoteca
+ * @description Fragment HTML amb la maquetació del formulari per al càlcul de la hipoteca.
+ * @returns {DocumentFragment}
  */
 function crearMaquetacioncalcularHipoteca(){
 
@@ -1119,8 +1092,6 @@ function crearMaquetacioncalcularHipoteca(){
   let divCardgroup = document.createElement("div");
   let divCard = document.createElement("div");
   let divCardBody = document.createElement("div");
-
-
   let form = document.createElement('form');
   let inputAnysLabel = document.createElement('label');
   let inputAnys = document.createElement('input');
@@ -1170,22 +1141,15 @@ function crearMaquetacioncalcularHipoteca(){
   buttonCalcula.setAttribute('id', 'calculaButton');
   buttonCalcula.textContent = 'calcula';
   buttonCalcula.classList.add("btn", "btn-primary",  "col-3", 'mt-3');
-
-
   divCardgroup.classList.add("card-group");
   divCard.classList.add("card");
-
-
 
   /* CARD */
   form.appendChild(inputAnysLabel);
   form.appendChild(inputAnys);
-
   form.appendChild(inputPrestecLabel);
   form.appendChild(inputPrestec);
   form.appendChild(divButton);
-
- 
   divCardBody.appendChild(form);
   divCard.appendChild(divCardBody);
   divCardgroup.appendChild(divCard)
@@ -1194,17 +1158,15 @@ function crearMaquetacioncalcularHipoteca(){
 
 }
 
-
-
-/******************/
+/*********************************************************************/
 /* PINTAR INMUEBLES */
-/******************/
 
 /**
- * @description Crea los elemento HTNML de inmueble para mostrar
- * @param {json} inmueble  Se pasa un inmueble como parametro
- * @param {boolean} listado Es un boleano  true si es del inidice, false si es detalle de inmueble
- * @returns {DocumentFragment} Retorna un elemento HTML
+ * Crea els elements HTML de l'immoble per mostrar.
+ *
+ * @param {json} inmueble Es passa un immoble com a paràmetre.
+ * @param {boolean} listado És un booleà, true si és de l'índex, false si és detall d'immoble.
+ * @returns {DocumentFragment} Retorna un element HTML.
  */
 function crearMaquetacionInmueble(inmueble, listado) {
   //crea elementos de la tarjeta
@@ -1229,58 +1191,36 @@ function crearMaquetacionInmueble(inmueble, listado) {
 
  let pLocalizacion = document.createElement('p');
  let bPreu = document.createElement('b');
-
   h5CardTitle.textContent = "immoble a, " + inmueble.Poblacio;
   pCardText.textContent = inmueble.Descripcio;
   pLocalizacion.textContent = inmueble.Carrer +', ' +inmueble.Numero +', '+ inmueble.Pis +', '+  inmueble.Codi_Postal +', '+  inmueble.Poblacio;
   bPreu.textContent =  inmueble.Preu + ' €';
-  imgCardImgTop.src = /*inmueble.Imatge ? inmueble.image : */ "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
-
+  imgCardImgTop.src = inmueble.Imatge ? inmueble.image :  "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE";
   divCardgroup.classList.add("card-group");
   divCard.classList.add("card");
-
-
 /* HIPOTECA */
   buttonHipoteca.textContent = "calcula hipoteca";
   buttonHipoteca.classList.add("btn", "btn-primary", "p2", "col-3");
-  buttonHipoteca.setAttribute('id','calcularHipotecaBtn' )
-
-
-
-  divCardgroup.classList.add("card-group");
-
-
-  divCard.classList.add("card");
-  
+  buttonHipoteca.setAttribute('id','calcularHipotecaBtn' );
+  divCardgroup.classList.add('card-group','m-auto');
+  divCard.classList.add("card", 'mt-5');
   divCard.setAttribute( 'id', inmueble.id_immoble);
   imgCardImgTop.classList.add("card-img-top");
   imgCardImgTop.setAttribute("alt", inmueble.Descripcio);
-
   divCardBody.classList.add("card-body");
   h5CardTitle.classList.add("card-title", "text-start", "title-inmoble");
   /* TEXTOS */
   pCardText.classList.add("card-text", "text-start", "decripcion-inmoble");
   pLocalizacion.classList.add("card-text", "text-start", "decripcion-inmoble");
-
-
   /* PRECIO */
   bPreu.classList.add("col-4", "card-text",  "d-flex",  "align-items-center");
-
   divCardfooter.classList.add("card-footer");
-
-
   divMaquetacionFooter.classList.add( "row", "justify-content-end", "text-center" );
   smallLiked.classList.add( "col-3", "d-flex", "justify-content-center", "align-items-center");
   spanLiked.classList.add("liked");
-
-
-
-
+  //TODO !!!!
   esFavorito(inmueble.id_immoble) ? spanLiked.classList.add("fa", "fa-heart") :spanLiked.classList.add("fa", "fa-heart-o") ;
   spanLiked.setAttribute("aria-hidden", true);
-
-
-
 
 if(!listado){
 
@@ -1290,8 +1230,6 @@ if(!listado){
     divCardBody.appendChild(h5CardTitle); 
     divCardBody.appendChild(pCardText);
     divCardBody.appendChild(pLocalizacion);
-
-  
     /* FOOTER */
     // divCardfooter.appendChild(smallTextMuted);
  
@@ -1311,9 +1249,6 @@ if(!listado){
    // console.log(card);
     return card;
 }
-
-
-
   /*BODY*/
   divCardBody.appendChild(h5CardTitle); 
   divCardBody.appendChild(pCardText);
@@ -1339,3 +1274,56 @@ if(!listado){
   return card;
 }
 
+/**
+ * @description Crea i insereix l'HTML dels immobles llistats per la base de dades.
+ * @param {Array} inmuebles Se li passa un array d'immobles.
+ * @returns {void}
+ */
+export async function pintarInmuebles(inmuebles) {
+  //cantidad de inmuebles por row
+  const INMUEBLES = 3;
+  //Máximo de inmuebles por página
+  const MAX = 10;
+
+  let inmueblesContainer = document.getElementById("inmuebles-container");
+
+  if (inmueblesContainer.children) {
+    while (inmueblesContainer.firstChild) {
+      inmueblesContainer.firstChild.remove();
+  }
+  }
+
+  let countInmuebles = 0;
+  let inmueblesMaquetados = new Array();
+
+  await inmuebles.forEach(  (inmueble) => {
+if(inmueblesMaquetados.length < MAX){
+  inmueblesMaquetados.push(  crearMaquetacionInmueble(  inmueble, true));
+}
+
+  });
+
+
+  while (inmueblesMaquetados.length > countInmuebles) {
+    //console.log('countInmuebles while' + countInmuebles)
+    let count = 0;
+    let divCardGroupINMOBLES = document.createElement("div");
+    divCardGroupINMOBLES.classList.add(
+      "d-flex",
+      "flex-sm-wrap",
+      "flex-md-nowrap",
+      "flex-wrap",
+      "gap-3",
+      "my-2",
+      "container",
+      "justify-content-center"
+    );
+
+    while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
+      divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
+      count++;
+      countInmuebles++;
+    }
+    inmueblesContainer.appendChild(divCardGroupINMOBLES);
+  }
+}

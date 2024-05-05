@@ -5,10 +5,10 @@ let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
 let regConfMssg = "Registre amb èxit!";
 
 /**
- * @description Permet fer login
- * @param {String} rutaApi
- * @param {String} email
- * @param {String} pass
+ * @description Petició de login a l'endpoint
+ * @param {string} rutaApi ruta de l'api
+ * @param {string} email email de l'usuari
+ * @param {string} pass password de l'usuari
  * @returns {void}
  */
 export function loginUser(rutaApi, email, pass) {
@@ -28,8 +28,8 @@ export function loginUser(rutaApi, email, pass) {
       return resp.json();
     })
     .then((data) => {
-      console.log("Data Login:");
-      console.log(data);
+      //console.log("Data Login:");
+      //console.log(data);
       return data;
     })
     .catch((error) => {
@@ -38,7 +38,7 @@ export function loginUser(rutaApi, email, pass) {
 }
 
 /**
- * @description Retorna un usuario o un null
+ * @description Retorna un usuari o un null segons estigui loguejat o no.
  * @returns {json} 
  * @returns {null} 
  */
@@ -51,7 +51,7 @@ export function isUserLoged(){
 }
 
 /**
- * @description Diu si un usuari es administrador o no
+ * @description Ens diu si un usuari es administrador o no
  * @returns {boolean}
  */
 export function isUserAdmin(){
@@ -62,7 +62,7 @@ export function isUserAdmin(){
  * @description Obte un usuari de base de dades
  * @param {String} rutaAPI
  * @param {int} id
- * @returns usuari
+ * @returns {json} usuari
  */
 export function getUser(rutaAPI, id) {
   fetch(rutaAPI + "/app/" + id)
@@ -80,7 +80,7 @@ export function getUser(rutaAPI, id) {
 }
 
 /**
- * Retorna el objeto usuario
+ * @description Retorna l'objecte usuari
  * @returns {Object} usuari
  */
 export function getLocalUser() {
@@ -89,9 +89,9 @@ export function getLocalUser() {
 }
 
 /**
- * @description Registra l'usuari a la base de dades
- * @param {String} rutaAPI
- * @param {Object} datausuari
+ * @description Envia la petició de registre a l'endpoint.
+ * @param {String} rutaAPI url del endpoint
+ * @param {Object} datausuari dades de l'usuari
  * @returns {void}
  */
 export function registerUser(rutaAPI, datausuari) {
@@ -133,7 +133,7 @@ export function registerUser(rutaAPI, datausuari) {
 }
 
 /**
- * @description Retorna el llistat d'usuaris
+ * @description Llista d'usuaris registrats
  * @returns {Array} usuaris
  */
 export async function getUsers() {
@@ -196,6 +196,10 @@ export async function addUser(user) {
 }
 
 /**
+ * @description Elimina un usuari amb token
+ * @param {string} rutaAPI
+ * @param {*} id
+ * @param {*} token
  * @description Actualitza un usuari de la base de dades
  * @param {Object} user
  * @returns {void}
@@ -224,7 +228,7 @@ export async function updateUser(user, id_usuari) {
 }
 
 /**
- * @description Crea una taula amb els usuaris
+ * @description Omple la tabla d'usuaris
  * @param {Object} usuaris
  * @returns {void}
  */

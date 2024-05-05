@@ -18,8 +18,8 @@ let url = (() => {
 })();
 
 /**
- * @description Petición login
- * @param {*} dataUsuari
+ * @description Petició de login a l'endpoint.
+ * @param {json} dataUsuari Dades de l'usuari
  * @returns {void}
  */
 export async function peticionLogin(dataUsuari) {
@@ -38,10 +38,6 @@ export async function peticionLogin(dataUsuari) {
     return resp.json();
   })
   .then((data) => {
-    console.log('DATA: ');
-    console.log(data.message);
-    console.log(data.datosUsuario);
-    console.log('-----');
     localStorage.setItem("usuario", JSON.stringify(data.datosUsuario)); // GUARDA USUARIO EN LOCAL
     modoLogueado();
     window.location.assign("/dashboard.html");
@@ -55,11 +51,10 @@ export async function peticionLogin(dataUsuari) {
 
 
 /**
- * @description Petición logout usuario
- * @param {string} url
+ * @description Petició de tancament de sessió a l'endpoint.
  * @returns {void}
  */
-async function peticionLogout(url){
+async function peticionLogout(){
   fetch(url + "/logout", {
     method: "POST",
     headers: {
@@ -79,7 +74,7 @@ async function peticionLogout(url){
 }
 
 /**
- * @description Login usuario
+ * @description Inici de sessió de l'usuari, controla la correcció de les dades.
  * @returns {void}
  */
 export function userLogin() {
@@ -106,7 +101,7 @@ export function userLogin() {
 }
 
 /**
- * @description Checkea si se ha rellenado el formulario de login
+ * @description Comprova si s'ha omplert el formulari d'inici de sessió.
  * @param {string} loginEmail
  * @param {string} loginPassword
  * @returns {void}
@@ -120,8 +115,8 @@ function checkLoginAndPassword(loginEmail, loginPassword) {
 }
 
 /**
- * @description Checkea si el usuario esta logeado
- * @returns {boolean}
+ * @description Comprova si l'usuari està loguejat.
+ * @returns {boolean} Verdader si està loguejat, fals si no ho està.
  */
 export function checkLog() {
   let usuario = localStorage.getItem("usuario");
@@ -137,7 +132,7 @@ export function checkLog() {
 }
 
 /**
- * @description Cambia el modo logeado nav
+ * @description Canvia el mode de navegació si està loguejat.
  * @returns {void}
  */
 export function modoLogueado() {
@@ -152,8 +147,6 @@ export function modoLogueado() {
     let botonUsuario = crearBotonUsuario(usuario);
 
     nomContainer.appendChild(botonUsuario);
-
-    //cambio boton login pot logout
     btnContainer.replaceChildren(botonLogout);
 
     botonLogout.addEventListener('click', async ()=>{
@@ -163,7 +156,7 @@ export function modoLogueado() {
 }
 
 /**
- * @description Añade el nombre en el dashboard
+ * @description Afegeix el nom al tauler de control.
  * @returns {void}
  */
 export function modoLogueadoDashboard(){
@@ -180,7 +173,7 @@ export function modoLogueadoDashboard(){
 }
 
 /**
- * @description Devuelve un boton para hacer logout
+ * @description Retorna un botó per fer tancament de sessió.
  * @returns {button} logoutButton
  */
 function crearBotonLogout() {
@@ -205,7 +198,7 @@ function crearBotonLogout() {
 }
 
 /**
- * @description Devuelve un boton para hacer login
+ * @description Retorna un botó per iniciar sessió.
  * @returns {button} loginButton
  */
 function crearBotonLogin() {
@@ -232,8 +225,8 @@ function crearBotonLogin() {
 }
 
 /**
+ * @description Retorna un botó per accedir al tauler de control.
  * @param {Object} usuario
- * @description Devuelve un boton para acceder al dashboard
  * @returns {HTMLButtonElement} btnProfile
  */
 function crearBotonUsuario(usuario) {
@@ -261,15 +254,18 @@ function crearBotonUsuario(usuario) {
 }
 
 /**
- * @description Devuelve el usuario que está logueado
- * @returns {json} usuario
+ * @description Retorna l'usuari que està loguejat.
+ * @returns {json} usuari
  */
 function getUsuario() {
   return JSON.parse(localStorage.getItem("usuario"));
 }
 
 /**
- * @description  Desloguea al usuario
+ * @description Desconnecta l'usuari i redirigeix-lo a l'índex.
+ * Elimina l'usuari del localStorage.
+ * Elimina la llista de favorits del localStorage.
+ * Elimina l'últim immoble visualitzat del localStorage.
  * @returns {void}
  */
 export async function logout(){
@@ -302,7 +298,7 @@ export async function logout(){
 }
 
 /**
- * @description Muestra el mensaje de error al hacer Login
+ * @description Mostra el missatge d'error en cas de fallar en l'inici de sessió.
  * @returns {void}
  */
 function showLoginError() {
@@ -311,7 +307,7 @@ function showLoginError() {
 }
 
 /**
- * @description Esconde el mensaje de error al hacer Login
+ * @description Amaga o mostra el camp del missatge.
  * @returns {void}
  */
 function hideLoginError() {
