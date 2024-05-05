@@ -1,4 +1,4 @@
-import {userLogin, modoLogueado,  modoLogueadoDashboard} from "./login.js";
+import {userLogin, modoLogueado} from "./login.js";
 import {busquedaPorTipo, cargarDetallesImmoble,cargarFavoritos ,  likeInmueble, formularioBusquedaInmuebles} from "./inmoble.js";
 (()=>{
     //console.log("OBSERVADOR INICIADO")
@@ -41,24 +41,28 @@ const mutationObserver = new MutationObserver((mutations) => {
 
     switch(mutacionId){
         /*MODAL */
-        case "staticBackdrop": userLogin();
+        case "staticBackdrop":
+            userLogin();
         break;
         /*BARRA DE NAVEGACIÓN */
-        case "navbar":modoLogueado();
+        case "navbar":
+            modoLogueado();
         break;
-        case "message-modal":;
-        break;
-        /*DASHBOARD */
-        case "barraNavegacionDashBoard":  modoLogueadoDashboard();
+        case "message-modal":
         break;
         /*INMUEBLES */
-        case "inmuebles-container":  cargarFavoritos();likeInmueble(); busquedaPorTipo();
+        case "inmuebles-container":
+            cargarFavoritos();
+            likeInmueble();
+            busquedaPorTipo();
         break;
         /*BUSQUEDA */
-        case "busqueda":formularioBusquedaInmuebles();
+        case "busqueda":
+            formularioBusquedaInmuebles();
         break;
         /* INMUEBLE DETALLE */
-        case "immoble-container": cargarDetallesImmoble();
+        case "immoble-container":
+            cargarDetallesImmoble();
         break;
     }
 })

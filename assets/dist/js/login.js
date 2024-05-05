@@ -156,23 +156,6 @@ export function modoLogueado() {
 }
 
 /**
- * @description Afegeix el nom al tauler de control.
- * @returns {void}
- */
-export function modoLogueadoDashboard(){
-
-    const nomDashboard = document.getElementById('username');
-    const logoutDashboard = document.getElementById('logoutDashborad');
-
-    let usuario = getUsuario();
-    nomDashboard.textContent = usuario.nombre ;
-   
-    logoutDashboard.addEventListener('click', async ()=>{
-       await logout(url);
-    })
-}
-
-/**
  * @description Retorna un botó per fer tancament de sessió.
  * @returns {button} logoutButton
  */
@@ -270,6 +253,9 @@ function getUsuario() {
  */
 export async function logout(){
 
+  console.log("window.location.pathname");
+  console.log(window.location.pathname);
+
   if(window.location.pathname != "/dashboard.html"){
     const benvinguda = document.getElementById("perfil-usuari");
     const nomContainer = document.getElementById("nom-usuari-container");
@@ -284,7 +270,7 @@ export async function logout(){
     localStorage.removeItem("favoritos");
     localStorage.removeItem('immoble');
  
-    await peticionLogout(url);
+    await peticionLogout();
   }
 
   // Elimina usuario

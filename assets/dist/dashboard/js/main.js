@@ -1,5 +1,6 @@
 import { renderizaFragmento } from "../../js/utils/modularizacionHtml.js";
 import { isUserLoged, isUserAdmin } from "../../js/users.js";
+import {logout} from "../../js/login.js";
 
 let userInformation = isUserLoged();
 
@@ -29,6 +30,15 @@ $(document).ready(function() {
 
     $('#username').html(userInformation.nombre);
     console.log('Welcome '+userInformation.nombre+'!');
+
+    setTimeout(async function () {
+        $('#username').html(userInformation.nombre);
+        console.log('Welcome '+userInformation.nombre+'!');
+    }, 500);
+
+    $(document).on("click", '#logoutDashboard', async function(event) {
+        await logout();
+    });
 });
 
 function getHtmlFromUrl(url){
