@@ -17,8 +17,8 @@ if(!isUserAdmin()) {
   function handleURLChange() {
     if (window.location.hash.split("?")[0].split("#")[1] === "editar-immoble") {
       if (immobleToEdit !== undefined) {
-        setTimeout(function () {
-          loadImmobleEditForm();
+        setTimeout(async function () {
+          await loadImmobleEditForm();
         }, 200);
       } else {
         window.location.replace("dashboard.html");
@@ -30,8 +30,8 @@ if(!isUserAdmin()) {
 
   window.navigation.addEventListener("navigate", () => {
     if (immobleToEdit !== undefined && window.location.hash.split('?')[0].split('#')[1] === 'editar-immoble') {
-      setTimeout(function () {
-        loadImmobleEditForm();
+      setTimeout(async function () {
+        await loadImmobleEditForm();
       }, 200);
     }
   });
