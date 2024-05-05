@@ -14,7 +14,7 @@ if(!isUserAdmin()) {
   let immobleToEdit = undefined;
   let immobles = [];
 
-  function handleURLChange() {
+  async function handleURLChange()  {
     if (window.location.hash.split("?")[0].split("#")[1] === "editar-immoble") {
       if (immobleToEdit !== undefined) {
         setTimeout(async function () {
@@ -24,15 +24,23 @@ if(!isUserAdmin()) {
         window.location.replace("dashboard.html");
       }
     }
+
+    if (window.location.hash.split('?')[0].split('#')[1] === 'immobles-favorits') {
+      await loadImmoblesFavTable();
+    }
   }
 
   window.addEventListener("hashchange", handleURLChange);
 
-  window.navigation.addEventListener("navigate", () => {
+  window.navigation.addEventListener("navigate", async () => {
     if (immobleToEdit !== undefined && window.location.hash.split('?')[0].split('#')[1] === 'editar-immoble') {
       setTimeout(async function () {
         await loadImmobleEditForm();
       }, 200);
+    }
+
+    if (window.location.hash.split('?')[0].split('#')[1] === 'immobles-favorits') {
+      await loadImmoblesFavTable();
     }
   });
 
