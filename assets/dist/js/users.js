@@ -68,8 +68,8 @@ export function getUser(rutaAPI, id) {
       return resp.json();
     })
     .then((data) => {
-      console.log("get usuario");
-      console.log(data);
+     // console.log("get usuario");
+     // console.log(data);
       usuari = data;
     })
     .catch((error) => {
@@ -108,7 +108,7 @@ export function registerUser(rutaAPI, datausuari) {
       return resp.json();
     })
     .then((data) => {
-      console.log("registro correcto:", data);
+      // console.log("registro correcto:", data);
 
       // EJECUTAR MODAL REGISTRO CORRECTO 5 SEG Y REDIRIGE A INDEX LOGUEADO.
       setTimeout(() => {

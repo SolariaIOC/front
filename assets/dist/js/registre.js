@@ -7,7 +7,7 @@ const url = getApiURL();
 /**
  *  @description Maquetació del registre d'usuari
  */
-document.onload = () => {console.log("cargado Registre.js")}
+document.onload = () => {/*console.log("cargado Registre.js" )*/}
   const formularioRegistro = document.getElementById("registre-formulari-dades");
   const btnRegistre = document.getElementById("btnRegistre");
   const messageModal = document.getElementById("message-modal");
@@ -28,7 +28,7 @@ formularioRegistro.addEventListener('change', ()=>{
   let errorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
   let confMssg = "Registre amb èxit!";
 
-  console.log("dentro de registro");
+  //console.log("dentro de registro");
   formularioRegistro.addEventListener("submit", function (evento) {
     evento.preventDefault();
     const formData = new FormData(formularioRegistro);
