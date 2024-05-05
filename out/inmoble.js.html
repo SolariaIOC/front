@@ -1,4 +1,32 @@
-import { getApiURL } from "./utils.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: inmoble.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: inmoble.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getApiURL } from "./utils.js";
 import { checkLog } from "./login.js";
 
 // Tipo de usuario A - R
@@ -580,12 +608,12 @@ export async function formularioBusquedaInmuebles(){
       mensajeBusquedaError(mensaje);
     }
 
-    if(valorBusqueda == "" && tipoBusqueda == 'codiPostal'){
+    if(valorBusqueda == "" &amp;&amp; tipoBusqueda == 'codiPostal'){
       mensaje = "Ha d'introdui un codi postal";
       mensajeBusquedaError(mensaje);
     }
 
-    if(valorBusqueda == "" && tipoBusqueda == 'poblacio'){
+    if(valorBusqueda == "" &amp;&amp; tipoBusqueda == 'poblacio'){
       mensaje = "Ha d'introdui un poblacio";
       mensajeBusquedaError(mensaje);
     }
@@ -649,7 +677,7 @@ export async function pintarInmuebles(inmuebles) {
   let inmueblesMaquetados = new Array();
 
   await inmuebles.forEach(  (inmueble) => {
-    if(inmueblesMaquetados.length < MAX){
+    if(inmueblesMaquetados.length &lt; MAX){
       inmueblesMaquetados.push(  crearMaquetacionInmueble(  inmueble, true));
     }
   });
@@ -669,7 +697,7 @@ export async function pintarInmuebles(inmuebles) {
       "justify-content-center"
     );
 
-    while (count < INMUEBLES && inmueblesMaquetados[countInmuebles]) {
+    while (count &lt; INMUEBLES &amp;&amp; inmueblesMaquetados[countInmuebles]) {
       divCardGroupINMOBLES.append(inmueblesMaquetados[countInmuebles]);
       count++;
       countInmuebles++;
@@ -841,7 +869,7 @@ function likeCorazon(clases) {
 
       let paginas = evento.target.parentElement.parentElement.children.length;
       if(paginas){
-        for(let i=0; i <paginas; i++){
+        for(let i=0; i &lt;paginas; i++){
           evento.target.parentElement.parentElement.children[i].classList.remove('active')
          }
          evento.target.parentElement.classList.add("active");
@@ -862,7 +890,7 @@ function clearPaginacion(){
   console.log(paginacionPadre);
 
  let cantidadDePaginas = paginacionPadre.firstChild.children.length
- for(let i=0; i <cantidadDePaginas; i++){
+ for(let i=0; i &lt;cantidadDePaginas; i++){
   paginacionPadre.firstChild.children[i].classList.remove('active')
  }
   paginacionPadre.firstChild.firstChild.classList.add("active");
@@ -889,7 +917,7 @@ pagina.classList.add(
   'my-3'
 )
 
-  if(paginacionDatos.totalPages > 1 && pagina.children.length == 0){
+  if(paginacionDatos.totalPages > 1 &amp;&amp; pagina.children.length == 0){
   
   navegacionPaginas.setAttribute("aria-label", "...");
 
@@ -902,7 +930,7 @@ pagina.classList.add(
    
   );
 
-  for (let i = 1; i < paginacionDatos.totalPages + 1; i++) {
+  for (let i = 1; i &lt; paginacionDatos.totalPages + 1; i++) {
     let pagina = document.createElement("li");
     pagina.classList.add("page-item");
     pagina.setAttribute('id', i)
@@ -1339,3 +1367,26 @@ if(!listado){
   return card;
 }
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

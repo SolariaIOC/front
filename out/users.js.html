@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: users.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: users.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getApiURL } from "./utils.js";
+
+/* MANEJO DE USUARIOS */
+let regErrorMssg = "Error en registrar. Si us plau, torneu-ho a provar.";
+let regConfMssg = "Registre amb èxit!";
+
+/**
+ * 
+ * @param {*} rutaApi 
+ * @param {*} email 
+ * @param {*} pass 
+ */
+
+export function loginUser(rutaApi, email, pass) {
+  let datausuari = { Email: email, Contrasenya: pass };
+
+  fetch(rutaApi + "login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(datausuari),
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error("S'ha produït un error al servidor.");
+      }
+      return resp.json();
+    })
+    .then((data) => {
+      console.log("Data Login:");
+      console.log(data);
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error en el login:", error.message);
+    });
+}
+
+/**
+ * Retorna un usuario o un null
+ * 
+ * @returns {json} 
+ * @returns {null} 
+ */
+export function isUserLoged(){
+   let usuario =  localStorage.getItem('usuario');
+   if(usuario !== undefined){
+    return JSON.parse(usuario); } else {
+      return null;
+    }
+}
+
+/**
+ * Diu si un usuari es administrador o no
+ * @returns {boolean}
+ */
+export function isUserAdmin(){
+  return isUserLoged().tipusUsuari === 'A';
+}
+
+/**
+ *
+ * @param {String} rutaAPI
+ * @param {Integer} id
+ * @returns usuari
+ */
+export function getUser(rutaAPI, id) {
+  fetch(rutaAPI + "/app/" + id)
+    .then((resp) => {
+      return resp.json();
+    })
+    .then((data) => {
+      console.log("get usuario");
+      console.log(data);
+      usuari = data;
+    })
+    .catch((error) => {
+      console.error("Error al recuperar l'usuari:", error.message);
+    });
+}
+
+/**
+ * Retorna el objeto usuario
+ *
+ * @returns usuari
+ */
+export function getLocalUser() {
+  let usuari = JSON.parse(localStorage.getItem("usuario"));
+  return usuari;
+}
+
+/**
+ *
+ * @param {String} rutaAPI
+ * @param {*} datos
+ *
+ */
+
+export function registerUser(rutaAPI, datausuari) {
+  fetch(rutaAPI + "/app/registre", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(datausuari),
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error(
+          "S'ha produït un error en registrar. Si us plau, torneu-ho a provar."
+        );
+      }
+      return resp.json();
+    })
+    .then((data) => {
+      console.log("registro correcto:", data);
+
+      // EJECUTAR MODAL REGISTRO CORRECTO 5 SEG Y REDIRIGE A INDEX LOGUEADO.
+      setTimeout(() => {
+        renderizaFragmento("#message-modal", "components/message-modal.html");
+      }, 1000);
+
+      const missModal = new bootstrap.Modal(
+        document.getElementById("message-modal")
+      );
+      const missatge = document.getElementById("misatje-en-modal");
+      missatge.textContent = regConfMssg;
+      missModal.show();
+
+      setTimeout(location.assign("/index.html"), 3000);
+    })
+    .catch((error) => {
+      console.error("Error en el registro:", error.message);
+    });
+}
+
+/**
+ * @returns {array} usuaris
+ */
+export async function getUsers() {
+  return await fetch(getApiURL() + "/app/")
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error("S'ha produït un error al servidor.");
+      }
+      return resp.json();
+    }).then((data) => {
+      return data;
+    }).catch((error) => {
+      console.error("Error en la peticio de usuaris:", error.message);
+    });
+}
+
+/**
+ * @description Elimina un usuari de la base de dades
+ * @param {int} id_usuari
+ */
+export async function removeUser(id_usuari) {
+  return await fetch(getApiURL() + "/app/a/eliminarUsuari/" + id_usuari, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+      .then((resp) => resp.json())
+      .then((json) => !json.hasOwnProperty("error"));
+}
+
+/**
+ * @description Afegeix un usuari de la base de dades
+ * @param {Object} user
+ */
+export async function addUser(user) {
+  await fetch(getApiURL() + "/app/registre", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+  .then(async (resp) => {
+    if (!resp.ok) {
+      alert(await resp.text());
+    } else {
+      alert("Usuari registrat correctament.");
+      window.location.assign("/dashboard.html#all-usuaris");
+      location.reload();
+    }
+  }).catch((error) => {
+    console.error("Error en el registro del usuario", error.message);
+    alert("No s'ha pogut crear correctament l\'usuari");
+  });
+}
+
+/**
+ * @description Actualitza un usuari de la base de dades
+ * @param {Object} user
+ */
+export async function updateUser(user, id_usuari) {
+  await fetch(getApiURL() + "/app/a/actualitzarUsuari/"+id_usuari, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+      .then(async (resp) => {
+        if (!resp.ok) {
+          alert(await resp.text());
+        } else {
+          alert("Usuari editat correctament.");
+          window.location.assign("/dashboard.html#all-usuaris");
+          location.reload();
+        }
+      }).catch((error) => {
+        console.error("Error en la edición del usuario", error.message);
+        alert("No s'ha pogut editar correctament l\'usuari");
+      });
+}
+
+/* LISTA DE USUARIOS */
+/**
+ * 
+ * @param {*} usuaris 
+ * 
+ */
+export function fillTablaUsuarios(usuaris) {
+  const contenidoTabla = document.getElementById("contenido-en-tabla-usuaris");
+  // let rowUsuario = document.createDocumentFragment();
+
+  // CHECKEAR SI YA ESTA RENDERIZADO
+  // NO AGRAGR EL USUARIO QUE LO ESTA CONSULTANDO
+
+  usuaris.forEach((usuari) => {
+    let tr = document.createElement("tr");
+    tr.setAttribute("scope", "row");
+
+    let thId = document.createElement("th");
+    thId.setAttribute("id", "id-" + usuari.id_usuari);
+    thId.textContent = usuari.id_usuari;
+
+    let tdNom = document.createElement("td");
+    tdNom.setAttribute("nom", "nom-" + usuari.Mom);
+    tdNom.textContent = usuari.Nom;
+
+    let tdEmail = document.createElement("td");
+    tdEmail.setAttribute("email", "email-" + usuari.Email);
+    tdEmail.textContent = usuari.Email;
+
+    let tdTipusUsuari = document.createElement("td");
+
+    let tdDeleteUsuari = document.createElement("td");
+    let iconDelete = document.createElement("i");
+    (iconDelete.classList = "fa"), "fa-close";
+    iconDelete.setAttribute("aria-hidden", true);
+
+    // AÑADIR ON CLICK CON COMPROBACIONES
+    let select = document.createElement("select");
+    select.setAttribute("name", "tipus-de-usuari");
+
+    let optionUsuari = document.createElement("option");
+    optionUsuari.setAttribute("id", "usuari");
+    optionUsuari.value = "usuari";
+    optionUsuari.textContent = "usuari";
+
+    let optionAdmin = document.createElement("option");
+    optionAdmin.setAttribute("id", "admin");
+    optionAdmin.value = "admin";
+    optionAdmin.textContent = "admin";
+
+    tr.appendChild(thId);
+    tr.appendChild(tdNom);
+    tr.appendChild(tdEmail);
+
+    select.appendChild(optionAdmin);
+    select.appendChild(optionUsuari);
+    tdTipusUsuari.appendChild(select);
+
+    tr.appendChild(tdTipusUsuari);
+    tdDeleteUsuari.append(iconDelete);
+    tr.appendChild(tdDeleteUsuari);
+
+    contenidoTabla.appendChild(tr);
+
+    let usuariSelected = document.getElementById("usuari");
+    let adminelected = document.getElementById("admin");
+
+    usuari.tdTipusUsuari === "admin"
+      ? (adminelected.selected = true)
+      : (usuariSelected.selected = true);
+  });
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addInmoble">addInmoble</a></li><li><a href="global.html#addInmobleAdmin">addInmobleAdmin</a></li><li><a href="global.html#addInmobleFavorir">addInmobleFavorir</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#busquedaFail">busquedaFail</a></li><li><a href="global.html#busquedaOk">busquedaOk</a></li><li><a href="global.html#busquedaPorTipo">busquedaPorTipo</a></li><li><a href="global.html#calcularHipoteca">calcularHipoteca</a></li><li><a href="global.html#cargarDetallesImmoble">cargarDetallesImmoble</a></li><li><a href="global.html#cargarFavoritos">cargarFavoritos</a></li><li><a href="global.html#checkLog">checkLog</a></li><li><a href="global.html#checkLoginAndPassword">checkLoginAndPassword</a></li><li><a href="global.html#clearPaginacion">clearPaginacion</a></li><li><a href="global.html#controlLogin">controlLogin</a></li><li><a href="global.html#crearBotonLogin">crearBotonLogin</a></li><li><a href="global.html#crearBotonLogout">crearBotonLogout</a></li><li><a href="global.html#crearBotonUsuario">crearBotonUsuario</a></li><li><a href="global.html#crearMaquetacionInmueble">crearMaquetacionInmueble</a></li><li><a href="global.html#crearMaquetacionResultadoHipoteca">crearMaquetacionResultadoHipoteca</a></li><li><a href="global.html#crearMaquetacioncalcularHipoteca">crearMaquetacioncalcularHipoteca</a></li><li><a href="global.html#crearPaginacion">crearPaginacion</a></li><li><a href="global.html#dislikeCorazon">dislikeCorazon</a></li><li><a href="global.html#esFavorito">esFavorito</a></li><li><a href="global.html#fillTablaInmobles">fillTablaInmobles</a></li><li><a href="global.html#fillTablaUsuarios">fillTablaUsuarios</a></li><li><a href="global.html#formularioBusquedaInmuebles">formularioBusquedaInmuebles</a></li><li><a href="global.html#getAllInmobles">getAllInmobles</a></li><li><a href="global.html#getAllInmoblesInformation">getAllInmoblesInformation</a></li><li><a href="global.html#getApiURL">getApiURL</a></li><li><a href="global.html#getInmoblePerPoblacio">getInmoblePerPoblacio</a></li><li><a href="global.html#getInmoblesPerCodiPostal">getInmoblesPerCodiPostal</a></li><li><a href="global.html#getLocalUser">getLocalUser</a></li><li><a href="global.html#getMyFavInmobles">getMyFavInmobles</a></li><li><a href="global.html#getMyInmobles">getMyInmobles</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#getUsuario">getUsuario</a></li><li><a href="global.html#isUserAdmin">isUserAdmin</a></li><li><a href="global.html#isUserLoged">isUserLoged</a></li><li><a href="global.html#likeCorazon">likeCorazon</a></li><li><a href="global.html#likeInmueble">likeInmueble</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#mensajeBusquedaError">mensajeBusquedaError</a></li><li><a href="global.html#modalShow">modalShow</a></li><li><a href="global.html#modoLogueado">modoLogueado</a></li><li><a href="global.html#modoLogueadoDashboard">modoLogueadoDashboard</a></li><li><a href="global.html#peticionLogin">peticionLogin</a></li><li><a href="global.html#peticionLogout">peticionLogout</a></li><li><a href="global.html#pintarInmuebles">pintarInmuebles</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeImmobleAdmin">removeImmobleAdmin</a></li><li><a href="global.html#removeInmoble">removeInmoble</a></li><li><a href="global.html#removeInmobleFav">removeInmobleFav</a></li><li><a href="global.html#removeUser">removeUser</a></li><li><a href="global.html#renderizaFragmento">renderizaFragmento</a></li><li><a href="global.html#updateInmoble">updateInmoble</a></li><li><a href="global.html#updateInmobleAdmin">updateInmobleAdmin</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#url">url</a></li><li><a href="global.html#userLogin">userLogin</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun May 05 2024 12:47:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
