@@ -43,8 +43,8 @@ export async function getAllInmobles(pag = 1) {
  */
 export async function getAllInmoblesInformation(pag = 1) {
 
-  if(pag === undefined){
-    console.log("No se ha pasado una página");
+    if (pag === undefined) {
+        console.log("No se ha pasado una página");
   }
 
   return await fetch(url + "/immobles/?page="+pag, {
@@ -230,7 +230,7 @@ export async function addInmoble(inmoble) {
  */
 export async function addInmobleAdmin(inmoble) {
   await fetch(url + "/immobles/a/afegirUsuariImmoble", {
-    method: "POST",
+      method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -281,7 +281,7 @@ export async function removeImmobleAdmin(id_immoble, id_usuari) {
  */
 export async function removeInmoble(id_immoble) {
   return await fetch(url + "/immobles/r/eliminar/" + id_immoble, {
-    method: "DELETE",
+      method: "DELETE",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -296,7 +296,7 @@ export async function removeInmoble(id_immoble) {
 /*************/
 
 /**
- * @description Afegeix el immoble a favorits.
+ * @description Afegeix l'immoble a favorits.
  * @param {int} id_immoble
  * @returns {void}
  */
@@ -324,7 +324,7 @@ export async function addInmobleFavorir(id_immoble) {
  */
 export async function removeInmobleFav(id_immoble) {
   return await fetch(url + "/eliminarImmobleFavorit", {
-    method: "DELETE",
+      method: "DELETE",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
@@ -342,7 +342,7 @@ export async function removeInmobleFav(id_immoble) {
  * @returns {void}
  */
 export async function updateInmoble(inmoble, id_immoble) {
-  await fetch(url + "/immobles/r/actualitzar/" + id_immoble, {
+    await fetch(url + "/immobles/r/actualitzar/" + id_immoble, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -382,7 +382,7 @@ export async function updateInmoble(inmoble, id_immoble) {
  * @returns {void}
  */
 export async function updateInmobleAdmin(inmoble, id_immoble) {
-  await fetch(url + "/immobles/a/actualitzar/" + id_immoble, {
+    await fetch(url + "/immobles/a/actualitzar/" + id_immoble, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -423,7 +423,7 @@ export async function updateInmobleAdmin(inmoble, id_immoble) {
  */
 if (window.location.href.includes("register-inmobles")) {
   const formulariInmoble = document.getElementById(
-    "registre-formulari-inmoble"
+      "registre-formulari-inmoble"
   );
 
   console.log("formulariInmoble");
@@ -449,10 +449,11 @@ if (window.location.href.includes("register-inmobles")) {
     //console.log(checkToken(token));
 
     console.log("add inmoble");
-    addInmoble(token, inmoble);
+    addInmoble(inmoble);
     formulariInmoble.reset();
   });
 }
+
 /*********************************************************************/
 
 /*********************************************************************/
@@ -461,7 +462,7 @@ if (window.location.href.includes("register-inmobles")) {
  * @description Carga la tabla de inmuebles
  * @param {int} inmobles
  * @returns {void}
- */                      */
+ */
 export function fillTablaInmobles(inmobles) {
   const contenidoTabla = document.getElementById("contenido-en-tabla-inmobles");
   // let rowUsuario = document.createDocumentFragment();
@@ -615,7 +616,7 @@ export async function formularioBusquedaInmuebles(){
  */
 export async function busquedaPorTipo(pagina){
   let tipoBusqueda = localStorage.getItem('tipoBusqueda');
-  let valorBusqueda = localStorage.getItem('valorBusqueda');
+    let valorBusqueda = localStorage.getItem('valorBusqueda');
   let inmuebles = new Array();
 
     switch(tipoBusqueda){
@@ -645,7 +646,7 @@ export async function busquedaPorTipo(pagina){
   */
  function busquedaFail(mensaje){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
-  busquedaMensaje.classList.remove('visually-hidden');
+     busquedaMensaje.classList.remove('visually-hidden');
   busquedaMensaje.firstChild.nextSibling.textContent =  mensaje;
  }
 
@@ -655,7 +656,7 @@ export async function busquedaPorTipo(pagina){
   */
  function busquedaOk(){
   const busquedaMensaje = document.getElementById('busqueda-mensaje');
-  busquedaMensaje.classList.add('visually-hidden');
+     busquedaMensaje.classList.add('visually-hidden');
  }
 
  /**
@@ -747,9 +748,9 @@ export async function cargarFavoritos(){
 
   let favoritos = await getMyFavInmobles();
 
-  let favoritosArray =  new Array();
+  let favoritosArray = new Array();
 
-  if (checkLog() &&  favoritos) {
+    if (checkLog() &&  favoritos) {
 
   favoritos.forEach( e => {
           favoritosArray.push(e.id_immoble)     
@@ -825,8 +826,8 @@ function likeCorazon(clases) {
       if(paginas){
         for(let i=0; i <paginas; i++){
           console.log(          evento.target.parentElement.parentElement.children[i].classList
-        )
-          evento.target.parentElement.parentElement.children[i].classList.remove('active')
+          )
+            evento.target.parentElement.parentElement.children[i].classList.remove('active')
          }
          evento.target.parentElement.classList.add("active");
         
