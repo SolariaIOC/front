@@ -61,3 +61,7 @@ body {
 .card-footer{
   cursor: pointer;
 }
+
+.page-item{
+  cursor: pointer;
+}
