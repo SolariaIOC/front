@@ -122,7 +122,7 @@ export function checkLog() {
   let usuario = localStorage.getItem("usuario");
 
   if (JSON.parse(usuario) != undefined) {
-    console.log("El usuario " + JSON.parse(usuario).nombre + " está logueado");
+    console.log("El usuario " + JSON.parse(usuario).nom + " está logueado");
     return true;
   } else {
     console.log("el usuario no está logueado");
@@ -214,7 +214,7 @@ function crearBotonLogin() {
  */
 function crearBotonUsuario(usuario) {
   let btnProfile = document.createElement("button");
-  btnProfile.textContent = "Benvingut, " + usuario.nombre;
+  btnProfile.textContent = "Benvingut, " + usuario.nom;
   btnProfile.value = "account profile";
   btnProfile.setAttribute("id", "perfil-usuari");
   btnProfile.setAttribute("onclick", 'location.assign("/dashboard.html")');
