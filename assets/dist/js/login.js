@@ -1,3 +1,5 @@
+
+
 /**
  * @description Obtención url
  * @returns {string}
@@ -284,11 +286,18 @@ export async function logout(){
     // Quitar banner
     nomContainer.removeChild(benvinguda);
     localStorage.removeItem("usuario");
+    localStorage.removeItem("favoritos");
+    localStorage.removeItem('immoble');
+ 
     await peticionLogout(url);
   }
 
   // Elimina usuario
   localStorage.removeItem("usuario");
+  localStorage.removeItem("favoritos");
+  localStorage.removeItem('immoble');
+
+
   await peticionLogout(url);
   window.location.assign("/index.html")
 }

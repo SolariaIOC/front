@@ -4,8 +4,7 @@ import { isUserAdmin, getUsers } from "../../../js/users.js";
 
 if(isUserAdmin()) {
 
-    console.log('Admin code');
-
+if(isUserAdmin) {
     let immobleToEdit = undefined;
     let immobles = [];
     let currentPage = 1;

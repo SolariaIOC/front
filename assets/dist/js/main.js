@@ -44,15 +44,13 @@ await renderizaFragmento("#barra-navegacion", "./components/nav.html");
 const ruta = window.location.href;
 
 if (ruta.includes("index")) {
-  // TODO PETICION MIDDLE WARE PARA SABER SI HAY USUARIO LOGUEADO
-  // TODO AL CERRAR QUITAR USUARIO DEL LOCAL
+
   await renderizaFragmento("#login-modal-container", "./components/login-modal.html");
   await renderizaFragmento("#busqueda-container", "./components/busqueda.html");
   await renderizaFragmento("#inmobles", "./components/inmobles.html");
 
 
   await renderizaFragmento("#message-modal-container","./components/message-modal.html");
-
 
 
 }
@@ -67,6 +65,12 @@ if (ruta.includes("registre")) {
 if (ruta.includes("registre-inmoble")) {
   await  renderizaFragmento("#login-modal-container", "./components/login-modal.html");
   await renderizaFragmento("#message-modal-container","./components/message-modal.html");
+
+}
+
+//TODO
+if (ruta.includes("immoble-details")) {
+  await  renderizaFragmento("#immoble-details", "./components/immoble.html");
 
 }
 
