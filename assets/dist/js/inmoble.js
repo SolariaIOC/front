@@ -1017,15 +1017,19 @@ calcularHipotecaBtn.addEventListener('click', (event)=>{
         let quantitat = document.getElementById('prestec');
         let anys = document.getElementById('anys');
         let resultado =  calcularHipoteca(quantitat.value, anys.value);
+        let resultadosCard = document.getElementById('resultadosCard')
         let quota = document.getElementById('quotaHipoteca');
         let total = document.getElementById('resultadoHipoteca');
-        let resultadosCard = document.getElementById('resultadosCard')
 
         if(!resultadosCard){
           formHipoteca.appendChild(crearMaquetacionResultadoHipoteca(resultado));
+          quota = document.getElementById('quotaHipoteca');
+          total = document.getElementById('resultadoHipoteca');
+         
         }        
-          quota.textContent = 'La quota mensual es: '  + resultado[0];
-          total.textContent = 'El total del prestec es: '+resultado[1];
+  
+        quota.textContent = 'La quota mensual es: '  + resultado[0];
+        total.textContent = 'El total del prestec es: '+resultado[1];
        
       })
 
